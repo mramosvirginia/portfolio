@@ -23,7 +23,7 @@ export const footer = {
     downloadCv: 'Download CV',
   },
   es: {
-    connectTitle: 'Ya has visto el trabajo, construyamos algo grande juntos.',
+    connectTitle: 'Ya has visto el trabajo, construyamos algo genial juntos.',
     siteLabel: 'SITIO',
     contactLabel: 'CONTACTO',
     downloadCv: 'Descargar CV',
@@ -31,7 +31,7 @@ export const footer = {
 };
 
 export const cvUrl =
-  'https://drive.google.com/file/d/1Y_UFx3r6VW5nXwgF6Ud75oSrs8REhcc7/view';
+  'https://drive.google.com/file/d/1TRtIspR3Crb0Q2o7njCeolwB8JPYZssP/view?usp=sharing';
 export const email = 'vminer.ramos@gmail.com';
 export const linkedinUrl = 'https://www.linkedin.com/in/virginiamramos/';
 
