@@ -1,0 +1,404 @@
+---
+import '../styles/global.css';
+import { nav, footer, cvUrl, email, linkedinUrl, type Locale } from '../data/site';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+}
+
+const { locale, title, description } = Astro.props;
+const t = nav[locale];
+const f = footer[locale];
+
+// Build the equivalent path in the other language for the language switcher.
+const currentPath = Astro.url.pathname;
+const otherLocale: Locale = locale === 'en' ? 'es' : 'en';
+const otherHref =
+  locale === 'en'
+    ? `/es${currentPath === '/' ? '' : currentPath}`
+    : currentPath.replace(/^\/es/, '') || '/';
+
+// Nav hrefs + which one matches the current page, for the active-page indicator.
+const homeHref = locale === 'en' ? '/' : '/es/';
+const workHref = locale === 'en' ? '/work' : '/es/work';
+const aboutHref = locale === 'en' ? '/about' : '/es/about';
+const isActive = (href: string) => currentPath === href;
+const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" />
+
+    <!--
+      Theme is set synchronously, before first paint, using an inline
+      (non-deferred) script. This is what prevents the flash-of-wrong-theme
+      you saw on the Framer site when navigating between pages: by the time
+      the browser paints anything, data-theme is already correct.
+    -->
+    <script is:inline>
+      (function () {
+        var stored = localStorage.getItem('theme');
+        var theme = stored || 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Stack+Sans+Headline:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">{locale === 'en' ? 'Skip to content' : 'Saltar al contenido'}</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href={locale === 'en' ? '/' : '/es/'} class="brand">
+          <svg class="brand-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2L12 3z"/></svg>
+          Virginia Miner
+        </a>
+
+        <nav class="main-nav">
+          <a href={homeHref} class:list={{ active: isActive(homeHref) }}>{t.home}</a>
+          <a href={workHref} class:list={{ active: isWorkActive }}>{t.work}</a>
+          <a href={aboutHref} class:list={{ active: isActive(aboutHref) }}>{t.about}</a>
+        </nav>
+
+        <div class="header-controls">
+          <a
+            href={cvUrl}
+            target="_blank"
+            rel="noopener"
+            class="cv-link"
+            aria-label={locale === 'en' ? 'Download CV' : 'Descargar CV'}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
+            <span>{t.cv}</span>
+          </a>
+
+          <a href={otherHref} class="lang-switch" aria-label="Switch language">
+            {otherLocale.toUpperCase()}
+          </a>
+
+          <button
+            id="theme-toggle"
+            class="theme-toggle"
+            aria-label={locale === 'en' ? 'Toggle dark mode' : 'Cambiar modo oscuro'}
+            type="button"
+          >
+            <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+            <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          </button>
+
+          <button
+            id="menu-toggle"
+            class="menu-toggle"
+            aria-label={locale === 'en' ? 'Open menu' : 'Abrir menú'}
+            data-close-label={locale === 'en' ? 'Close menu' : 'Cerrar menú'}
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+            type="button"
+          >
+            <svg class="icon-burger" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+            <svg class="icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <nav id="mobile-nav" class="mobile-nav">
+        <a href={homeHref} class:list={{ active: isActive(homeHref) }}>{t.home}</a>
+        <a href={workHref} class:list={{ active: isWorkActive }}>{t.work}</a>
+        <a href={aboutHref} class:list={{ active: isActive(aboutHref) }}>{t.about}</a>
+        <a href={cvUrl} target="_blank" rel="noopener" class="mobile-cv">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
+          {locale === 'en' ? 'Download CV' : 'Descargar CV'}
+        </a>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <h2>{f.connectTitle}</h2>
+          <slot name="footer" />
+        </div>
+        <nav class="footer-col" aria-label={f.siteLabel}>
+          <p class="footer-heading">{f.siteLabel}</p>
+          <a href={locale === 'en' ? '/' : '/es/'}>{t.home}</a>
+          <a href={locale === 'en' ? '/work' : '/es/work'}>{t.work}</a>
+          <a href={locale === 'en' ? '/about' : '/es/about'}>{t.about}</a>
+        </nav>
+        <div class="footer-col" aria-label={f.contactLabel}>
+          <p class="footer-heading">{f.contactLabel}</p>
+          <a href={`mailto:${email}`}>Email</a>
+          <a href={linkedinUrl} target="_blank" rel="noopener">LinkedIn</a>
+          <a href={cvUrl} target="_blank" rel="noopener">{f.downloadCv}</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const btn = document.getElementById('theme-toggle');
+      btn?.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      });
+
+      const menuBtn = document.getElementById('menu-toggle');
+      const mobileNav = document.getElementById('mobile-nav');
+      const openLabel = menuBtn?.getAttribute('aria-label') || 'Open menu';
+      const closeLabel = menuBtn?.dataset.closeLabel || 'Close menu';
+      menuBtn?.addEventListener('click', () => {
+        const isOpen = mobileNav?.classList.toggle('is-open');
+        menuBtn.setAttribute('aria-expanded', String(!!isOpen));
+        menuBtn.setAttribute('aria-label', isOpen ? closeLabel : openLabel);
+      });
+      mobileNav?.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          mobileNav.classList.remove('is-open');
+          menuBtn?.setAttribute('aria-expanded', 'false');
+          menuBtn?.setAttribute('aria-label', openLabel);
+        });
+      });
+
+      // Enable transitions only after the first paint, so the initial
+      // theme application never visibly animates.
+      requestAnimationFrame(() => {
+        document.body.classList.add('theme-ready');
+      });
+    </script>
+
+    <style>
+      .skip-link {
+        position: absolute;
+        top: -100%;
+        left: var(--space-4);
+        z-index: 100;
+        background: var(--bg-surface);
+        color: var(--text-primary);
+        border: 1px solid var(--border-default);
+        border-radius: var(--radius-sm);
+        padding: var(--space-2) var(--space-4);
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        transition: top 0.15s ease;
+      }
+      .skip-link:focus {
+        top: var(--space-4);
+      }
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: var(--bg-page);
+        border-bottom: 1px solid var(--border-default);
+      }
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-block: var(--space-4);
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2);
+        font-family: var(--font-headline);
+        font-size: 1.1rem;
+      }
+      .brand-icon {
+        color: var(--accent-highlight);
+        flex-shrink: 0;
+      }
+      .main-nav {
+        display: flex;
+        gap: var(--space-6);
+        font-size: 0.9rem;
+      }
+      .main-nav a {
+        color: var(--text-secondary);
+        font-family: var(--font-mono);
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        font-size: 0.8rem;
+      }
+      .main-nav a:hover {
+        color: var(--accent-highlight);
+      }
+      .main-nav a.active {
+        color: var(--accent-highlight);
+        font-weight: 700;
+      }
+      .header-controls {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+      }
+      .lang-switch {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 36px;
+        min-height: 36px;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        padding: var(--space-1) var(--space-3);
+        border: 1px solid var(--border-default);
+        border-radius: var(--radius-sm);
+        color: var(--text-secondary);
+      }
+      .theme-toggle {
+        display: grid;
+        place-items: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid var(--border-default);
+        background: var(--bg-surface);
+        color: var(--text-primary);
+        cursor: pointer;
+      }
+      .icon-moon { display: none; }
+      :global([data-theme='dark']) .icon-sun { display: none; }
+      :global([data-theme='dark']) .icon-moon { display: block; }
+
+      .cv-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 36px;
+        gap: var(--space-1);
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        padding: var(--space-1) var(--space-3);
+        border: 1px solid var(--border-default);
+        border-radius: var(--radius-sm);
+        color: var(--text-secondary);
+      }
+      .cv-link:hover { color: var(--accent-highlight); }
+      .cv-link span { display: inline; }
+
+      .menu-toggle {
+        display: none;
+        place-items: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid var(--border-default);
+        background: var(--bg-surface);
+        color: var(--text-primary);
+        cursor: pointer;
+      }
+      .icon-close { display: none; }
+      .menu-toggle[aria-expanded='true'] .icon-burger { display: none; }
+      .menu-toggle[aria-expanded='true'] .icon-close { display: block; }
+
+      .mobile-nav {
+        display: none;
+        flex-direction: column;
+        gap: var(--space-1);
+        padding: var(--space-4) var(--space-6) var(--space-6);
+        border-top: 1px solid var(--border-default);
+      }
+      .mobile-nav.is-open { display: flex; }
+      .mobile-nav a {
+        padding-block: var(--space-2);
+        font-family: var(--font-mono);
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+      }
+      .mobile-nav a.active {
+        color: var(--accent-highlight);
+        font-weight: 700;
+      }
+      .mobile-cv {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        margin-top: var(--space-2);
+        padding-top: var(--space-4);
+        border-top: 1px solid var(--border-default);
+        color: var(--text-primary) !important;
+      }
+
+      .site-footer {
+        border-top: 1px solid var(--border-default);
+        padding-block: var(--space-16);
+        margin-top: var(--space-16);
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr minmax(160px, auto) minmax(160px, auto);
+        gap: var(--space-8);
+      }
+      .footer-brand {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+      .footer-brand h2 {
+        font-size: 1.75rem;
+        margin-bottom: var(--space-4);
+        max-width: calc((min(100vw, 1160px) - var(--space-6) * 2) / 2);
+      }
+      .footer-brand :global(p) {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        margin-top: auto;
+      }
+      .footer-col {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-3);
+      }
+      .footer-heading {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        color: var(--text-muted);
+        margin-bottom: var(--space-1);
+      }
+      .footer-col a {
+        color: var(--text-secondary);
+        font-family: var(--font-sans);
+        font-size: 0.9rem;
+      }
+      .footer-col a:hover {
+        color: var(--accent-highlight);
+      }
+
+      @media (max-width: 640px) {
+        .main-nav { display: none; }
+        .menu-toggle { display: grid; }
+        .header-controls { gap: var(--space-3); }
+        .cv-link { display: none; }
+        .footer-grid { grid-template-columns: 1fr; gap: var(--space-6); }
+        .footer-brand h2 { max-width: none; }
+        .footer-brand { height: auto; }
+        .footer-brand :global(p) { margin-top: var(--space-4); }
+      }
+    </style>
+  </body>
+</html>

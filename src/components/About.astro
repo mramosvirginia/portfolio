@@ -1,0 +1,364 @@
+---
+import { about, cvUrl, type Locale } from '../data/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const a = about[locale];
+const zineHref = locale === 'en' ? '/projects/levedadzine' : '/es/projects/levedadzine';
+const photoAlt = {
+  overview: locale === 'en' ? 'Portrait of Virginia Miner outdoors' : 'Retrato de Virginia Miner al aire libre',
+  experience: locale === 'en' ? 'Collage of Virginia\'s work: team sessions, UX research boards, and product screens' : 'Collage del trabajo de Virginia: sesiones de equipo, tableros de investigación UX y pantallas de producto',
+  personal: locale === 'en' ? 'Virginia Miner in a personal, candid moment' : 'Virginia Miner en un momento personal',
+};
+---
+
+<section class="about-hero">
+  <div class="container about-grid">
+    <nav class="about-tabs" aria-label={a.overview.title} role="tablist">
+      <button type="button" role="tab" id="tab-overview" aria-selected="true" aria-controls="panel-overview" class="is-active" data-tab="overview">{a.tabs.overview}</button>
+      <button type="button" role="tab" id="tab-experience" aria-selected="false" aria-controls="panel-experience" tabindex="-1" data-tab="experience">{a.tabs.experience}</button>
+      <button type="button" role="tab" id="tab-personal" aria-selected="false" aria-controls="panel-personal" tabindex="-1" data-tab="personal">{a.tabs.personal}</button>
+    </nav>
+
+    <div class="about-copy">
+      <div class="tab-panel is-active" data-panel="overview" role="tabpanel" id="panel-overview" aria-labelledby="tab-overview" tabindex="0">
+        <h1>{a.overview.title}</h1>
+        {a.overview.body.map((p) => <p>{p}</p>)}
+        <ul class="badges">
+          {a.overview.badges.map((b) => (
+            <li>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5" fill="currentColor"/></svg>
+              {b}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="tab-panel" data-panel="experience" role="tabpanel" id="panel-experience" aria-labelledby="tab-experience" tabindex="0">
+        <h1>{a.experiencePanel.title}</h1>
+        {a.experiencePanel.body.map((p) => <p>{p}</p>)}
+        <a class="panel-cta" href={cvUrl} target="_blank" rel="noopener">&gt; {a.experiencePanel.cta}</a>
+      </div>
+      <div class="tab-panel" data-panel="personal" role="tabpanel" id="panel-personal" aria-labelledby="tab-personal" tabindex="0">
+        <h1>{a.personalPanel.title}</h1>
+        {a.personalPanel.body.map((p) => <p>{p}</p>)}
+        <a class="panel-cta" href={zineHref}>&gt; {a.personalPanel.cta}</a>
+      </div>
+    </div>
+
+    <div class="about-photo tab-panel is-active" data-panel="overview">
+      <img src="/images/about/overview.png" alt={photoAlt.overview} />
+    </div>
+    <div class="about-photo tab-panel" data-panel="experience">
+      <img src="/images/about/experience.png" alt={photoAlt.experience} />
+    </div>
+    <div class="about-photo tab-panel" data-panel="personal">
+      <img src="/images/about/personal.jpg" alt={photoAlt.personal} />
+    </div>
+  </div>
+</section>
+
+<script>
+  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('.about-tabs button'));
+  const panels = document.querySelectorAll<HTMLDivElement>('.tab-panel');
+
+  function activateTab(tab: HTMLButtonElement, focus = false) {
+    tabs.forEach((t) => {
+      t.classList.remove('is-active');
+      t.setAttribute('aria-selected', 'false');
+      t.tabIndex = -1;
+    });
+    tab.classList.add('is-active');
+    tab.setAttribute('aria-selected', 'true');
+    tab.tabIndex = 0;
+    if (focus) tab.focus();
+    panels.forEach((p) => p.classList.toggle('is-active', p.dataset.panel === tab.dataset.tab));
+  }
+
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => activateTab(tab));
+    tab.addEventListener('keydown', (e) => {
+      const key = e.key;
+      if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(key)) return;
+      e.preventDefault();
+      let nextIndex = i;
+      if (key === 'ArrowRight') nextIndex = (i + 1) % tabs.length;
+      if (key === 'ArrowLeft') nextIndex = (i - 1 + tabs.length) % tabs.length;
+      if (key === 'Home') nextIndex = 0;
+      if (key === 'End') nextIndex = tabs.length - 1;
+      activateTab(tabs[nextIndex], true);
+    });
+  });
+</script>
+
+<section class="skills">
+  <div class="container">
+    <h2>{a.skillsTitle}</h2>
+    <div class="skills-grid">
+      {a.skillsGroups.map((g) => (
+        <div class="skill-card">
+          <h3>{g.title}</h3>
+          <ul>
+            {g.items.map((item) => <li>{item}</li>)}
+          </ul>
+          {g.footnote && <p class="footnote">{g.footnote}</p>}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="experience">
+  <div class="container">
+    <h2>{a.experienceTitle}</h2>
+    <div class="row-list">
+      {a.experience.map((e) => (
+        <div class="row">
+          <div class="row-heading">
+            <p class="row-title">{e.role}</p>
+            <p class="row-sub">@ {e.company}</p>
+          </div>
+          <p class="row-desc">{e.description}</p>
+          <p class="row-years">{e.years}</p>
+        </div>
+      ))}
+    </div>
+
+    <h2>{a.coursesTitle}</h2>
+    <div class="row-list">
+      {a.courses.map((c) => (
+        <div class="row">
+          <div class="row-heading">
+            <p class="row-title">{c.title}</p>
+            <p class="row-sub">{c.institution}</p>
+          </div>
+          <p class="row-desc">{c.description}</p>
+          <p class="row-years">{c.year}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-tabs {
+    display: flex;
+    gap: var(--space-2);
+    margin-bottom: var(--space-16);
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .about-tabs button {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    padding: var(--space-2) var(--space-4);
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .about-tabs button.is-active {
+    background: #F7F7F7;
+    color: var(--text-primary);
+  }
+  :global([data-theme='dark']) .about-tabs button.is-active {
+    background: #2A2E38;
+  }
+  .about-tabs button:hover {
+    color: var(--text-primary);
+  }
+
+  .about-hero {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    column-gap: 120px;
+    row-gap: 0;
+    align-items: start;
+  }
+  .about-copy {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .about-photo {
+    grid-column: 2;
+    grid-row: 1 / 3;
+  }
+  .tab-panel {
+    display: none;
+  }
+  .tab-panel.is-active {
+    display: block;
+  }
+  .about-copy h1 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    margin-bottom: var(--space-6);
+  }
+  .about-copy p {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-4);
+    line-height: 1.7;
+  }
+  .panel-cta {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--text-primary);
+    margin-top: var(--space-2);
+  }
+  .panel-cta:hover {
+    text-decoration: underline;
+  }
+  .badges {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding: 0;
+    margin: var(--space-8) 0 0;
+  }
+  .badges li {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--text-primary);
+    background: #F7F7F7;
+    border-radius: 999px;
+    padding: var(--space-2) var(--space-4);
+  }
+  :global([data-theme='dark']) .badges li {
+    background: #2A2E38;
+  }
+  .about-photo {
+    aspect-ratio: 4 / 5;
+    margin-top: var(--space-8);
+    border-radius: var(--radius-md);
+    background: var(--bg-surface-subtle);
+    overflow: hidden;
+  }
+  .about-photo[data-panel='experience'] {
+    aspect-ratio: 6 / 5;
+  }
+  .about-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: inherit;
+  }
+
+  .skills {
+    padding-bottom: var(--space-16);
+    border-top: 1px solid var(--border-default);
+  }
+  .skills h2,
+  .experience h2 {
+    font-size: 1.5rem;
+    padding-top: var(--space-16);
+    margin-bottom: var(--space-6);
+  }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+  }
+  .skill-card {
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+  }
+  .skill-card h3 {
+    font-size: 0.95rem;
+    margin-bottom: var(--space-3);
+  }
+  .skill-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .skill-card li {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+  .footnote {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin: var(--space-3) 0 0;
+  }
+
+  .experience {
+    border-top: 1px solid var(--border-default);
+    padding-bottom: var(--space-16);
+  }
+  .row-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr 120px;
+    gap: var(--space-6);
+    align-items: start;
+    padding: var(--space-4) 0;
+    border-top: 1px solid var(--border-default);
+  }
+  .row:last-child {
+    border-bottom: 1px solid var(--border-default);
+  }
+  .row-title {
+    font-family: var(--font-headline);
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-bottom: var(--space-1);
+  }
+  .row-sub {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  .row-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .row-years {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    text-align: right;
+  }
+
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; grid-template-rows: auto auto auto; gap: var(--space-6); }
+    .about-tabs { grid-column: 1; grid-row: 1; margin-bottom: 0; }
+    .about-photo { grid-column: 1; grid-row: 2; order: -1; aspect-ratio: 4 / 3; margin-top: 0; }
+    .about-copy { grid-column: 1; grid-row: 3; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .row { grid-template-columns: 1fr; gap: var(--space-2); }
+    .row-years { text-align: left; }
+  }
+  @media (max-width: 640px) {
+    .about-hero { padding-top: var(--space-8); }
+    .about-tabs { padding-top: var(--space-4); }
+    .skills-grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,219 @@
+---
+import { home, work, type Locale } from '../data/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = home[locale];
+const w = work[locale];
+const filterGroupLabel = locale === 'en' ? 'Filter projects by category' : 'Filtrar proyectos por categoría';
+---
+
+<section class="work-intro">
+  <div class="container">
+    <p class="eyebrow">{w.eyebrow}</p>
+    <h1>{w.title}</h1>
+    <div class="filter-tabs" role="group" aria-label={filterGroupLabel}>
+      <button type="button" class="filter-tab is-active" data-filter="all" aria-pressed="true">{w.filters.all}</button>
+      <button type="button" class="filter-tab" data-filter="product" aria-pressed="false">{w.filters.product}</button>
+      <button type="button" class="filter-tab" data-filter="visual" aria-pressed="false">{w.filters.visual}</button>
+    </div>
+  </div>
+</section>
+
+<section class="work-list">
+  <div class="container">
+    <p
+      class="visually-hidden"
+      role="status"
+      id="filter-status"
+      data-singular={locale === 'en' ? 'project shown' : 'proyecto mostrado'}
+      data-plural={locale === 'en' ? 'projects shown' : 'proyectos mostrados'}
+    ></p>
+    <div class="work-grid">
+      {t.projects.map((p, i) => (
+        <a href={p.href} class="project-card" data-category={p.filter}>
+          <div class={`project-thumb thumb-ratio-${i % 4} ${p.image ? 'has-image' : ''}`}>
+            {p.image && <img src={p.image} alt="" />}
+            <div class="project-overlay">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+              <span>{t.viewCaseStudy}</span>
+            </div>
+          </div>
+          <p class="project-meta">{p.year} · {p.category}</p>
+          <p class="project-title">{p.title}</p>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.filter-tab');
+  const cards = document.querySelectorAll<HTMLAnchorElement>('.project-card');
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach((t) => {
+        t.classList.remove('is-active');
+        t.setAttribute('aria-pressed', 'false');
+      });
+      tab.classList.add('is-active');
+      tab.setAttribute('aria-pressed', 'true');
+
+      const filter = tab.dataset.filter;
+      let visibleCount = 0;
+      cards.forEach((card) => {
+        const match = filter === 'all' || card.dataset.category === filter;
+        card.classList.toggle('is-hidden', !match);
+        if (match) visibleCount++;
+      });
+
+      const status = document.getElementById('filter-status');
+      if (status) {
+        const label = visibleCount === 1 ? status.dataset.singular : status.dataset.plural;
+        status.textContent = `${visibleCount} ${label}`;
+      }
+    });
+  });
+</script>
+
+<style>
+  .work-intro {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-8);
+  }
+  .work-intro h1 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    margin-bottom: var(--space-8);
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-2);
+  }
+  .filter-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+  .filter-tab {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    padding: var(--space-2) var(--space-4);
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .filter-tab.is-active {
+    background: #F7F7F7;
+    color: var(--text-primary);
+  }
+  :global([data-theme='dark']) .filter-tab.is-active {
+    background: #2A2E38;
+  }
+
+  .work-list {
+    padding-bottom: var(--space-16);
+  }
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+  .project-card.is-hidden {
+    display: none;
+  }
+  .project-thumb {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    background: var(--bg-surface-subtle);
+    border: 1px solid var(--border-default);
+    margin-bottom: var(--space-3);
+    aspect-ratio: 4 / 3;
+  }
+  .thumb-ratio-0 { aspect-ratio: 4 / 3; }
+  .thumb-ratio-1 { aspect-ratio: 4 / 3; }
+  .thumb-ratio-2 { aspect-ratio: 4 / 3; }
+  .thumb-ratio-3 { aspect-ratio: 4 / 3; }
+  .project-thumb.has-image { background: none; }
+  .project-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .project-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    color: var(--white);
+    background: rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  .project-overlay span {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .project-card:hover .project-overlay,
+  .project-card:focus-visible .project-overlay {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .project-meta {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-2);
+  }
+  .project-title {
+    font-family: var(--font-headline);
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+
+  @media (max-width: 900px) {
+    .work-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 640px) {
+    .work-grid { grid-template-columns: 1fr; }
+    .work-intro { padding-top: var(--space-8); }
+    .filter-tabs {
+      flex-wrap: nowrap;
+      gap: var(--space-1);
+      overflow-x: auto;
+      scrollbar-width: none;
+      margin-inline: calc(var(--space-4) * -1);
+      padding-inline: var(--space-4);
+    }
+    .filter-tabs::-webkit-scrollbar { display: none; }
+    .filter-tab {
+      white-space: nowrap;
+      flex-shrink: 0;
+      font-size: 0.65rem;
+      padding: 6px var(--space-3);
+    }
+  }
+</style>

@@ -1,0 +1,536 @@
+---
+import { home, type Locale } from '../data/site';
+import type { CaseStudyContent } from '../data/caseStudyTypes';
+
+interface Props {
+  locale: Locale;
+  study: CaseStudyContent;
+}
+
+const { locale, study } = Astro.props;
+const t = home[locale];
+const base = locale === 'en' ? '' : '/es';
+const workHref = `${base}/work`;
+const backLabel = locale === 'en' ? 'Back to work' : 'Volver a trabajo';
+const tocLabel = locale === 'en' ? 'On this page' : 'En esta página';
+
+const toc = [
+  { id: 'overview', label: study.overviewTitle },
+  { id: 'challenge', label: study.challengeTitle },
+  ...(study.objectives ? [{ id: 'objectives', label: study.objectives.title }] : []),
+  ...study.sections.map((s) => ({ id: s.id, label: s.title })),
+];
+
+const related = t.projects.filter((p) => p.filter === study.filter && !p.href.endsWith(study.slug)).slice(0, 3);
+---
+
+<article class="case-study">
+  <div class="container case-layout">
+    <aside class="case-sidebar">
+      <a href={workHref} class="back-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        {backLabel}
+      </a>
+      <nav class="toc-nav" aria-label={study.title}>
+        <p class="toc-label">{tocLabel}</p>
+        <div class="toc">
+          {toc.map((item) => <a href={`#${item.id}`}>{item.label}</a>)}
+        </div>
+      </nav>
+    </aside>
+
+    <div class="case-content">
+      <header class="case-hero">
+        <h1>{study.title}</h1>
+        {study.heroCtaHref && (
+          <a href={study.heroCtaHref} target="_blank" rel="noopener" class="hero-cta">{study.heroCtaLabel}</a>
+        )}
+      </header>
+      {study.heroImage ? (
+        <div class="hero-image has-image">
+          <img src={study.heroImage} alt={study.title} />
+        </div>
+      ) : (
+        <div class="hero-image" aria-hidden="true"></div>
+      )}
+
+      <section id="overview" class="case-section">
+        <h2>{study.overviewTitle}</h2>
+        <p>{study.overviewIntro}</p>
+        <dl class="meta-grid">
+          <div>
+            <dt>{study.metaLabels.client}</dt>
+            <dd>{study.meta.client}</dd>
+          </div>
+          <div>
+            <dt>{study.metaLabels.industry}</dt>
+            <dd>{study.meta.industry}</dd>
+          </div>
+          <div>
+            <dt>{study.metaLabels.year}</dt>
+            <dd>{study.meta.year}</dd>
+          </div>
+          <div>
+            <dt>{study.metaLabels.services}</dt>
+            <dd>{study.meta.services}</dd>
+          </div>
+        </dl>
+        {study.overviewImages?.map((image) => (
+          <figure class:list={['figure-image', { framed: image.framed }]}>
+            <img class="section-image has-image" src={image.src} alt={image.caption || study.overviewTitle} />
+            {image.caption && <figcaption>({image.caption})</figcaption>}
+          </figure>
+        ))}
+      </section>
+
+      <section id="challenge" class="case-section">
+        <h2>{study.challengeTitle}</h2>
+        <p>{study.challengeBody}</p>
+        {study.roleLabel && study.role && (
+          <p class="role-line"><strong>{study.roleLabel}</strong> · {study.role}</p>
+        )}
+        {study.creditLink && (
+          <a href={study.creditLink.href} target="_blank" rel="noopener" class="credit-link">{study.creditLink.label}</a>
+        )}
+        {study.roleImages?.map((image) => (
+          <figure class:list={['figure-image', { framed: image.framed }]}>
+            <img class="section-image has-image" src={image.src} alt={image.caption || study.roleLabel || study.title} />
+            {image.caption && <figcaption>({image.caption})</figcaption>}
+          </figure>
+        ))}
+      </section>
+
+      {study.objectives && (
+        <section id="objectives" class="case-section">
+          <h2>{study.objectives.title}</h2>
+          <div class="objectives-grid">
+            <div>
+              <p class="objectives-label">{study.objectives.businessLabel}</p>
+              <ul>
+                {study.objectives.business.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+            <div>
+              <p class="objectives-label">{study.objectives.userLabel}</p>
+              <ul>
+                {study.objectives.user.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {study.sections.map((section) => (
+        <section id={section.id} class="case-section">
+          <h2>{section.title}</h2>
+          {section.paragraphs?.map((p) => <p>{p}</p>)}
+          {section.items && (
+            <ul>
+              {section.items.map((item) => <li>{item}</li>)}
+            </ul>
+          )}
+          {section.labeledItems && (
+            <ul class="iterations-list">
+              {section.labeledItems.map((item) => (
+                <li><strong>{item.label}:</strong> {item.body}</li>
+              ))}
+            </ul>
+          )}
+          {section.table && (
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    {section.table.headers.map((h) => <th scope="col">{h}</th>)}
+                  </tr>
+                </thead>
+                <tbody>
+                  {section.table.rows.map((row) => (
+                    <tr>
+                      {row.map((cell) => <td>{cell}</td>)}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+          {section.video && (
+            <video class="section-video" src={section.video} aria-label={section.title} autoplay loop muted playsinline></video>
+          )}
+          {section.images?.map((image) => (
+            <figure class:list={['figure-image', { framed: image.framed }]}>
+              <img class="section-image has-image" src={image.src} alt={image.caption || section.title} />
+              {image.caption && <figcaption>({image.caption})</figcaption>}
+            </figure>
+          ))}
+        </section>
+      ))}
+
+      {related.length > 0 && (
+        <section class="related">
+          <h2>{study.viewMoreWork}</h2>
+          <div class="related-grid">
+            {related.map((p) => (
+              <a href={p.href} class="related-card">
+                <div class={`related-thumb ${p.image ? 'has-image' : ''}`}>
+                  {p.image && <img src={p.image} alt="" />}
+                </div>
+                <p>{p.title}</p>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+    </div>
+  </div>
+</article>
+
+<script>
+  const links = document.querySelectorAll<HTMLAnchorElement>('.toc a');
+  const sections = Array.from(links)
+    .map((link) => document.querySelector(link.getAttribute('href') || ''))
+    .filter((el): el is Element => !!el);
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        links.forEach((link) => link.classList.remove('is-active'));
+        const active = document.querySelector(`.toc a[href="#${entry.target.id}"]`);
+        active?.classList.add('is-active');
+      });
+    },
+    { rootMargin: '-20% 0px -70% 0px' }
+  );
+
+  sections.forEach((section) => observer.observe(section));
+</script>
+
+<style>
+  .case-study {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
+  }
+  .case-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: var(--space-16);
+    align-items: start;
+  }
+  .case-sidebar {
+    position: sticky;
+    top: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+  }
+  .back-link:hover {
+    color: var(--accent-highlight);
+  }
+  .toc-label {
+    display: none;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-3);
+  }
+  .toc {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .toc a {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+  .toc a.is-active {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+  .toc a:hover {
+    color: var(--accent-highlight);
+  }
+
+  .case-content {
+    min-width: 0;
+  }
+  .case-hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+  }
+  .case-hero h1 {
+    font-size: clamp(1.5rem, 2.6vw, 2rem);
+    max-width: 34ch;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--accent-cta-text);
+    background: var(--accent-cta);
+    border-radius: 999px;
+    padding: var(--space-2) var(--space-4);
+    white-space: nowrap;
+  }
+  .hero-image {
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-md);
+    background: var(--bg-surface-subtle);
+    border: 1px solid var(--border-default);
+    margin-bottom: var(--space-16);
+    overflow: hidden;
+  }
+  .hero-image.has-image {
+    background: none;
+    border: none;
+  }
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .case-section {
+    padding-top: var(--space-16);
+    border-top: 1px solid var(--border-default);
+    margin-top: var(--space-16);
+    scroll-margin-top: var(--space-8);
+  }
+  .case-section:first-of-type {
+    margin-top: 0;
+  }
+  .case-section h2 {
+    font-size: 1.35rem;
+    margin-bottom: var(--space-4);
+  }
+  .case-section p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--space-4);
+  }
+  .case-section p:last-child {
+    margin-bottom: 0;
+  }
+  .case-section ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    padding-left: var(--space-6);
+  }
+  .role-line {
+    color: var(--text-secondary);
+  }
+  .role-line strong {
+    color: var(--text-primary);
+  }
+  .credit-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-primary);
+    text-decoration: underline;
+  }
+
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--border-default);
+  }
+  .meta-grid dt {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-1);
+  }
+  .meta-grid dd {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .objectives-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+  }
+  .objectives-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-3);
+  }
+  .objectives-grid ul {
+    padding-left: var(--space-5);
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    margin-bottom: var(--space-6);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+  th {
+    text-align: left;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    padding: var(--space-3);
+    border-bottom: 1px solid var(--border-default);
+  }
+  td {
+    padding: var(--space-3);
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-default);
+    vertical-align: top;
+  }
+
+  figure {
+    margin: var(--space-6) 0 0;
+  }
+  .figure-image.framed {
+    background: var(--off-white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-6);
+    box-shadow: 0 12px 32px -16px rgba(20, 15, 40, 0.25);
+  }
+  .figure-image.framed .section-image {
+    border-radius: var(--radius-sm);
+  }
+  .section-image {
+    aspect-ratio: 16 / 10;
+    border-radius: var(--radius-md);
+    background: var(--bg-surface-subtle);
+    border: 1px solid var(--border-default);
+  }
+  .section-image.has-image {
+    aspect-ratio: auto;
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .section-video {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-default);
+    margin-top: var(--space-6);
+  }
+  figcaption {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: var(--space-2);
+    text-align: center;
+  }
+
+  .iterations-list {
+    padding-left: 0 !important;
+  }
+  .iterations-list li {
+    list-style: none;
+  }
+  .iterations-list strong {
+    color: var(--text-primary);
+  }
+
+  .related {
+    padding-top: var(--space-16);
+    border-top: 1px solid var(--border-default);
+    margin-top: var(--space-16);
+  }
+  .related h2 {
+    font-size: 1.35rem;
+    margin-bottom: var(--space-6);
+  }
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+  .related-thumb {
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-md);
+    background: var(--bg-surface-subtle);
+    border: 1px solid var(--border-default);
+    margin-bottom: var(--space-3);
+    overflow: hidden;
+  }
+  .related-thumb.has-image {
+    background: none;
+  }
+  .related-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .related-card p {
+    font-family: var(--font-headline);
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+
+  @media (max-width: 900px) {
+    .case-layout { grid-template-columns: 1fr; }
+    .case-sidebar { position: static; }
+    .toc-label { display: block; }
+    .toc { flex-direction: row; flex-wrap: wrap; gap: var(--space-2); }
+    .toc a {
+      border: 1px solid var(--border-default);
+      border-radius: 999px;
+      padding: 6px var(--space-3);
+    }
+    .toc a.is-active {
+      background: var(--bg-surface-subtle);
+      border-color: var(--accent-highlight);
+    }
+    .meta-grid { grid-template-columns: 1fr 1fr; }
+    .objectives-grid { grid-template-columns: 1fr; gap: var(--space-6); }
+    .related-grid { grid-template-columns: 1fr; }
+    table { min-width: 480px; }
+    th, td { white-space: normal; min-width: 160px; }
+  }
+  @media (max-width: 640px) {
+    .case-study { padding-top: var(--space-8); }
+  }
+</style>

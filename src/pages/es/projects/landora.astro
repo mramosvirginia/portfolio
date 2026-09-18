@@ -1,0 +1,19 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import CaseStudy from '../../../components/CaseStudy.astro';
+import { home } from '../../../data/site';
+import { landora } from '../../../data/case-studies/landora';
+
+const t = home.es;
+---
+
+<Layout
+  locale="es"
+  title="Landora — Virginia Miner"
+  description={landora.es.title}
+>
+  <CaseStudy locale="es" study={landora.es} />
+  <Fragment slot="footer">
+    <p>{t.footerTagline}</p>
+  </Fragment>
+</Layout>

@@ -1,0 +1,18 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import About from '../../components/About.astro';
+import { home } from '../../data/site';
+
+const t = home.es;
+---
+
+<Layout
+  locale="es"
+  title="Sobre mí — Virginia Miner"
+  description="Un poco sobre Virginia Miner: trayectoria, habilidades, experiencia y cursos."
+>
+  <About locale="es" />
+  <Fragment slot="footer">
+    <p>{t.footerTagline}</p>
+  </Fragment>
+</Layout>

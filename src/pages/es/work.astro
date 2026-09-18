@@ -1,0 +1,18 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Work from '../../components/Work.astro';
+import { home } from '../../data/site';
+
+const t = home.es;
+---
+
+<Layout
+  locale="es"
+  title="Trabajo — Virginia Miner"
+  description="Trabajo seleccionado de UX/UI, producto y diseño visual de Virginia Miner."
+>
+  <Work locale="es" />
+  <Fragment slot="footer">
+    <p>{t.footerTagline}</p>
+  </Fragment>
+</Layout>

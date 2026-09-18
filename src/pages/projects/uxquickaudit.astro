@@ -1,0 +1,19 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CaseStudy from '../../components/CaseStudy.astro';
+import { home } from '../../data/site';
+import { uxquickaudit } from '../../data/case-studies/uxquickaudit';
+
+const t = home.en;
+---
+
+<Layout
+  locale="en"
+  title="UX QuickAudit — Virginia Miner"
+  description={uxquickaudit.en.title}
+>
+  <CaseStudy locale="en" study={uxquickaudit.en} />
+  <Fragment slot="footer">
+    <p>{t.footerTagline}</p>
+  </Fragment>
+</Layout>

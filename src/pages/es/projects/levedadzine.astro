@@ -1,0 +1,19 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import CaseStudy from '../../../components/CaseStudy.astro';
+import { home } from '../../../data/site';
+import { levedadzine } from '../../../data/case-studies/levedadzine';
+
+const t = home.es;
+---
+
+<Layout
+  locale="es"
+  title="Levedad & Somos Paisajes — Virginia Miner"
+  description={levedadzine.es.title}
+>
+  <CaseStudy locale="es" study={levedadzine.es} />
+  <Fragment slot="footer">
+    <p>{t.footerTagline}</p>
+  </Fragment>
+</Layout>

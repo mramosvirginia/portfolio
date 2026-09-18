@@ -1,0 +1,19 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import CaseStudy from '../../../components/CaseStudy.astro';
+import { home } from '../../../data/site';
+import { auroradorada } from '../../../data/case-studies/auroradorada';
+
+const t = home.es;
+---
+
+<Layout
+  locale="es"
+  title="Aurora Dorada — Virginia Miner"
+  description={auroradorada.es.title}
+>
+  <CaseStudy locale="es" study={auroradorada.es} />
+  <Fragment slot="footer">
+    <p>{t.footerTagline}</p>
+  </Fragment>
+</Layout>

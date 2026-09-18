@@ -1,0 +1,19 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CaseStudy from '../../components/CaseStudy.astro';
+import { home } from '../../data/site';
+import { rebrandingQdq } from '../../data/case-studies/rebranding-qdq';
+
+const t = home.en;
+---
+
+<Layout
+  locale="en"
+  title="Rebranding qdq — Virginia Miner"
+  description={rebrandingQdq.en.title}
+>
+  <CaseStudy locale="en" study={rebrandingQdq.en} />
+  <Fragment slot="footer">
+    <p>{t.footerTagline}</p>
+  </Fragment>
+</Layout>

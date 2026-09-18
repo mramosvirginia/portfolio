@@ -1,0 +1,390 @@
+---
+import { home, type Locale } from '../data/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = home[locale];
+const base = locale === 'en' ? '' : '/es';
+
+// One icon per process card, matched by index — not translated content,
+// so kept separate from the locale-aware copy in site.ts.
+const processIcons = [
+  // 0 — Design with intention first (target/focus)
+  '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.5" fill="currentColor"/></svg>',
+  // 1 — Strategy and pixel (swap arrows)
+  '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 8h13M17 8l-3-3M17 8l-3 3M20 16H7M7 16l3-3M7 16l3 3"/></svg>',
+  // 2 — Scalable by design systems (stacked layers)
+  '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg>',
+  // 3 — Different formats, same eye
+  '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>',
+];
+---
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-main">
+      <h1>{t.greeting}<br class="hero-break" /> <span class="h1-accent">{t.role}</span></h1>
+      <div class="hero-cta">
+        <a href={`${base}/work`} class="btn btn-primary">
+          {t.ctaWork}
+          <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="mailto:vminer.ramos@gmail.com" class="btn btn-ghost">{t.ctaTalk}</a>
+      </div>
+    </div>
+    <div class="hero-aside">
+      <ul class="availability">
+        {t.availability.map((item) => <li>{item}</li>)}
+      </ul>
+      <p class="tagline">{t.tagline}</p>
+      <ul class="tags">
+        {t.tags.map((tag) => <li>{tag}</li>)}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="process">
+  <div class="container">
+    <p class="eyebrow">{t.processEyebrow}</p>
+    <h2>{t.processTitle}</h2>
+    <div class="process-grid">
+      {t.process.map((item, i) => (
+        <div class="process-card">
+          <div class={`card-header header-${i}`}>
+            <div class="card-icon" set:html={processIcons[i]} />
+            <h3>{item.title}</h3>
+          </div>
+          <div class="card-body">
+            <p>{item.body}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="case-studies">
+  <div class="container">
+    <p class="eyebrow">{t.caseStudiesEyebrow}</p>
+    <h2>{t.caseStudiesTitle}</h2>
+    <div class="project-grid">
+      {t.projects.map((p, i) => (
+        <a href={p.href} class="project-card">
+          <div class={`project-thumb thumb-ratio-${i % 4} ${p.image ? 'has-image' : ''}`}>
+            {p.image && <img src={p.image} alt="" />}
+            <div class="project-overlay">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+              <span>{t.viewCaseStudy}</span>
+            </div>
+          </div>
+          <p class="project-meta">{p.year} · {p.category}</p>
+          <p class="project-title">{p.title}</p>
+          {p.impact && <p class="project-impact">{p.impact}</p>}
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-top: calc(var(--space-16) * 2 + var(--space-8));
+    padding-bottom: calc(var(--space-16) + 40px);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+    align-items: start;
+  }
+  .hero-aside {
+    padding-top: var(--space-8);
+    padding-left: var(--space-8);
+  }
+  .availability {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-6);
+    gap: var(--space-2);
+  }
+  .availability li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    background: #F7F7F7;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    padding: 3px var(--space-2);
+  }
+  :global([data-theme='dark']) .availability li {
+    background: #2A2E38;
+  }
+  .availability li:first-child::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-highlight);
+    box-shadow: 0 0 0 0 var(--accent-highlight);
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0% { box-shadow: 0 0 0 0 rgba(224, 181, 255, 0.55); }
+    70% { box-shadow: 0 0 0 5px rgba(224, 181, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(224, 181, 255, 0); }
+  }
+  .hero-main h1 {
+    font-size: clamp(2rem, 3.6vw, 2.5rem);
+    margin-bottom: var(--space-6);
+  }
+  .h1-accent {
+    color: inherit;
+  }
+  .tagline {
+    font-family: var(--font-headline);
+    font-size: 1.15rem;
+    color: var(--text-primary);
+    margin-bottom: var(--space-6);
+  }
+  .tags {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+    padding: 0;
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--accent-highlight);
+  }
+  .hero-cta {
+    display: inline-grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: var(--space-3);
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-6);
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: border-color 0.2s ease;
+  }
+  .btn-primary {
+    background: var(--accent-highlight);
+    color: var(--accent-cta-text);
+    letter-spacing: -0.2px;
+  }
+  .btn-arrow {
+    width: 0;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: width 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+    overflow: hidden;
+  }
+  .btn-primary:focus-visible .btn-arrow {
+    width: 16px;
+    opacity: 1;
+    transform: translateX(0);
+  }
+  @media (hover: hover) {
+    .btn-primary:hover .btn-arrow {
+      width: 16px;
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  .btn-ghost {
+    border: 1px solid var(--border-default);
+    color: var(--text-primary);
+  }
+  .btn-ghost:focus-visible {
+    border-color: var(--text-primary);
+  }
+  @media (hover: hover) {
+    .btn-ghost:hover {
+      border-color: var(--text-primary);
+    }
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-2);
+  }
+  .process, .case-studies {
+    padding-block: var(--space-16);
+    border-top: 1px solid var(--border-default);
+  }
+  .process h2, .case-studies h2 { margin-bottom: var(--space-8); font-size: 1.75rem; }
+
+  .process-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+  .process-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--border-default);
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-6) 0;
+  }
+  .card-icon {
+    color: var(--accent-highlight);
+    flex-shrink: 0;
+  }
+  .card-header h3 {
+    font-size: 1.15rem;
+    color: var(--text-primary);
+  }
+  .card-header, .card-body {
+    background: #F7F7F7;
+  }
+  .card-body {
+    flex: 1;
+    padding: var(--space-2) var(--space-6) var(--space-4);
+    min-height: 80px;
+  }
+  :global([data-theme='dark']) .card-header,
+  :global([data-theme='dark']) .card-body {
+    background: #2A2E38;
+  }
+  .process-card p { font-size: 0.95rem; }
+
+  .project-grid {
+    column-count: 2;
+    column-gap: var(--space-6);
+  }
+  .project-card {
+    display: block;
+    break-inside: avoid;
+    margin-bottom: var(--space-6);
+  }
+  .project-thumb {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    background: var(--bg-surface-subtle);
+    border: 1px solid var(--border-default);
+    margin-bottom: var(--space-3);
+  }
+  /* Varied ratios per card, cycling by index — this is what makes the
+     masonry cascade read clearly instead of a uniform grid. */
+  .thumb-ratio-0 { aspect-ratio: 4 / 3; }
+  .thumb-ratio-1 { aspect-ratio: 3 / 4; }
+  .thumb-ratio-2 { aspect-ratio: 1 / 1; }
+  .thumb-ratio-3 { aspect-ratio: 16 / 10; }
+  .project-thumb.has-image { background: none; }
+  .project-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .project-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    background: rgba(0, 0, 0, 0.45);
+    color: var(--white);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .project-overlay svg {
+    color: var(--accent-highlight);
+  }
+  .project-overlay span {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .project-card:hover .project-overlay,
+  .project-card:focus-visible .project-overlay {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .project-meta {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-2);
+  }
+  .project-title {
+    font-family: var(--font-headline);
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+  .project-impact {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: var(--space-2);
+  }
+  .project-impact::before {
+    content: '+';
+    color: var(--accent-highlight);
+    font-size: 1.3em;
+    font-weight: 700;
+  }
+
+
+  @media (max-width: 780px) {
+    .hero {
+      padding-top: var(--space-8);
+      padding-bottom: var(--space-8);
+    }
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-aside {
+      padding-left: 0;
+      padding-top: var(--space-6);
+      margin-top: var(--space-2);
+    }
+    .hero-cta { grid-auto-flow: row; grid-auto-columns: unset; }
+    .hero-break { display: none; }
+    .hero-main h1 { font-size: 1.65rem; }
+    .process-grid { grid-template-columns: 1fr; }
+    .project-grid { column-count: 1; }
+  }
+</style>

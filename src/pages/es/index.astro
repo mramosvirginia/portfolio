@@ -1,0 +1,18 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Home from '../../components/Home.astro';
+import { home } from '../../data/site';
+
+const t = home.es;
+---
+
+<Layout
+  locale="es"
+  title="Virginia Miner — Diseñadora UX/UI & Visual"
+  description="Diseñadora UX/UI y Visual en Valencia, España. Estrategia UX y sistemas con un enfoque editorial."
+>
+  <Home locale="es" />
+  <Fragment slot="footer">
+    <p>{t.footerTagline}</p>
+  </Fragment>
+</Layout>

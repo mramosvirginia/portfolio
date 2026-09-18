@@ -1,0 +1,19 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import CaseStudy from '../../../components/CaseStudy.astro';
+import { home } from '../../../data/site';
+import { webia } from '../../../data/case-studies/webia';
+
+const t = home.es;
+---
+
+<Layout
+  locale="es"
+  title="Web IA — Virginia Miner"
+  description={webia.es.title}
+>
+  <CaseStudy locale="es" study={webia.es} />
+  <Fragment slot="footer">
+    <p>{t.footerTagline}</p>
+  </Fragment>
+</Layout>
