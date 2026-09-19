@@ -193,7 +193,7 @@ export const home = {
       {
         year: '2026',
         category: 'Diseño de Producto, Design Systems',
-        title: 'Diseño de producto de extremo a extremo para una plataforma de experiencias rurales',
+        title: 'Diseño de producto end-to-end para una plataforma de experiencias rurales',
         href: '/es/projects/landora',
         filter: 'product',
         image: '/images/case-studies/landora/cover.webp',

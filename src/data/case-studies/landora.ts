@@ -198,7 +198,7 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
   es: {
     slug: 'landora',
     filter: 'product',
-    title: 'Diseño de producto de extremo a extremo para una plataforma de experiencias rurales',
+    title: 'Diseño de producto end-to-end para una plataforma de experiencias rurales',
     heroImage: '/images/case-studies/landora/cover.webp',
     heroCtaLabel: 'Ver proyecto en vivo',
     heroCtaHref:
