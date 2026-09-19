@@ -98,7 +98,7 @@ export const home = {
       {
         year: '2026',
         category: 'Product Design, Design Systems',
-        title: 'End-to-end UX and design system handoff for a rural platform',
+        title: 'End-to-end product design for a rural experience platform',
         href: '/projects/landora',
         filter: 'product',
         image: '/images/case-studies/landora/cover.webp',
@@ -193,7 +193,7 @@ export const home = {
       {
         year: '2026',
         category: 'Diseño de Producto, Design Systems',
-        title: 'UX de extremo a extremo y handoff de design system para una plataforma rural',
+        title: 'Diseño de producto de extremo a extremo para una plataforma de experiencias rurales',
         href: '/es/projects/landora',
         filter: 'product',
         image: '/images/case-studies/landora/cover.webp',
