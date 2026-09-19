@@ -79,8 +79,8 @@ export const home = {
       },
       {
         year: '2026',
-        category: 'UX/UI Design, Web Development',
-        title: 'Custom 96-point UX audit tool built from scratch for fast evaluations',
+        category: 'Product Design, Web Development',
+        title: 'A self-built product for fast, evidence-based UX audits',
         href: '/projects/uxquickaudit',
         filter: 'product',
         image: '/images/case-studies/uxquickaudit/cover.webp',
@@ -97,7 +97,7 @@ export const home = {
       },
       {
         year: '2026',
-        category: 'UX/UI Design, Design Systems',
+        category: 'Product Design, Design Systems',
         title: 'End-to-end UX and design system handoff for a rural platform',
         href: '/projects/landora',
         filter: 'product',
@@ -174,8 +174,8 @@ export const home = {
       },
       {
         year: '2026',
-        category: 'Diseño UX/UI, Desarrollo Web',
-        title: 'Herramienta de auditoría UX de 96 puntos construida desde cero para evaluaciones rápidas',
+        category: 'Diseño de Producto, Desarrollo Web',
+        title: 'Un producto propio para auditorías UX rápidas y basadas en evidencia',
         href: '/es/projects/uxquickaudit',
         filter: 'product',
         image: '/images/case-studies/uxquickaudit/cover.webp',
@@ -192,7 +192,7 @@ export const home = {
       },
       {
         year: '2026',
-        category: 'Diseño UX/UI, Design Systems',
+        category: 'Diseño de Producto, Design Systems',
         title: 'UX de extremo a extremo y handoff de design system para una plataforma rural',
         href: '/es/projects/landora',
         filter: 'product',
@@ -232,12 +232,12 @@ export const work = {
   en: {
     eyebrow: 'WORK',
     title: 'All projects',
-    filters: { all: 'All', product: 'UX/UI & Product', visual: 'Visual & Branding' },
+    filters: { all: 'All', product: 'Product & UX/UI', visual: 'Visual & Branding' },
   },
   es: {
     eyebrow: 'TRABAJO',
     title: 'Todos los proyectos',
-    filters: { all: 'Todos', product: 'UX/UI y Producto', visual: 'Visual y Branding' },
+    filters: { all: 'Todos', product: 'Producto y UX/UI', visual: 'Visual y Branding' },
   },
 } as const;
 

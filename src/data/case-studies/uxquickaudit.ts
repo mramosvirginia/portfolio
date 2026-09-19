@@ -4,7 +4,7 @@ export const uxquickaudit: { en: CaseStudyContent; es: CaseStudyContent } = {
   en: {
     slug: 'uxquickaudit',
     filter: 'product',
-    title: 'Framework-free 96-point UX evaluation tool for rapid product audits',
+    title: 'A self-built product for fast, evidence-based UX audits',
     heroImage: '/images/case-studies/uxquickaudit/cover.webp',
     heroCtaLabel: 'View Live Project',
     heroCtaHref: 'https://mramosvirginia.github.io/ux-quickaudit/',
@@ -14,7 +14,7 @@ export const uxquickaudit: { en: CaseStudyContent; es: CaseStudyContent } = {
       client: 'Self-Initiated',
       industry: 'Productivity Software',
       year: '2026',
-      services: 'Web Development',
+      services: 'Product Design, Web Development',
     },
     overviewIntro:
       'Designers often leave accessibility, heuristics, and design psychology for the end — or ignore them altogether. There is no quick tool to consult these foundations in a way that is contextualized to the type of product being designed. UX QuickAudit solves this: select the product type and focus, and get technical arguments ready to copy and paste into any document. No registration, no plugins, no friction — 96 unique audit points combining heuristics, WCAG accessibility, and design psychology.',
@@ -184,7 +184,7 @@ export const uxquickaudit: { en: CaseStudyContent; es: CaseStudyContent } = {
   es: {
     slug: 'uxquickaudit',
     filter: 'product',
-    title: 'Herramienta de auditoría UX de 96 puntos sin frameworks para evaluaciones rápidas de producto',
+    title: 'Un producto propio para auditorías UX rápidas y basadas en evidencia',
     heroImage: '/images/case-studies/uxquickaudit/cover.webp',
     heroCtaLabel: 'Ver proyecto en vivo',
     heroCtaHref: 'https://mramosvirginia.github.io/ux-quickaudit/',
@@ -194,7 +194,7 @@ export const uxquickaudit: { en: CaseStudyContent; es: CaseStudyContent } = {
       client: 'Iniciativa propia',
       industry: 'Software de productividad',
       year: '2026',
-      services: 'Desarrollo web',
+      services: 'Diseño de Producto, Desarrollo web',
     },
     overviewIntro:
       'Los diseñadores suelen dejar la accesibilidad, la heurística y la psicología del diseño para el final —o directamente las ignoran. No existe una herramienta rápida para consultar estos fundamentos de forma contextualizada al tipo de producto que se está diseñando. UX QuickAudit resuelve esto: selecciona el tipo de producto y el foco, y obtén argumentos técnicos listos para copiar y pegar en cualquier documento. Sin registro, sin plugins, sin fricción — 96 puntos de auditoría únicos que combinan heurística, accesibilidad WCAG y psicología del diseño.',

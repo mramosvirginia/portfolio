@@ -4,7 +4,7 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
   en: {
     slug: 'landora',
     filter: 'product',
-    title: 'End-to-end UX/UI product design for a rural experience platform',
+    title: 'End-to-end product design for a rural experience platform',
     heroImage: '/images/case-studies/landora/cover.webp',
     heroCtaLabel: 'View Live Project',
     heroCtaHref:
@@ -15,7 +15,7 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
       client: 'Self-Initiated',
       industry: 'Travel / Rural Tourism',
       year: '2026',
-      services: 'UX/UI Design, Design Systems',
+      services: 'Product Design, Design Systems',
     },
     overviewIntro:
       "Rural experiences in Spain exist but are scattered and difficult to find or book. Current platforms fail to combine good UX with a rural focus and local community support — the booking process is often confusing and visual information is scarce. Landora centralizes the discovery and booking of rural experiences — cultural, gastronomic, and natural — in a simple, accessible way that supports local communities.",
@@ -27,7 +27,7 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
     challengeBody:
       'Rural areas are depopulating while cities face mass tourism — there is a high demand for unique experiences but no centralized platform to host them. The booking process in existing options is often confusing, outdated, or incomplete. Users find themselves searching multiple sites without finding a unified solution.',
     roleLabel: 'My Role',
-    role: 'UX/UI Design & Design System · Solo, end-to-end: research, IA, UI design, accessibility (WCAG AA), dev handoff.',
+    role: 'Product Design & Design System · Solo, end-to-end: research, IA, UI design, accessibility (WCAG AA), dev handoff.',
     roleImages: [{ src: '/images/case-studies/landora/image4.avif' }],
     objectives: {
       title: 'Objectives',
@@ -198,7 +198,7 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
   es: {
     slug: 'landora',
     filter: 'product',
-    title: 'UX/UI de extremo a extremo para una plataforma de experiencias rurales',
+    title: 'Diseño de producto de extremo a extremo para una plataforma de experiencias rurales',
     heroImage: '/images/case-studies/landora/cover.webp',
     heroCtaLabel: 'Ver proyecto en vivo',
     heroCtaHref:
@@ -209,7 +209,7 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
       client: 'Iniciativa propia',
       industry: 'Viajes / Turismo rural',
       year: '2026',
-      services: 'Diseño UX/UI, Design Systems',
+      services: 'Diseño de Producto, Design Systems',
     },
     overviewIntro:
       'Las experiencias rurales en España existen pero están dispersas y son difíciles de encontrar o reservar. Las plataformas actuales no combinan una buena UX con un enfoque rural y apoyo a la comunidad local —el proceso de reserva suele ser confuso y la información visual escasa. Landora centraliza el descubrimiento y la reserva de experiencias rurales —culturales, gastronómicas y naturales— de forma sencilla y accesible, apoyando a las comunidades locales.',
@@ -221,7 +221,7 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
     challengeBody:
       'Las zonas rurales se despueblan mientras las ciudades sufren turismo masivo —existe una alta demanda de experiencias únicas pero ninguna plataforma centralizada que las albergue. El proceso de reserva en las opciones existentes suele ser confuso, anticuado o incompleto. Los usuarios acaban buscando en varios sitios sin encontrar una solución unificada.',
     roleLabel: 'Mi rol',
-    role: 'Diseño UX/UI y Design System · En solitario, de principio a fin: investigación, IA, diseño de UI, accesibilidad (WCAG AA), handoff a desarrollo.',
+    role: 'Diseño de Producto y Design System · En solitario, de principio a fin: investigación, IA, diseño de UI, accesibilidad (WCAG AA), handoff a desarrollo.',
     roleImages: [{ src: '/images/case-studies/landora/image4.avif' }],
     objectives: {
       title: 'Objetivos',

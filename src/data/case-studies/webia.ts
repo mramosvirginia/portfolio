@@ -14,7 +14,7 @@ export const webia: { en: CaseStudyContent; es: CaseStudyContent } = {
       client: 'qdq',
       industry: 'AI & Automation',
       year: '2024-2025',
-      services: 'UX/UI Design, AI',
+      services: 'Product Design, AI',
     },
     overviewIntro:
       "Freelancers and small businesses without a digital presence face a simple problem: building a website is slow, expensive, and requires technical knowledge they don't have. This AI-powered tool generates a complete site — copy, images, and structure — from just three data points. A real product in production, presented at Mobile World Congress 2024.",
@@ -169,7 +169,7 @@ export const webia: { en: CaseStudyContent; es: CaseStudyContent } = {
       client: 'qdq',
       industry: 'IA y automatización',
       year: '2024-2025',
-      services: 'Diseño UX/UI, IA',
+      services: 'Diseño de Producto, IA',
     },
     overviewIntro:
       'Los autónomos y pequeños negocios sin presencia digital se enfrentan a un problema simple: crear una web es lento, caro y requiere conocimientos técnicos que no tienen. Esta herramienta con IA genera un sitio completo —copy, imágenes y estructura— a partir de solo tres datos. Un producto real en producción, presentado en el Mobile World Congress 2024.',
