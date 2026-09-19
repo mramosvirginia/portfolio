@@ -1,6 +1,7 @@
 ---
 import { home, type Locale } from '../data/site';
 import type { CaseStudyContent } from '../data/caseStudyTypes';
+import Img from './Img.astro';
 
 interface Props {
   locale: Locale;
@@ -20,6 +21,9 @@ const toc = [
   ...(study.objectives ? [{ id: 'objectives', label: study.objectives.title }] : []),
   ...study.sections.map((s) => ({ id: s.id, label: s.title })),
 ];
+
+const contentSizes = '(min-width: 901px) 830px, calc(100vw - 32px)';
+const relatedSizes = '(min-width: 901px) 260px, calc(100vw - 32px)';
 
 const related = t.projects.filter((p) => p.filter === study.filter && !p.href.endsWith(study.slug)).slice(0, 3);
 ---
@@ -48,7 +52,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
       </header>
       {study.heroImage ? (
         <div class="hero-image has-image">
-          <img src={study.heroImage} alt={study.title} />
+          <Img src={study.heroImage} alt={study.title} sizes={contentSizes} loading="eager" />
         </div>
       ) : (
         <div class="hero-image" aria-hidden="true"></div>
@@ -77,7 +81,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
         </dl>
         {study.overviewImages?.map((image) => (
           <figure class:list={['figure-image', { framed: image.framed }]}>
-            <img class="section-image has-image" src={image.src} alt={image.caption || study.overviewTitle} />
+            <Img class="section-image has-image" src={image.src} alt={image.caption || study.overviewTitle} sizes={contentSizes} />
             {image.caption && <figcaption>({image.caption})</figcaption>}
           </figure>
         ))}
@@ -94,7 +98,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
         )}
         {study.roleImages?.map((image) => (
           <figure class:list={['figure-image', { framed: image.framed }]}>
-            <img class="section-image has-image" src={image.src} alt={image.caption || study.roleLabel || study.title} />
+            <Img class="section-image has-image" src={image.src} alt={image.caption || study.roleLabel || study.title} sizes={contentSizes} />
             {image.caption && <figcaption>({image.caption})</figcaption>}
           </figure>
         ))}
@@ -159,7 +163,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
           )}
           {section.images?.map((image) => (
             <figure class:list={['figure-image', { framed: image.framed }]}>
-              <img class="section-image has-image" src={image.src} alt={image.caption || section.title} />
+              <Img class="section-image has-image" src={image.src} alt={image.caption || section.title} sizes={contentSizes} />
               {image.caption && <figcaption>({image.caption})</figcaption>}
             </figure>
           ))}
@@ -173,7 +177,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
             {related.map((p) => (
               <a href={p.href} class="related-card">
                 <div class={`related-thumb ${p.image ? 'has-image' : ''}`}>
-                  {p.image && <img src={p.image} alt="" />}
+                  {p.image && <Img src={p.image} alt="" sizes={relatedSizes} widths={[320, 480, 640, 900]} />}
                 </div>
                 <p>{p.title}</p>
               </a>
@@ -307,7 +311,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
     background: none;
     border: none;
   }
-  .hero-image img {
+  .hero-image :global(img) {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -432,16 +436,16 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
     padding: var(--space-6);
     box-shadow: 0 12px 32px -16px rgba(20, 15, 40, 0.25);
   }
-  .figure-image.framed .section-image {
+  .figure-image.framed :global(.section-image) {
     border-radius: var(--radius-sm);
   }
-  .section-image {
+  :global(.section-image) {
     aspect-ratio: 16 / 10;
     border-radius: var(--radius-md);
     background: var(--bg-surface-subtle);
     border: 1px solid var(--border-default);
   }
-  .section-image.has-image {
+  :global(.section-image.has-image) {
     aspect-ratio: auto;
     width: 100%;
     height: auto;
@@ -497,7 +501,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
   .related-thumb.has-image {
     background: none;
   }
-  .related-thumb img {
+  .related-thumb :global(img) {
     width: 100%;
     height: 100%;
     object-fit: cover;

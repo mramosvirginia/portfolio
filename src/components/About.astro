@@ -1,5 +1,6 @@
 ---
 import { about, cvUrl, type Locale } from '../data/site';
+import Img from './Img.astro';
 
 interface Props {
   locale: Locale;
@@ -13,6 +14,7 @@ const photoAlt = {
   experience: locale === 'en' ? 'Collage of Virginia\'s work: team sessions, UX research boards, and product screens' : 'Collage del trabajo de Virginia: sesiones de equipo, tableros de investigación UX y pantallas de producto',
   personal: locale === 'en' ? 'Virginia Miner in a personal, candid moment' : 'Virginia Miner en un momento personal',
 };
+const aboutSizes = '(min-width: 901px) 540px, calc(100vw - 32px)';
 ---
 
 <section class="about-hero">
@@ -49,13 +51,13 @@ const photoAlt = {
     </div>
 
     <div class="about-photo tab-panel is-active" data-panel="overview">
-      <img src="/images/about/overview.png" alt={photoAlt.overview} />
+      <Img src="/images/about/overview.png" alt={photoAlt.overview} sizes={aboutSizes} widths={[400, 640, 828, 1100]} loading="eager" />
     </div>
     <div class="about-photo tab-panel" data-panel="experience">
-      <img src="/images/about/experience.png" alt={photoAlt.experience} />
+      <Img src="/images/about/experience.png" alt={photoAlt.experience} sizes={aboutSizes} widths={[400, 640, 828, 1100]} loading="lazy" />
     </div>
     <div class="about-photo tab-panel" data-panel="personal">
-      <img src="/images/about/personal.jpg" alt={photoAlt.personal} />
+      <Img src="/images/about/personal.jpg" alt={photoAlt.personal} sizes={aboutSizes} widths={[400, 640, 828, 1100]} loading="lazy" />
     </div>
   </div>
 </section>
@@ -255,7 +257,7 @@ const photoAlt = {
   .about-photo[data-panel='experience'] {
     aspect-ratio: 6 / 5;
   }
-  .about-photo img {
+  .about-photo :global(img) {
     width: 100%;
     height: 100%;
     object-fit: cover;
