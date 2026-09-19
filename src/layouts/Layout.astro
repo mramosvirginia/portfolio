@@ -27,7 +27,8 @@ const otherHref =
 const homeHref = locale === 'en' ? '/' : '/es/';
 const workHref = locale === 'en' ? '/work' : '/es/work';
 const aboutHref = locale === 'en' ? '/about' : '/es/about';
-const isActive = (href: string) => currentPath === href;
+// currentPath has no trailing slash, so strip it from the href too (Spanish home is "/es/").
+const isActive = (href: string) => currentPath === (href.length > 1 ? href.replace(/\/$/, '') : href);
 const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
 ---
 
