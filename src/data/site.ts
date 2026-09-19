@@ -75,7 +75,7 @@ export const home = {
         href: '/projects/webia',
         filter: 'product',
         image: '/images/case-studies/webia/cover.webp',
-        impact: '3 inputs, 1 finished website',
+        impact: 'MWC 2024, sold to 2 partners',
       },
       {
         year: '2026',
@@ -84,7 +84,7 @@ export const home = {
         href: '/projects/uxquickaudit',
         filter: 'product',
         image: '/images/case-studies/uxquickaudit/cover.webp',
-        impact: '96 audit points, zero frameworks',
+        impact: 'Full UX audit in under 10 minutes',
       },
       {
         year: '2019-2026',
@@ -102,7 +102,7 @@ export const home = {
         href: '/projects/landora',
         filter: 'product',
         image: '/images/case-studies/landora/cover.webp',
-        impact: '20+ components, fully WCAG AA',
+        impact: '213 token inconsistencies audited & fixed',
       },
       {
         year: '2024',
@@ -120,7 +120,7 @@ export const home = {
         href: '/projects/levedadzine',
         filter: 'visual',
         image: '/images/case-studies/levedadzine/cover.jpg',
-        impact: '8 photographers, one collaborative zine',
+        impact: 'Featured in Lomography Magazine',
       },
     ] satisfies WorkProject[],
     labTeaser: {
@@ -166,11 +166,11 @@ export const home = {
       {
         year: '2023/2025',
         category: 'Diseño de Producto, IA',
-        title: 'Constructor web con IA de qdq usando tres datos, presentado en el MWC 2024',
+        title: 'Generador web con IA de qdq usando tres datos, presentado en el MWC 2024',
         href: '/es/projects/webia',
         filter: 'product',
         image: '/images/case-studies/webia/cover.webp',
-        impact: '3 datos, una web lista',
+        impact: 'MWC 2024, vendido a 2 partners',
       },
       {
         year: '2026',
@@ -179,7 +179,7 @@ export const home = {
         href: '/es/projects/uxquickaudit',
         filter: 'product',
         image: '/images/case-studies/uxquickaudit/cover.webp',
-        impact: '96 puntos, cero frameworks',
+        impact: 'Auditoría UX completa en menos de 10 minutos',
       },
       {
         year: '2019-2026',
@@ -197,7 +197,7 @@ export const home = {
         href: '/es/projects/landora',
         filter: 'product',
         image: '/images/case-studies/landora/cover.webp',
-        impact: '20+ componentes, 100% accesibles',
+        impact: '213 inconsistencias de tokens auditadas y corregidas',
       },
       {
         year: '2024',
@@ -215,7 +215,7 @@ export const home = {
         href: '/es/projects/levedadzine',
         filter: 'visual',
         image: '/images/case-studies/levedadzine/cover.jpg',
-        impact: '8 fotógrafos, un zine colaborativo',
+        impact: 'Destacado en Lomography Magazine',
       },
     ] satisfies WorkProject[],
     labTeaser: {
