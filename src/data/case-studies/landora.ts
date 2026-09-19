@@ -4,7 +4,7 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
   en: {
     slug: 'landora',
     filter: 'product',
-    title: 'End-to-end UX/UI product design for a rural tourism platform',
+    title: 'End-to-end UX/UI product design for a rural experience platform',
     heroImage: '/images/case-studies/landora/cover.webp',
     heroCtaLabel: 'View Live Project',
     heroCtaHref:
@@ -12,13 +12,13 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
     overviewTitle: 'Project overview',
     metaLabels: { client: 'Client', industry: 'Industry', year: 'Year', services: 'Services' },
     meta: {
-      client: 'Master Project',
+      client: 'Self-Initiated',
       industry: 'Travel / Rural Tourism',
       year: '2026',
       services: 'UX/UI Design, Design Systems',
     },
     overviewIntro:
-      "Rural experiences in Spain exist but are scattered and difficult to find or book. Current platforms fail to combine good UX with a rural focus and local community support — the booking process is often confusing and visual information is scarce. Landora centralizes the discovery and booking of rural experiences — cultural, gastronomic, and natural — in a simple, accessible way that supports local communities. Solo Master's project — full UX/UI process from initial research to design system.",
+      "Rural experiences in Spain exist but are scattered and difficult to find or book. Current platforms fail to combine good UX with a rural focus and local community support — the booking process is often confusing and visual information is scarce. Landora centralizes the discovery and booking of rural experiences — cultural, gastronomic, and natural — in a simple, accessible way that supports local communities.",
     overviewImages: [
       { src: '/images/case-studies/landora/image3.avif' },
       { src: '/images/case-studies/landora/image2.png' },
@@ -198,7 +198,7 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
   es: {
     slug: 'landora',
     filter: 'product',
-    title: 'UX/UI de extremo a extremo para una plataforma de turismo rural',
+    title: 'UX/UI de extremo a extremo para una plataforma de experiencias rurales',
     heroImage: '/images/case-studies/landora/cover.webp',
     heroCtaLabel: 'Ver proyecto en vivo',
     heroCtaHref:
@@ -206,13 +206,13 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
     overviewTitle: 'Resumen del proyecto',
     metaLabels: { client: 'Cliente', industry: 'Industria', year: 'Año', services: 'Servicios' },
     meta: {
-      client: 'Proyecto de máster',
+      client: 'Iniciativa propia',
       industry: 'Viajes / Turismo rural',
       year: '2026',
       services: 'Diseño UX/UI, Design Systems',
     },
     overviewIntro:
-      'Las experiencias rurales en España existen pero están dispersas y son difíciles de encontrar o reservar. Las plataformas actuales no combinan una buena UX con un enfoque rural y apoyo a la comunidad local —el proceso de reserva suele ser confuso y la información visual escasa. Landora centraliza el descubrimiento y la reserva de experiencias rurales —culturales, gastronómicas y naturales— de forma sencilla y accesible, apoyando a las comunidades locales. Proyecto de máster individual —proceso UX/UI completo desde la investigación inicial hasta el design system.',
+      'Las experiencias rurales en España existen pero están dispersas y son difíciles de encontrar o reservar. Las plataformas actuales no combinan una buena UX con un enfoque rural y apoyo a la comunidad local —el proceso de reserva suele ser confuso y la información visual escasa. Landora centraliza el descubrimiento y la reserva de experiencias rurales —culturales, gastronómicas y naturales— de forma sencilla y accesible, apoyando a las comunidades locales.',
     overviewImages: [
       { src: '/images/case-studies/landora/image3.avif' },
       { src: '/images/case-studies/landora/image2.png' },

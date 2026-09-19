@@ -11,7 +11,7 @@ export const uxquickaudit: { en: CaseStudyContent; es: CaseStudyContent } = {
     overviewTitle: 'Project overview',
     metaLabels: { client: 'Client', industry: 'Industry', year: 'Year', services: 'Services' },
     meta: {
-      client: 'Master Project',
+      client: 'Self-Initiated',
       industry: 'Productivity Software',
       year: '2026',
       services: 'Web Development',
@@ -191,7 +191,7 @@ export const uxquickaudit: { en: CaseStudyContent; es: CaseStudyContent } = {
     overviewTitle: 'Resumen del proyecto',
     metaLabels: { client: 'Cliente', industry: 'Industria', year: 'Año', services: 'Servicios' },
     meta: {
-      client: 'Proyecto de máster',
+      client: 'Iniciativa propia',
       industry: 'Software de productividad',
       year: '2026',
       services: 'Desarrollo web',
