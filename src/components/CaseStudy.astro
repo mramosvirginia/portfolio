@@ -14,6 +14,7 @@ const base = locale === 'en' ? '' : '/es';
 const workHref = `${base}/work`;
 const backLabel = locale === 'en' ? 'Back to work' : 'Volver a trabajo';
 const tocLabel = locale === 'en' ? 'On this page' : 'En esta página';
+const impactLabel = locale === 'en' ? 'Impact:' : 'Impacto:';
 
 const toc = [
   { id: 'overview', label: study.overviewTitle },
@@ -56,6 +57,9 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
         </div>
       ) : (
         <div class="hero-image" aria-hidden="true"></div>
+      )}
+      {study.highlight && (
+        <p class="case-highlight"><strong>{impactLabel}</strong> {study.highlight}</p>
       )}
 
       <section id="overview" class="case-section">
@@ -310,6 +314,24 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
   .hero-image.has-image {
     background: none;
     border: none;
+  }
+  .case-highlight {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    margin-top: calc(var(--space-16) * -1 + var(--space-4));
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: var(--text-muted);
+  }
+  .case-highlight strong {
+    color: var(--text-primary);
+  }
+  .case-highlight::before {
+    content: '+';
+    color: var(--accent-highlight);
+    font-size: 1.3em;
+    font-weight: 700;
   }
   .hero-image :global(img) {
     width: 100%;

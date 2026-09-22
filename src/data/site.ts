@@ -45,6 +45,7 @@ export const home = {
     ctaWork: 'See my work',
     ctaTalk: "Let's talk!",
     processEyebrow: 'PROCESS',
+    processMoreLink: 'More about me',
     processTitle: 'What guides my process',
     process: [
       {
@@ -75,7 +76,7 @@ export const home = {
         href: '/projects/webia',
         filter: 'product',
         image: '/images/case-studies/webia/cover.webp',
-        impact: 'MWC 2024, sold to 2 partners',
+        impact: 'MWC 2024, sold to partners',
       },
       {
         year: '2026',
@@ -140,6 +141,7 @@ export const home = {
     ctaWork: 'Ver mi trabajo',
     ctaTalk: 'Hablemos',
     processEyebrow: 'PROCESO',
+    processMoreLink: 'Más sobre mí',
     processTitle: 'Lo que guía mi proceso',
     process: [
       {
@@ -170,7 +172,7 @@ export const home = {
         href: '/es/projects/webia',
         filter: 'product',
         image: '/images/case-studies/webia/cover.webp',
-        impact: 'MWC 2024, vendido a 2 partners',
+        impact: 'MWC 2024, vendido a partners',
       },
       {
         year: '2026',

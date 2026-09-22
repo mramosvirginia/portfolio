@@ -9,6 +9,7 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
     heroCtaLabel: 'View Live Project',
     heroCtaHref:
       'https://www.figma.com/proto/xSsAgNWjrqVlo0lg0XpLdm/Landora-App-%7C-UI-Design?node-id=1-4&p=f&viewport=-77%2C89%2C0.41&t=kceyZGHaanXrLbuZ-8&scaling=scale-down&content-scaling=fixed&starting-point-node-id=1%3A4&hide-ui=1',
+    highlight: '213 token inconsistencies audited & fixed',
     overviewTitle: 'Project overview',
     metaLabels: { client: 'Client', industry: 'Industry', year: 'Year', services: 'Services' },
     meta: {
@@ -203,6 +204,7 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
     heroCtaLabel: 'Ver proyecto en vivo',
     heroCtaHref:
       'https://www.figma.com/proto/xSsAgNWjrqVlo0lg0XpLdm/Landora-App-%7C-UI-Design?node-id=1-4&p=f&viewport=-77%2C89%2C0.41&t=kceyZGHaanXrLbuZ-8&scaling=scale-down&content-scaling=fixed&starting-point-node-id=1%3A4&hide-ui=1',
+    highlight: '213 inconsistencias de tokens auditadas y corregidas',
     overviewTitle: 'Resumen del proyecto',
     metaLabels: { client: 'Cliente', industry: 'Industria', year: 'Año', services: 'Servicios' },
     meta: {

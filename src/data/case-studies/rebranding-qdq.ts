@@ -8,6 +8,7 @@ export const rebrandingQdq: { en: CaseStudyContent; es: CaseStudyContent } = {
     heroImage: '/images/case-studies/rebranding-qdq/cover.webp',
     heroCtaLabel: 'View Live Project',
     heroCtaHref: 'https://www.brand.qdq.com/',
+    highlight: 'Traffic grew from 300K to 2.5M',
     overviewTitle: 'Project overview',
     metaLabels: { client: 'Client', industry: 'Industry', year: 'Year', services: 'Services' },
     meta: {
@@ -122,6 +123,7 @@ export const rebrandingQdq: { en: CaseStudyContent; es: CaseStudyContent } = {
     heroImage: '/images/case-studies/rebranding-qdq/cover.webp',
     heroCtaLabel: 'Ver proyecto en vivo',
     heroCtaHref: 'https://www.brand.qdq.com/',
+    highlight: 'Tráfico: de 300K a 2,5M',
     overviewTitle: 'Resumen del proyecto',
     metaLabels: { client: 'Cliente', industry: 'Industria', year: 'Año', services: 'Servicios' },
     meta: {

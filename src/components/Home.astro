@@ -51,7 +51,13 @@ const processIcons = [
 <section class="process">
   <div class="container">
     <p class="eyebrow">{t.processEyebrow}</p>
-    <h2>{t.processTitle}</h2>
+    <div class="process-header">
+      <h2>{t.processTitle}</h2>
+      <a href={`${base}/about`} class="process-more-link">
+        {t.processMoreLink}
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
     <div class="process-grid">
       {t.process.map((item, i) => (
         <div class="process-card">
@@ -235,6 +241,37 @@ const processIcons = [
     color: var(--text-muted);
     margin-bottom: var(--space-2);
   }
+  .process-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+  }
+  .process-header h2 {
+    margin-bottom: 0;
+  }
+  .process-more-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
+  .process-more-link svg {
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+  .process-more-link:hover {
+    color: var(--accent-highlight);
+  }
+  .process-more-link:hover svg {
+    transform: translateX(2px);
+  }
   .process, .case-studies {
     padding-block: var(--space-16);
     border-top: 1px solid var(--border-default);
@@ -386,6 +423,7 @@ const processIcons = [
     .hero-cta .btn { padding-inline: var(--space-3); white-space: nowrap; }
     .hero-main h1 { font-size: 1.65rem; }
     .process h2, .case-studies h2 { font-size: 1.65rem; }
+    .process-header { flex-direction: column; align-items: flex-start; gap: var(--space-1); margin-bottom: var(--space-6); }
     .process-grid { grid-template-columns: 1fr; }
     .project-grid { column-count: 1; }
   }

@@ -59,6 +59,9 @@ export interface CaseStudyContent {
   heroImage?: string;
   heroCtaLabel: string;
   heroCtaHref?: string;
+  /** One-line "at a glance" result shown at the top of the case study,
+   * above the overview. Mirrors the impact line used on its Home card. */
+  highlight?: string;
   overviewTitle: string;
   metaLabels: CaseStudyMetaLabels;
   meta: CaseStudyMeta;

@@ -8,6 +8,7 @@ export const uxquickaudit: { en: CaseStudyContent; es: CaseStudyContent } = {
     heroImage: '/images/case-studies/uxquickaudit/cover.webp',
     heroCtaLabel: 'View Live Project',
     heroCtaHref: 'https://mramosvirginia.github.io/ux-quickaudit/',
+    highlight: 'Full UX audit in under 10 minutes',
     overviewTitle: 'Project overview',
     metaLabels: { client: 'Client', industry: 'Industry', year: 'Year', services: 'Services' },
     meta: {
@@ -188,6 +189,7 @@ export const uxquickaudit: { en: CaseStudyContent; es: CaseStudyContent } = {
     heroImage: '/images/case-studies/uxquickaudit/cover.webp',
     heroCtaLabel: 'Ver proyecto en vivo',
     heroCtaHref: 'https://mramosvirginia.github.io/ux-quickaudit/',
+    highlight: 'Auditoría UX completa en menos de 10 minutos',
     overviewTitle: 'Resumen del proyecto',
     metaLabels: { client: 'Cliente', industry: 'Industria', year: 'Año', services: 'Servicios' },
     meta: {

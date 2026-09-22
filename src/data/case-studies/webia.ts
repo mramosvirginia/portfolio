@@ -8,6 +8,7 @@ export const webia: { en: CaseStudyContent; es: CaseStudyContent } = {
     heroImage: '/images/case-studies/webia/cover.webp',
     heroCtaLabel: 'View Live Project',
     heroCtaHref: 'https://landingia.qdq.com/',
+    highlight: 'MWC 2024, sold to partners',
     overviewTitle: 'Project overview',
     metaLabels: { client: 'Client', industry: 'Industry', year: 'Year', services: 'Services' },
     meta: {
@@ -163,6 +164,7 @@ export const webia: { en: CaseStudyContent; es: CaseStudyContent } = {
     heroImage: '/images/case-studies/webia/cover.webp',
     heroCtaLabel: 'Ver proyecto en vivo',
     heroCtaHref: 'https://landingia.qdq.com/',
+    highlight: 'MWC 2024, vendido a partners',
     overviewTitle: 'Resumen del proyecto',
     metaLabels: { client: 'Cliente', industry: 'Industria', year: 'Año', services: 'Servicios' },
     meta: {

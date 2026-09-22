@@ -8,6 +8,7 @@ export const levedadzine: { en: CaseStudyContent; es: CaseStudyContent } = {
     heroImage: '/images/case-studies/levedadzine/cover.jpg',
     heroCtaLabel: 'View Live Project',
     heroCtaHref: 'https://www.lomography.com/magazine/350035-recap-lomography-x-etereo-lomowalk-madrid',
+    highlight: 'Featured in Lomography Magazine',
     overviewTitle: 'Project overview',
     metaLabels: { client: 'Client', industry: 'Industry', year: 'Year', services: 'Services' },
     meta: {
@@ -61,6 +62,7 @@ export const levedadzine: { en: CaseStudyContent; es: CaseStudyContent } = {
     heroImage: '/images/case-studies/levedadzine/cover.jpg',
     heroCtaLabel: 'Ver proyecto en vivo',
     heroCtaHref: 'https://www.lomography.com/magazine/350035-recap-lomography-x-etereo-lomowalk-madrid',
+    highlight: 'Destacado en Lomography Magazine',
     overviewTitle: 'Resumen del proyecto',
     metaLabels: { client: 'Cliente', industry: 'Industria', year: 'Año', services: 'Servicios' },
     meta: {

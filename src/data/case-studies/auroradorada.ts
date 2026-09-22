@@ -8,6 +8,7 @@ export const auroradorada: { en: CaseStudyContent; es: CaseStudyContent } = {
     heroImage: '/images/case-studies/auroradorada/cover.webp',
     heroCtaLabel: 'View Live Project',
     heroCtaHref: 'https://www.auroradoradaediciones.com/',
+    highlight: '50% of sales now organic',
     overviewTitle: 'Project overview',
     metaLabels: { client: 'Client', industry: 'Industry', year: 'Year', services: 'Services' },
     meta: {
@@ -121,6 +122,7 @@ export const auroradorada: { en: CaseStudyContent; es: CaseStudyContent } = {
     heroImage: '/images/case-studies/auroradorada/cover.webp',
     heroCtaLabel: 'Ver proyecto en vivo',
     heroCtaHref: 'https://www.auroradoradaediciones.com/',
+    highlight: '50% de ventas orgánicas',
     overviewTitle: 'Resumen del proyecto',
     metaLabels: { client: 'Cliente', industry: 'Industria', year: 'Año', services: 'Servicios' },
     meta: {
