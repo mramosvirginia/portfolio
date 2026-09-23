@@ -262,7 +262,7 @@ export const about = {
       title: 'A little about me',
       body: [
         "Hi! I'm Virginia, a multidisciplinary designer based in Valencia. I design digital products where craft meets strategy bridging user research, visual design, and a strong editorial foundation built over 7+ years.",
-        'With 3 years in product design and 7+ in graphic and editorial work, I bring a rare combination: the rigour of someone who has typeset 1,600-page books and the curiosity of someone who is always asking what problem is actually worth solving.',
+        'With 3 years in product design and 7+ in graphic and editorial work, I bring a rare combination: the rigour of someone who has typeset +800-page books and the curiosity of someone who is always asking what problem is actually worth solving.',
         'I also studied fashion design, shoot analog film, and keep a running list of exhibitions I want to visit because for me, design has never been just one discipline.',
       ],
       badges: ['Based in Valencia, Spain', 'Remote / Hybrid (Valencia / Mad travel)'],
@@ -360,7 +360,7 @@ export const about = {
       title: 'Un poco sobre mí',
       body: [
         '¡Hola! Soy Virginia, diseñadora multidisciplinar afincada en Valencia. Diseño productos digitales donde el oficio se encuentra con la estrategia, uniendo investigación de usuarios, diseño visual y una sólida base editorial construida durante más de 7 años.',
-        'Con 3 años en product design y más de 7 en diseño gráfico y editorial, aporto una combinación poco habitual: el rigor de quien ha maquetado libros de 1.600 páginas y la curiosidad de quien siempre se pregunta qué problema merece realmente la pena resolver.',
+        'Con 3 años en product design y más de 7 en diseño gráfico y editorial, aporto una combinación poco habitual: el rigor de quien ha maquetado libros de +800 páginas y la curiosidad de quien siempre se pregunta qué problema merece realmente la pena resolver.',
         'También estudié diseño de moda, hago fotografía analógica y llevo una lista siempre creciente de exposiciones que quiero visitar, porque para mí el diseño nunca ha sido una sola disciplina.',
       ],
       badges: ['Afincada en Valencia, España', 'Remoto / Híbrido (Valencia / viajes a Madrid)'],
