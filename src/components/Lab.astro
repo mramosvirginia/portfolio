@@ -1,0 +1,623 @@
+---
+import { lab, type Locale } from '../data/site';
+import Img from './Img.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const l = lab[locale];
+
+// Only 4 placeholder photos exist today, not enough to fill a row edge to
+// edge — repeat them so the accordion reads as full width. Duplicates are
+// marked so the markup below can hide them from assistive tech and the
+// tab order (same photo, nothing new to announce twice) while still
+// letting sighted/mouse users hover them like any other strip. Once real
+// photos replace the placeholders, drop the target below the real count
+// to stop duplicating.
+const target = 8;
+const analogDisplay = Array.from({ length: target }, (_, i) => ({
+  ...l.analog.images[i % l.analog.images.length],
+  isDuplicate: i >= l.analog.images.length,
+}));
+---
+
+<section class="lab-intro">
+  <div class="container">
+    <p class="eyebrow">{l.eyebrow}</p>
+    <h1>{l.title}</h1>
+    <p class="lab-lede">{l.intro}</p>
+
+    <div class="lab-nav">
+      <a href="#ai-code" class="lab-nav-card lab-nav-card-pink">
+        <span class="lab-nav-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M13 6l-2 12"/></svg>
+        </span>
+        <h2>{l.aiCode.eyebrow}</h2>
+        <p>{l.aiCode.navBlurb}</p>
+      </a>
+      <a href="#analog-creative" class="lab-nav-card lab-nav-card-white">
+        <span class="lab-nav-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="6" width="14" height="12" rx="2"/><path d="M7 6l1.5-2h3L13 6"/><circle cx="10" cy="12" r="3"/><path d="M20 9l1.5 7-1.5-1.5"/></svg>
+        </span>
+        <h2>{l.analog.eyebrow}</h2>
+        <p>{l.analog.navBlurb}</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="lab-section lab-ai" id="ai-code">
+  <div class="container">
+    <div class="lab-section-header">
+      <p class="eyebrow">{l.aiCode.eyebrow}</p>
+      <h2>{l.aiCode.title}</h2>
+    </div>
+
+    <div class="pill-row" role="group" aria-label={l.aiCode.filterLabel}>
+      {l.aiCode.pills.map((topic) => (
+        <button type="button" class="pill" data-topic={topic} aria-pressed="false">{topic}</button>
+      ))}
+    </div>
+
+    <article class="ai-card" data-topics={l.aiCode.pills.join('|')}>
+      <span class="ai-tag">{l.aiCode.placeholderTag}</span>
+      <h3>{l.aiCode.placeholderTitle}</h3>
+      <p>{l.aiCode.placeholderBody}</p>
+    </article>
+  </div>
+</section>
+
+<section class="lab-section lab-analog" id="analog-creative">
+  <div class="container">
+    <p class="eyebrow">{l.analog.eyebrow}</p>
+    <h2>{l.analog.title}</h2>
+    <p class="lab-lede">{l.analog.intro}</p>
+
+  <div class="ccarousel-wrap">
+    <p class="visually-hidden" role="status" data-cc-status aria-live="polite"></p>
+    <div
+      class="ccarousel"
+      data-ccarousel
+      tabindex="0"
+      role="group"
+      aria-roledescription="carousel"
+      aria-label={l.analog.title}
+    >
+      <div class="cc-viewport">
+        <div class="cc-track" data-cc-track>
+          {analogDisplay.map((image, i) => (
+            <figure
+              class="cc-slide"
+              data-cc-slide
+              data-caption={image.caption}
+              class:list={{ 'is-active': i === 0 }}
+              aria-hidden={image.isDuplicate ? 'true' : undefined}
+            >
+              <Img
+                src={image.src}
+                alt={image.alt}
+                sizes="(min-width: 900px) 620px, 70vw"
+                widths={[400, 640, 900]}
+                loading={i === 0 ? 'eager' : 'lazy'}
+              />
+            </figure>
+          ))}
+        </div>
+      </div>
+
+      <button type="button" class="cc-arrow cc-prev" data-cc-prev aria-label={l.analog.prevLabel}>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg>
+      </button>
+      <button type="button" class="cc-arrow cc-next" data-cc-next aria-label={l.analog.nextLabel}>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+      <button type="button" class="cc-play" data-cc-play aria-pressed="true">
+        <svg class="cc-icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        <svg class="cc-icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8V4z"/></svg>
+      </button>
+    </div>
+
+    <p class="cc-caption" data-cc-caption></p>
+
+    <div class="cc-dots" data-cc-dots role="tablist" aria-label={l.analog.title}>
+      {analogDisplay.map((_, i) => (
+        <button type="button" class="cc-dot" data-cc-dot data-index={i} aria-current={i === 0 ? 'true' : 'false'} aria-label={`${i + 1}`}></button>
+      ))}
+    </div>
+  </div>
+  </div>
+</section>
+
+<script>
+  // ── AI & Code topic pills ─────────────────────────────────────────────
+  // Multi-select toggle. With only a placeholder card today this is mostly
+  // decorative, but the filtering logic is real: a card must carry every
+  // selected topic (via its data-topics list) to stay visible.
+  const pills = document.querySelectorAll<HTMLButtonElement>('.pill');
+  const aiCards = document.querySelectorAll<HTMLElement>('.ai-card');
+
+  function applyPillFilter() {
+    const active = Array.from(pills)
+      .filter((p) => p.getAttribute('aria-pressed') === 'true')
+      .map((p) => p.dataset.topic);
+    aiCards.forEach((card) => {
+      const topics = (card.dataset.topics || '').split('|');
+      const match = active.length === 0 || active.every((t) => topics.includes(t as string));
+      card.classList.toggle('is-hidden', !match);
+    });
+  }
+
+  pills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      const pressed = pill.getAttribute('aria-pressed') === 'true';
+      pill.setAttribute('aria-pressed', String(!pressed));
+      pill.classList.toggle('is-active', !pressed);
+      applyPillFilter();
+    });
+  });
+
+  // ── Analog & Creative card carousel ────────────────────────────────────
+  // The active photo sits centered and full-size; its neighbours peek in
+  // from both edges, smaller and dimmed, so the row reads as a real strip
+  // of photos rather than one slide at a time — inspired by the "Card
+  // Carousel" pattern shared from 21st.dev/@reuno-ui. That component's
+  // source is paywalled ("Component source is locked" behind an unlock),
+  // so only the publicly-visible usage (a Swiper-based carousel with
+  // pagination dots, nav arrows and autoplay) informed this from-scratch
+  // vanilla JS/CSS build — no locked code was copied. There are 8 slides
+  // (4 real photos, repeated) so neighbours are never empty space; since
+  // that's a fixed strip rather than a true infinite loop, autoplay
+  // bounces back at each end instead of jumping.
+  //
+  // Autoplay pauses on hover/focus and starts paused entirely under
+  // prefers-reduced-motion; a visible play/pause button is always
+  // available, so nothing moves without a way to stop it (WCAG 2.2.2).
+  function initCarousel(root: HTMLElement) {
+    const track = root.querySelector<HTMLElement>('[data-cc-track]');
+    const slides = Array.from(root.querySelectorAll<HTMLElement>('[data-cc-slide]'));
+    const n = slides.length;
+    if (!track || !n) return;
+
+    const wrap = root.closest('.ccarousel-wrap');
+    const dots = Array.from(wrap?.querySelectorAll<HTMLButtonElement>('[data-cc-dot]') || []);
+    const status = wrap?.querySelector<HTMLElement>('[data-cc-status]');
+    const caption = wrap?.querySelector<HTMLElement>('[data-cc-caption]');
+    const prevBtn = wrap?.querySelector<HTMLButtonElement>('[data-cc-prev]');
+    const nextBtn = wrap?.querySelector<HTMLButtonElement>('[data-cc-next]');
+    const playBtn = wrap?.querySelector<HTMLButtonElement>('[data-cc-play]');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let index = 0;
+    let direction = 1;
+    let playing = !reduceMotion;
+    let timer = 0;
+
+    function position() {
+      const viewport = track.parentElement as HTMLElement;
+      const active = slides[index];
+      // Every slide after the first centers in the viewport, with its
+      // neighbours peeking at both edges. The very first slide instead
+      // sits flush against the left edge, lining up with the section's
+      // title and description above it, rather than floating centered
+      // with empty space to its left.
+      const desiredLeft = index === 0 ? 0 : (viewport.clientWidth - active.offsetWidth) / 2;
+      const target = active.offsetLeft - desiredLeft;
+      track.style.transform = `translateX(${-target}px)`;
+    }
+
+    function render() {
+      slides.forEach((slide, i) => slide.classList.toggle('is-active', i === index));
+      dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === index)));
+      if (status) status.textContent = `${index + 1}/${n}`;
+      if (caption) caption.textContent = slides[index].dataset.caption || '';
+      position();
+    }
+
+    function goTo(target: number) {
+      index = Math.max(0, Math.min(n - 1, target));
+      render();
+    }
+
+    function step() {
+      if (index + direction < 0 || index + direction > n - 1) direction *= -1;
+      goTo(index + direction);
+    }
+
+    function stopAutoplay() {
+      clearInterval(timer);
+    }
+    function startAutoplay() {
+      stopAutoplay();
+      if (!playing) return;
+      timer = window.setInterval(step, 3000);
+    }
+
+    playBtn?.addEventListener('click', () => {
+      playing = !playing;
+      playBtn.setAttribute('aria-pressed', String(playing));
+      playBtn.classList.toggle('is-paused', !playing);
+      if (playing) startAutoplay();
+      else stopAutoplay();
+    });
+
+    root.addEventListener('pointerenter', stopAutoplay);
+    root.addEventListener('pointerleave', startAutoplay);
+    root.addEventListener('focusin', stopAutoplay);
+    root.addEventListener('focusout', startAutoplay);
+
+    prevBtn?.addEventListener('click', () => goTo(index - 1));
+    nextBtn?.addEventListener('click', () => goTo(index + 1));
+    root.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { goTo(index + 1); e.preventDefault(); }
+      if (e.key === 'ArrowLeft') { goTo(index - 1); e.preventDefault(); }
+    });
+    dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+    slides.forEach((slide, i) => slide.addEventListener('click', () => goTo(i)));
+
+    window.addEventListener('resize', position);
+
+    if (playBtn && !playing) {
+      playBtn.setAttribute('aria-pressed', 'false');
+      playBtn.classList.add('is-paused');
+    }
+
+    render();
+    startAutoplay();
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-ccarousel]').forEach(initCarousel);
+</script>
+
+<style>
+  .lab-intro {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
+  }
+  .lab-intro h1 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+  }
+  .lab-lede {
+    max-width: 56ch;
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    margin-top: var(--space-3);
+  }
+
+  /* ── the two section-nav cards under the intro. Colors are fixed on
+     purpose (not tied to the light/dark toggle) — same reasoning as the
+     Analog & Creative background: revisit once there's real content to
+     see whether a themed version reads better. ── */
+  .lab-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+  }
+  .lab-nav-card {
+    display: block;
+    padding: var(--space-6);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .lab-nav-card:hover,
+  .lab-nav-card:focus-visible {
+    transform: scale(1.03);
+    box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.35);
+  }
+  .lab-nav-card:focus-visible {
+    outline: 2px solid var(--lilac-500);
+    outline-offset: 3px;
+  }
+  .lab-nav-card-pink {
+    background: #F3C9E8;
+    color: #3D1A33;
+  }
+  .lab-nav-card-white {
+    background: #FFFFFF;
+    color: #14121A;
+    border: 1px solid var(--border-light);
+  }
+  .lab-nav-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.06);
+    margin-bottom: var(--space-4);
+    transition: transform 0.25s ease;
+  }
+  .lab-nav-card:hover .lab-nav-icon,
+  .lab-nav-card:focus-visible .lab-nav-icon {
+    transform: scale(1.15) rotate(-6deg);
+  }
+  .lab-nav-card h2 {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-bottom: var(--space-2);
+    color: inherit;
+  }
+  .lab-nav-card p {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: inherit;
+    opacity: 0.85;
+    margin: 0;
+  }
+  @media (max-width: 640px) {
+    .lab-nav { grid-template-columns: 1fr; }
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-2);
+  }
+
+  .lab-section {
+    padding-block: var(--space-16);
+    border-top: 1px solid var(--border-default);
+  }
+  .lab-section-header h2,
+  .lab-analog h2 {
+    font-size: 1.75rem;
+    margin-top: var(--space-1);
+  }
+
+  /* ── AI & Code — same accent as the rest of the site ── */
+  .pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-6);
+  }
+  .pill {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    background: transparent;
+    border: 1px solid var(--border-default);
+    border-radius: 999px;
+    padding: var(--space-2) var(--space-4);
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  .pill.is-active {
+    color: var(--accent-highlight);
+    border-color: var(--accent-highlight);
+    background: color-mix(in srgb, var(--accent-highlight) 12%, transparent);
+  }
+
+  .ai-card {
+    margin-top: var(--space-8);
+    padding: var(--space-8);
+    border: 1px dashed var(--border-default);
+    border-radius: var(--radius-md);
+    max-width: 62ch;
+  }
+  .ai-card.is-hidden {
+    display: none;
+  }
+  .ai-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--accent-highlight);
+    border: 1px solid var(--accent-highlight);
+    border-radius: 999px;
+    padding: 2px var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+  .ai-card h3 {
+    font-family: var(--font-headline);
+    font-size: 1.3rem;
+    line-height: 1.3;
+    margin-bottom: var(--space-3);
+  }
+  .ai-card p {
+    color: var(--text-secondary);
+  }
+
+  /* ── Analog & Creative — deliberately breaks from the toggle: fixed
+     dark background regardless of light/dark mode, to read as its own
+     space rather than a themed section. ── */
+  .lab-analog {
+    background: #101114;
+    color: #F2F0F5;
+    border-top-color: #232228;
+  }
+  .lab-analog .eyebrow {
+    color: #9A96A8;
+  }
+  .lab-analog .lab-lede {
+    color: #C7C3D1;
+  }
+
+  /* ── card carousel — the active photo sits centered and full-size; its
+     neighbours peek in from both edges, smaller and dimmed. ── */
+  .ccarousel-wrap {
+    margin-top: var(--space-16);
+  }
+  .ccarousel {
+    position: relative;
+    touch-action: pan-y;
+  }
+  .ccarousel:focus-visible {
+    outline: 2px solid var(--lilac-500);
+    outline-offset: 4px;
+  }
+  .cc-viewport {
+    overflow: hidden;
+    height: 500px;
+    display: flex;
+    align-items: center;
+  }
+  .cc-track {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    padding-inline: 50%;
+    width: max-content;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+  /* Inactive slides are genuinely smaller boxes (not just scaled down
+     inside a full-size one) so they sit close together with only the
+     track's own gap between them, not extra reserved space. width/height
+     stay OUT of the transition list on purpose: animating box size here
+     previously made the track's centering math (which measures layout
+     mid-resize) land on the wrong spot, so the size change is instant —
+     only opacity/transform/filter ease in. */
+  .cc-slide {
+    position: relative;
+    flex: 0 0 auto;
+    width: 280px;
+    height: 350px;
+    margin: 0;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: #000;
+    opacity: 0.45;
+    filter: grayscale(0.3);
+    transform: scale(0.95);
+    transition: opacity 0.5s ease, transform 0.5s ease, filter 0.5s ease;
+    cursor: pointer;
+  }
+  .cc-slide.is-active {
+    width: 400px;
+    height: 500px;
+    opacity: 1;
+    filter: none;
+    transform: scale(1);
+    cursor: default;
+  }
+  .cc-slide :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .cc-caption {
+    margin-top: var(--space-4);
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: #C7C3D1;
+    text-align: center;
+    min-height: 1.2em;
+  }
+
+  .cc-arrow {
+    position: absolute;
+    top: 50%;
+    translate: 0 -50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(10, 10, 12, 0.55);
+    backdrop-filter: blur(4px);
+    color: #fff;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .cc-arrow:hover {
+    border-color: #fff;
+    background: rgba(10, 10, 12, 0.8);
+  }
+  .cc-prev {
+    left: var(--space-4);
+  }
+  .cc-next {
+    right: var(--space-4);
+  }
+
+  .cc-play {
+    position: absolute;
+    bottom: var(--space-4);
+    right: var(--space-4);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(10, 10, 12, 0.55);
+    color: #fff;
+    cursor: pointer;
+  }
+  .cc-icon-play {
+    display: none;
+  }
+  .cc-play.is-paused .cc-icon-pause {
+    display: none;
+  }
+  .cc-play.is-paused .cc-icon-play {
+    display: block;
+  }
+
+  .cc-dots {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-2);
+    margin-top: var(--space-6);
+  }
+  .cc-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border-radius: 999px;
+    border: 0;
+    background: #3A3842;
+    cursor: pointer;
+    transition: background 0.2s ease, width 0.2s ease;
+  }
+  .cc-dot:hover {
+    background: #726E7D;
+  }
+  .cc-dot[aria-current='true'] {
+    width: 22px;
+    background: var(--accent-highlight);
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (max-width: 640px) {
+    .lab-intro { padding-top: var(--space-8); }
+    .cc-track { gap: var(--space-3); }
+    .cc-viewport { height: 340px; }
+    .cc-slide { width: 190px; height: 240px; }
+    .cc-slide.is-active { width: 220px; height: 340px; }
+  }
+</style>

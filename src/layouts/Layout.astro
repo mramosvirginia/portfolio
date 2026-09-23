@@ -27,6 +27,7 @@ const otherHref =
 const homeHref = locale === 'en' ? '/' : '/es/';
 const workHref = locale === 'en' ? '/work' : '/es/work';
 const aboutHref = locale === 'en' ? '/about' : '/es/about';
+const labHref = locale === 'en' ? '/lab' : '/es/lab';
 // currentPath has no trailing slash, so strip it from the href too (Spanish home is "/es/").
 const isActive = (href: string) => currentPath === (href.length > 1 ? href.replace(/\/$/, '') : href);
 const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
@@ -90,6 +91,7 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
           <a href={homeHref} class:list={{ active: isActive(homeHref) }}>{t.home}</a>
           <a href={workHref} class:list={{ active: isWorkActive }}>{t.work}</a>
           <a href={aboutHref} class:list={{ active: isActive(aboutHref) }}>{t.about}</a>
+          <a href={labHref} class:list={{ active: isActive(labHref) }}>{t.lab}</a>
         </nav>
 
         <div class="header-controls">
@@ -137,6 +139,7 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
         <a href={homeHref} class:list={{ active: isActive(homeHref) }}>{t.home}</a>
         <a href={workHref} class:list={{ active: isWorkActive }}>{t.work}</a>
         <a href={aboutHref} class:list={{ active: isActive(aboutHref) }}>{t.about}</a>
+        <a href={labHref} class:list={{ active: isActive(labHref) }}>{t.lab}</a>
         <a href={cvUrl} target="_blank" rel="noopener" class="mobile-cv">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
           {locale === 'en' ? 'Download CV' : 'Descargar CV'}
@@ -159,6 +162,7 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
           <a href={locale === 'en' ? '/' : '/es/'}>{t.home}</a>
           <a href={locale === 'en' ? '/work' : '/es/work'}>{t.work}</a>
           <a href={locale === 'en' ? '/about' : '/es/about'}>{t.about}</a>
+          <a href={labHref}>{t.lab}</a>
         </nav>
         <div class="footer-col" aria-label={f.contactLabel}>
           <p class="footer-heading">{f.contactLabel}</p>

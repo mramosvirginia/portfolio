@@ -15,6 +15,18 @@ export const nav = {
   es: { home: 'Inicio', work: 'Trabajo', about: 'Sobre mí', lab: 'Lab', cv: 'CV' },
 };
 
+/**
+ * Lab is the one page that's allowed to break from the site's clean/editorial
+ * system on purpose — it's the personal, experimental corner. Test images in
+ * `analog.images` are placeholders reused from other case studies purely to
+ * validate the carousel; swap them for real film photos before shipping.
+ */
+export interface LabImage {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
 export const footer = {
   en: {
     connectTitle: "You've seen the work, now let's build something great.",
@@ -439,5 +451,102 @@ export const about = {
         year: '2025',
       },
     ],
+  },
+} as const;
+
+export const lab = {
+  en: {
+    eyebrow: 'LAB',
+    title: 'Experimental Lab',
+    intro: "The stuff that doesn't fit a case study: code experiments and the personal, analog work I make for myself.",
+    aiCode: {
+      eyebrow: 'AI & CODE',
+      title: 'Building with AI',
+      navBlurb: 'Code experiments, AI workflows, and how this site got built.',
+      filterLabel: 'Filter by topic',
+      pills: ['AI', 'Design Systems', 'Astro', 'Accessibility'],
+      placeholderTag: 'Coming soon',
+      placeholderTitle: 'Rebuilding this portfolio with Astro + Claude Code',
+      placeholderBody:
+        'The migration from Framer to Astro, a dark-mode CSS scoping bug tracked down and fixed, the Figma-to-CSS-custom-properties token architecture, and the WCAG contrast math done by hand. Full write-up coming soon.',
+    },
+    analog: {
+      eyebrow: 'ANALOG & CREATIVE',
+      title: 'Analog & creative',
+      navBlurb: "Film photography, illustration and motion. The work that isn't for a client.",
+      intro: 'Film photography, illustration and motion: no case study treatment, just the work.',
+      dragHint: 'Hover, or tap, to expand',
+      prevLabel: 'Previous',
+      nextLabel: 'Next',
+      images: [
+        {
+          src: '/images/about/personal.jpg',
+          alt: 'Black and white film photo of a black cat looking out through a window security grille, with a potted plant on the sill and peeling plaster on the wall',
+          caption: 'Placeholder, real film photo coming soon',
+        },
+        {
+          src: '/images/case-studies/levedadzine/cover.jpg',
+          alt: 'Zine titled "Somos * Paisajes" resting on a bed of moss and lichen outdoors',
+          caption: 'Placeholder, real film photo coming soon',
+        },
+        {
+          src: '/images/case-studies/levedadzine/image2.webp',
+          alt: 'Black zine cover reading "levedad zine_ / 2016.2022_ Death_Nature_Ruins_Spirits" on a marble surface',
+          caption: 'Placeholder, real film photo coming soon',
+        },
+        {
+          src: '/images/case-studies/levedadzine/image5.webp',
+          alt: 'Zine back cover with a small black and white photo of a ruined stone archway, laid on marble',
+          caption: 'Placeholder, real film photo coming soon',
+        },
+      ] satisfies LabImage[],
+    },
+  },
+  es: {
+    eyebrow: 'LAB',
+    title: 'Lab experimental',
+    intro: 'Lo que no encaja en un caso de estudio: experimentos de código y el trabajo personal y analógico que hago para mí.',
+    aiCode: {
+      eyebrow: 'AI & CODE',
+      title: 'Construyendo con IA',
+      navBlurb: 'Experimentos de código, flujos con IA y cómo se construyó este sitio.',
+      filterLabel: 'Filtrar por tema',
+      pills: ['IA', 'Design Systems', 'Astro', 'Accesibilidad'],
+      placeholderTag: 'Próximamente',
+      placeholderTitle: 'Reconstruyendo este portfolio con Astro + Claude Code',
+      placeholderBody:
+        'La migración de Framer a Astro, un bug de scoping de CSS en modo oscuro rastreado y corregido, la arquitectura de tokens migrada de Figma a custom properties de CSS, y los cálculos de contraste WCAG hechos a mano. Artículo completo próximamente.',
+    },
+    analog: {
+      eyebrow: 'ANALOG & CREATIVE',
+      title: 'Analógico y creativo',
+      navBlurb: 'Fotografía analógica, ilustración y motion. El trabajo que no es para un cliente.',
+      intro: 'Fotografía analógica, ilustración y motion: sin tratamiento de caso de estudio, solo el trabajo.',
+      dragHint: 'Pasa el cursor, o toca, para expandir',
+      prevLabel: 'Anterior',
+      nextLabel: 'Siguiente',
+      images: [
+        {
+          src: '/images/about/personal.jpg',
+          alt: 'Fotografía analógica en blanco y negro de un gato negro asomado a una ventana con reja, con una maceta en el alféizar y la pared con la pintura desconchada',
+          caption: 'Placeholder, foto de carrete definitiva próximamente',
+        },
+        {
+          src: '/images/case-studies/levedadzine/cover.jpg',
+          alt: 'Zine titulado "Somos * Paisajes" apoyado sobre musgo y líquenes en el exterior',
+          caption: 'Placeholder, foto de carrete definitiva próximamente',
+        },
+        {
+          src: '/images/case-studies/levedadzine/image2.webp',
+          alt: 'Portada negra del zine con el texto "levedad zine_ / 2016.2022_ Death_Nature_Ruins_Spirits" sobre mármol',
+          caption: 'Placeholder, foto de carrete definitiva próximamente',
+        },
+        {
+          src: '/images/case-studies/levedadzine/image5.webp',
+          alt: 'Contraportada del zine con una pequeña fotografía en blanco y negro de un arco de piedra en ruinas, sobre mármol',
+          caption: 'Placeholder, foto de carrete definitiva próximamente',
+        },
+      ] satisfies LabImage[],
+    },
   },
 } as const;
