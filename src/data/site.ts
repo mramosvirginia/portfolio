@@ -45,7 +45,7 @@ export const home = {
     ctaWork: 'See my work',
     ctaTalk: "Let's talk!",
     processEyebrow: 'PROCESS',
-    processMoreLink: 'More about me',
+    processMoreLink: 'Learn more',
     processTitle: 'What guides my process',
     process: [
       {
@@ -141,7 +141,7 @@ export const home = {
     ctaWork: 'Ver mi trabajo',
     ctaTalk: 'Hablemos',
     processEyebrow: 'PROCESO',
-    processMoreLink: 'Más sobre mí',
+    processMoreLink: 'Saber más',
     processTitle: 'Lo que guía mi proceso',
     process: [
       {
