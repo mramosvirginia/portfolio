@@ -21,25 +21,30 @@ const analogDisplay = Array.from({ length: target }, (_, i) => ({
   ...l.analog.images[i % l.analog.images.length],
   isDuplicate: i >= l.analog.images.length,
 }));
+
+// "Experimental" reads as the page's one accent word — pulled out in pink
+// regardless of which word order the locale uses ("Experimental Lab" vs.
+// "Lab experimental").
+const titleHtml = l.title.replace(/(experimental)/i, '<span class="lab-title-pink">$1</span>');
 ---
 
 <section class="lab-intro">
   <div class="container">
     <p class="eyebrow">{l.eyebrow}</p>
-    <h1>{l.title}</h1>
+    <h1 set:html={titleHtml} />
     <p class="lab-lede">{l.intro}</p>
 
     <div class="lab-nav">
-      <a href="#ai-code" class="lab-nav-card lab-nav-card-pink">
+      <a href="#ai-code" class="lab-nav-card lab-nav-card-white">
         <span class="lab-nav-icon">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M13 6l-2 12"/></svg>
         </span>
         <h2>{l.aiCode.eyebrow}</h2>
         <p>{l.aiCode.navBlurb}</p>
       </a>
-      <a href="#analog-creative" class="lab-nav-card lab-nav-card-white">
+      <a href="#analog-creative" class="lab-nav-card lab-nav-card-pink">
         <span class="lab-nav-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="6" width="14" height="12" rx="2"/><path d="M7 6l1.5-2h3L13 6"/><circle cx="10" cy="12" r="3"/><path d="M20 9l1.5 7-1.5-1.5"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 8a2 2 0 0 1 2-2h2l1.5-2h5L16 6h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8z"/><circle cx="12" cy="13" r="3.5"/></svg>
         </span>
         <h2>{l.analog.eyebrow}</h2>
         <p>{l.analog.navBlurb}</p>
@@ -52,7 +57,13 @@ const analogDisplay = Array.from({ length: target }, (_, i) => ({
   <div class="container">
     <div class="lab-section-header">
       <p class="eyebrow">{l.aiCode.eyebrow}</p>
-      <h2>{l.aiCode.title}</h2>
+      <h2>
+        {l.aiCode.title}
+        <span class="ai-spark" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5c.4 3.6 1.2 6 2.6 7.4s3.8 2.2 7.4 2.6c-3.6.4-6 1.2-7.4 2.6s-2.2 3.8-2.6 7.4c-.4-3.6-1.2-6-2.6-7.4S6 13.5 2.5 13.1c3.6-.4 6-1.2 7.4-2.6S12 6 12 2.5z"/></svg>
+        </span>
+      </h2>
+      <p class="lab-lede">{l.aiCode.intro}</p>
     </div>
 
     <div class="pill-row" role="group" aria-label={l.aiCode.filterLabel}>
@@ -278,6 +289,9 @@ const analogDisplay = Array.from({ length: target }, (_, i) => ({
   .lab-intro h1 {
     font-size: clamp(1.75rem, 3vw, 2.25rem);
   }
+  .lab-intro h1 :global(.lab-title-pink) {
+    color: var(--accent-highlight);
+  }
   .lab-lede {
     max-width: 56ch;
     color: var(--text-secondary);
@@ -373,6 +387,18 @@ const analogDisplay = Array.from({ length: target }, (_, i) => ({
     font-size: 1.75rem;
     margin-top: var(--space-1);
   }
+  .ai-spark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--accent-highlight) 14%, transparent);
+    color: var(--accent-highlight);
+    margin-left: var(--space-2);
+    vertical-align: middle;
+  }
 
   /* ── AI & Code — same accent as the rest of the site ── */
   .pill-row {
@@ -405,7 +431,10 @@ const analogDisplay = Array.from({ length: target }, (_, i) => ({
     padding: var(--space-8);
     border: 1px dashed var(--border-default);
     border-radius: var(--radius-md);
-    max-width: 62ch;
+    max-width: calc((100% - var(--space-4)) / 2);
+  }
+  @media (max-width: 640px) {
+    .ai-card { max-width: none; }
   }
   .ai-card.is-hidden {
     display: none;
