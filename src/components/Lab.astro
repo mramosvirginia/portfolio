@@ -22,10 +22,10 @@ const analogDisplay = Array.from({ length: target }, (_, i) => ({
   isDuplicate: i >= l.analog.images.length,
 }));
 
-// "Experimental" reads as the page's one accent word — pulled out in pink
+// "Lab" reads as the page's one accent word — pulled out in pink
 // regardless of which word order the locale uses ("Experimental Lab" vs.
 // "Lab experimental").
-const titleHtml = l.title.replace(/(experimental)/i, '<span class="lab-title-pink">$1</span>');
+const titleHtml = l.title.replace(/\b(lab)\b/i, '<span class="lab-title-pink">$1</span>');
 ---
 
 <section class="lab-intro">
@@ -326,6 +326,10 @@ const titleHtml = l.title.replace(/(experimental)/i, '<span class="lab-title-pin
     outline-offset: 3px;
   }
   .lab-nav-card-pink {
+    background: var(--lilac-200);
+    color: var(--heading-ink);
+  }
+  :global([data-theme='dark']) .lab-nav-card-pink {
     background: #F3C9E8;
     color: #3D1A33;
   }
@@ -461,19 +465,18 @@ const titleHtml = l.title.replace(/(experimental)/i, '<span class="lab-title-pin
     color: var(--text-secondary);
   }
 
-  /* ── Analog & Creative — deliberately breaks from the toggle: fixed
-     dark background regardless of light/dark mode, to read as its own
-     space rather than a themed section. ── */
+  /* ── Analog & Creative — follows the light/dark toggle like the rest of
+     the page for now (a fixed dark background left the heading unreadable
+     in light mode, since h2 sets its own color from --text-primary). ── */
   .lab-analog {
-    background: #101114;
-    color: #F2F0F5;
-    border-top-color: #232228;
+    background: var(--bg-page);
+    color: var(--text-primary);
   }
   .lab-analog .eyebrow {
-    color: #9A96A8;
+    color: var(--text-muted);
   }
   .lab-analog .lab-lede {
-    color: #C7C3D1;
+    color: var(--text-secondary);
   }
 
   /* ── card carousel — the active photo sits centered and full-size; its
@@ -548,7 +551,7 @@ const titleHtml = l.title.replace(/(experimental)/i, '<span class="lab-title-pin
     margin-top: var(--space-4);
     font-family: var(--font-sans);
     font-size: 0.8rem;
-    color: #C7C3D1;
+    color: var(--text-secondary);
     text-align: center;
     min-height: 1.2em;
   }
