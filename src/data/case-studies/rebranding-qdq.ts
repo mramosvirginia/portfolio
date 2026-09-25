@@ -17,6 +17,8 @@ export const rebrandingQdq: { en: CaseStudyContent; es: CaseStudyContent } = {
       year: '2024',
       services: 'Product Strategy',
     },
+    stackLabel: 'Stack',
+    stack: ['Duda', 'Figma', 'Microsoft Office', 'GA4', 'Google AdSense'],
     overviewIntro:
       "qdq is a business directory and digital marketing platform for local businesses in Spain. Ahead of the company's 2023-2024 brand unification, I worked within the Product team shaping the strategy behind the qdq.com and directory redesign — deciding what to prioritize across the corporate site and directory architecture, opening a new revenue channel (Google AdSense), and supporting the company-wide brand rollout through internal training materials and a proposed brand reference portal.",
     overviewImages: [
@@ -132,6 +134,8 @@ export const rebrandingQdq: { en: CaseStudyContent; es: CaseStudyContent } = {
       year: '2024',
       services: 'Estrategia de producto',
     },
+    stackLabel: 'Stack',
+    stack: ['Duda', 'Figma', 'Microsoft Office', 'GA4', 'Google AdSense'],
     overviewIntro:
       'qdq es una plataforma de directorio empresarial y marketing digital para negocios locales en España. De cara a la unificación de marca 2023-2024, trabajé dentro del equipo de Producto definiendo la estrategia detrás del rediseño de qdq.com y el directorio — decidiendo qué priorizar en el sitio corporativo y la arquitectura del directorio, abriendo un nuevo canal de ingresos (Google AdSense), y apoyando el despliegue de marca a nivel de empresa mediante materiales de formación interna y una propuesta de portal de referencia de marca.',
     overviewImages: [

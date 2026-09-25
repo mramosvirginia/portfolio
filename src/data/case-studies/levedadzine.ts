@@ -17,6 +17,8 @@ export const levedadzine: { en: CaseStudyContent; es: CaseStudyContent } = {
       year: '2016-2022',
       services: 'Editorial Design',
     },
+    stackLabel: 'Stack',
+    stack: ['Film rolls', 'InDesign'],
     overviewIntro:
       "Two self-published analog photography zines that together trace an editorial practice built around landscape, memory and community. One personal, one collaborative — both rooted in the same conviction: that printed matter has a presence that digital can't replicate.",
     overviewImages: [{ src: '/images/case-studies/levedadzine/image1.avif' }],
@@ -71,6 +73,8 @@ export const levedadzine: { en: CaseStudyContent; es: CaseStudyContent } = {
       year: '2016-2022',
       services: 'Diseño editorial',
     },
+    stackLabel: 'Stack',
+    stack: ['Carretes analógicos', 'InDesign'],
     overviewIntro:
       'Dos zines autopublicados de fotografía analógica que juntos trazan una práctica editorial construida en torno al paisaje, la memoria y la comunidad. Uno personal, otro colaborativo —ambos arraigados en la misma convicción: que el papel impreso tiene una presencia que lo digital no puede replicar.',
     overviewImages: [{ src: '/images/case-studies/levedadzine/image1.avif' }],

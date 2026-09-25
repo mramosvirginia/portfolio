@@ -63,6 +63,14 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
       )}
 
       <section id="overview" class="case-section">
+        {study.stack && (
+          <div class="stack-block">
+            <p class="stack-label">{study.stackLabel}</p>
+            <ul class="stack-list">
+              {study.stack.map((tool) => <li>{tool}</li>)}
+            </ul>
+          </div>
+        )}
         <h2>{study.overviewTitle}</h2>
         <p>{study.overviewIntro}</p>
         <dl class="meta-grid">
@@ -403,6 +411,43 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
     font-size: 0.9rem;
     color: var(--text-primary);
     margin: 0;
+  }
+
+  .stack-block {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    /* Pulls up into the section's own padding-top (space-16), so it sits
+       close to the impact line/divider above instead of floating in the
+       middle of that gap. */
+    margin-top: calc(var(--space-2) - var(--space-16));
+    margin-bottom: var(--space-8);
+  }
+  .case-section .stack-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+  .case-section .stack-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+    padding-left: 0;
+  }
+  .stack-list li {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-default);
+    border-radius: 999px;
+    padding: var(--space-1) var(--space-3);
   }
 
   .objectives-grid {

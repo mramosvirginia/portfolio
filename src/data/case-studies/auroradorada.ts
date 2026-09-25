@@ -17,6 +17,8 @@ export const auroradorada: { en: CaseStudyContent; es: CaseStudyContent } = {
       year: '2019-2026',
       services: 'Brand Identity',
     },
+    stackLabel: 'Stack',
+    stack: ['BigCartel', 'Squarespace', 'Illustrator', 'InDesign', 'Photoshop', 'Affinity'],
     overviewIntro:
       'Aurora Dorada Ediciones is an independent publishing house for which I have been responsible for the complete visual identity — both physical and digital — since 2019. Over the years I have designed more than 40 book covers and laid out more than 30 books, building a consistent visual language for the editorial brand. As the catalogue and business grew, the existing website (Bigcartel) became a barrier — limiting navigation, the shopping experience, and organic positioning. This case study focuses on the full UX redesign and platform migration to Squarespace, extending the editorial visual identity into a functional digital experience.',
     overviewImages: [{ src: '/images/case-studies/auroradorada/image1.webp' }],
@@ -131,6 +133,8 @@ export const auroradorada: { en: CaseStudyContent; es: CaseStudyContent } = {
       year: '2019-2026',
       services: 'Identidad de marca',
     },
+    stackLabel: 'Stack',
+    stack: ['BigCartel', 'Squarespace', 'Illustrator', 'InDesign', 'Photoshop', 'Affinity'],
     overviewIntro:
       'Aurora Dorada Ediciones es una editorial independiente para la que he sido responsable de toda la identidad visual —física y digital— desde 2019. A lo largo de estos años he diseñado más de 40 portadas de libros y maquetado más de 30 libros, construyendo un lenguaje visual consistente para la marca editorial. A medida que el catálogo y el negocio crecían, la web existente (Bigcartel) se convirtió en una barrera —limitando la navegación, la experiencia de compra y el posicionamiento orgánico. Este caso de estudio se centra en el rediseño UX completo y la migración de plataforma a Squarespace, extendiendo la identidad visual editorial a una experiencia digital funcional.',
     overviewImages: [{ src: '/images/case-studies/auroradorada/image1.webp' }],

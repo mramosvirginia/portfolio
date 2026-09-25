@@ -65,6 +65,11 @@ export interface CaseStudyContent {
   overviewTitle: string;
   metaLabels: CaseStudyMetaLabels;
   meta: CaseStudyMeta;
+  /** Tools/software used on the project, shown as a chip list under the
+   * overview meta. Names are proper nouns and stay the same across
+   * locales; only stackLabel is translated. */
+  stackLabel?: string;
+  stack?: string[];
   overviewIntro: string;
   overviewImages?: CaseStudyImage[];
   challengeTitle: string;

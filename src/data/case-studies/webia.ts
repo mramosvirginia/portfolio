@@ -17,6 +17,8 @@ export const webia: { en: CaseStudyContent; es: CaseStudyContent } = {
       year: '2024-2025',
       services: 'Product Design, AI',
     },
+    stackLabel: 'Stack',
+    stack: ['Figma', 'Miro', 'OpenAI/ChatGPT', 'eformless', 'GA4'],
     overviewIntro:
       "Freelancers and small businesses without a digital presence face a simple problem: building a website is slow, expensive, and requires technical knowledge they don't have. This AI-powered tool generates a complete site — copy, images, and structure — from just three data points. A real product in production, presented at Mobile World Congress 2024.",
     overviewImages: [
@@ -173,6 +175,8 @@ export const webia: { en: CaseStudyContent; es: CaseStudyContent } = {
       year: '2024-2025',
       services: 'Diseño de Producto, IA',
     },
+    stackLabel: 'Stack',
+    stack: ['Figma', 'Miro', 'OpenAI/ChatGPT', 'eformless', 'GA4'],
     overviewIntro:
       'Los autónomos y pequeños negocios sin presencia digital se enfrentan a un problema simple: crear una web es lento, caro y requiere conocimientos técnicos que no tienen. Esta herramienta con IA genera un sitio completo —copy, imágenes y estructura— a partir de solo tres datos. Un producto real en producción, presentado en el Mobile World Congress 2024.',
     overviewImages: [

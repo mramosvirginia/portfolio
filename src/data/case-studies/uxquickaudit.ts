@@ -17,6 +17,8 @@ export const uxquickaudit: { en: CaseStudyContent; es: CaseStudyContent } = {
       year: '2026',
       services: 'Product Design, Web Development',
     },
+    stackLabel: 'Stack',
+    stack: ['Figma', 'VS Code', 'GitHub'],
     overviewIntro:
       'Designers often leave accessibility, heuristics, and design psychology for the end — or ignore them altogether. There is no quick tool to consult these foundations in a way that is contextualized to the type of product being designed. UX QuickAudit solves this: select the product type and focus, and get technical arguments ready to copy and paste into any document. No registration, no plugins, no friction — 96 unique audit points combining heuristics, WCAG accessibility, and design psychology.',
     overviewImages: [
@@ -198,6 +200,8 @@ export const uxquickaudit: { en: CaseStudyContent; es: CaseStudyContent } = {
       year: '2026',
       services: 'Diseño de Producto, Desarrollo web',
     },
+    stackLabel: 'Stack',
+    stack: ['Figma', 'VS Code', 'GitHub'],
     overviewIntro:
       'Los diseñadores suelen dejar la accesibilidad, la heurística y la psicología del diseño para el final —o directamente las ignoran. No existe una herramienta rápida para consultar estos fundamentos de forma contextualizada al tipo de producto que se está diseñando. UX QuickAudit resuelve esto: selecciona el tipo de producto y el foco, y obtén argumentos técnicos listos para copiar y pegar en cualquier documento. Sin registro, sin plugins, sin fricción — 96 puntos de auditoría únicos que combinan heurística, accesibilidad WCAG y psicología del diseño.',
     overviewImages: [

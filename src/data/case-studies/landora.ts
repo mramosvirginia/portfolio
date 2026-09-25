@@ -18,6 +18,8 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
       year: '2026',
       services: 'Product Design, Design Systems',
     },
+    stackLabel: 'Stack',
+    stack: ['Figma', 'FigJam', 'Notion', 'Figma Tokens'],
     overviewIntro:
       "Rural experiences in Spain exist but are scattered and difficult to find or book. Current platforms fail to combine good UX with a rural focus and local community support — the booking process is often confusing and visual information is scarce. Landora centralizes the discovery and booking of rural experiences — cultural, gastronomic, and natural — in a simple, accessible way that supports local communities.",
     overviewImages: [
@@ -213,6 +215,8 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
       year: '2026',
       services: 'Diseño de Producto, Design Systems',
     },
+    stackLabel: 'Stack',
+    stack: ['Figma', 'FigJam', 'Notion', 'Figma Tokens'],
     overviewIntro:
       'Las experiencias rurales en España existen pero están dispersas y son difíciles de encontrar o reservar. Las plataformas actuales no combinan una buena UX con un enfoque rural y apoyo a la comunidad local —el proceso de reserva suele ser confuso y la información visual escasa. Landora centraliza el descubrimiento y la reserva de experiencias rurales —culturales, gastronómicas y naturales— de forma sencilla y accesible, apoyando a las comunidades locales.',
     overviewImages: [

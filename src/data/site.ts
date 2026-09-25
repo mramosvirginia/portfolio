@@ -10,6 +10,11 @@ export interface WorkProject {
   impact?: string;
 }
 
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
 export const nav = {
   en: { home: 'Home', work: 'Work', about: 'About', lab: 'Lab', cv: 'CV' },
   es: { home: 'Inicio', work: 'Trabajo', about: 'Sobre mí', lab: 'Lab', cv: 'CV' },
@@ -136,6 +141,44 @@ export const home = {
         impact: 'Featured in Lomography Magazine',
       },
     ] satisfies WorkProject[],
+    faqEyebrow: 'FAQs',
+    faqTitle: 'Frequently asked questions',
+    faq: [
+      {
+        question: 'Why did you move from graphic design to product design?',
+        answer:
+          "Because I didn't want to stay on the surface of aesthetics: I felt I needed to give design decisions real coherence, and that's what I found in UX, a rationale I could actually apply and justify.",
+      },
+      {
+        question: 'How do you combine your editorial background with product design?',
+        answer:
+          'I bring the same aesthetic judgment and layout rigor I learned in editorial to my product work: visual hierarchy, typographic detail, consistency. The editorial collaborations I still take on are occasional, not an ongoing parallel job.',
+      },
+      {
+        question: 'Do you only design, or do you also code?',
+        answer:
+          "I design, and I also work with code. It's not my main role, but it's a space I like to keep growing in: it makes me more collaborative with the dev team and gives me a better sense of the technical implications of my decisions.",
+      },
+      {
+        question: 'What kind of projects are you looking for right now?',
+        answer:
+          "I'm looking for projects where I can apply UX, product judgment and my experience with AI, whether that's redesigning a complex flow, building a design system from scratch, or exploring how to bring AI into the design process without losing rigor. I'm also training in Learning Experience Design (LXD), an area I'm keen to keep exploring.",
+      },
+      {
+        question: 'What can you bring to my company or team?',
+        answer:
+          'I bring an unusual mix of disciplines in my background (editorial, graphic and product) which lets me make design decisions grounded in research and apply that same judgment and rigor across every phase of a project.',
+      },
+      {
+        question: 'Availability?',
+        answer: 'Open to remote, hybrid and on-site work, and available to relocate to Valencia.',
+      },
+      {
+        question: 'Why did you rebuild your portfolio with AI/Astro instead of a builder?',
+        answer:
+          'Because of the limitations of traditional builders, and because I wanted real control over the design: performance, structure and visual detail.',
+      },
+    ] satisfies FaqItem[],
     labTeaser: {
       year: '2026',
       category: 'Design Systems, AI',
@@ -232,6 +275,44 @@ export const home = {
         impact: 'Destacado en Lomography Magazine',
       },
     ] satisfies WorkProject[],
+    faqEyebrow: 'FAQs',
+    faqTitle: 'Preguntas frecuentes',
+    faq: [
+      {
+        question: '¿Por qué pasaste de diseño gráfico a diseño de producto?',
+        answer:
+          'Porque no quería quedarme en la superficie de la estética: sentía que necesitaba darle coherencia a las decisiones de diseño, y eso es lo que encontré en UX, un criterio que sí se podía aplicar y justificar.',
+      },
+      {
+        question: '¿Cómo compaginas tu fondo editorial con el product design?',
+        answer:
+          'Aplico el mismo criterio estético y el mismo rigor de maquetación que aprendí en editorial a mis proyectos de producto: jerarquía visual, detalle tipográfico, consistencia. Las colaboraciones editoriales que sigo haciendo son puntuales, no un trabajo paralelo constante.',
+      },
+      {
+        question: '¿Trabajas solo diseño o también desarrollas?',
+        answer:
+          'Diseño y también toco código. No es mi rol principal, pero es un terreno en el que me gusta seguir profundizando porque me permite ser más colaborativa con el equipo de desarrollo y entender mejor las implicaciones técnicas de mis decisiones.',
+      },
+      {
+        question: '¿Qué tipo de proyectos buscas ahora mismo?',
+        answer:
+          'Busco proyectos donde pueda aplicar UX, criterio de producto y mi experiencia con IA, ya sea rediseñando un flujo complejo, construyendo un design system desde cero o explorando cómo integrar IA en el proceso de diseño sin perder rigor. También me estoy formando en Learning Experience Design (LXD), un área que me interesa seguir explorando.',
+      },
+      {
+        question: '¿Qué puedo aportar a tu empresa o equipo?',
+        answer:
+          'Aporto una mezcla poco habitual de disciplinas en mi trayectoria (editorial, gráfico y producto) que me permite tomar decisiones de diseño fundamentadas en investigación y aplicar ese mismo criterio y rigor en todas las fases de un proyecto.',
+      },
+      {
+        question: '¿Disponibilidad?',
+        answer: 'Abierta a remoto, híbrido y presencial, con disponibilidad para reubicarme en Valencia.',
+      },
+      {
+        question: '¿Por qué reconstruiste el portfolio con IA/Astro en vez de un builder?',
+        answer:
+          'Por las limitaciones de los builders tradicionales y por querer tener más control real sobre el diseño: rendimiento, estructura y detalle visual.',
+      },
+    ] satisfies FaqItem[],
     labTeaser: {
       year: '2026',
       category: 'Design Systems, IA',
