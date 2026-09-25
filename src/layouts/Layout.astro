@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Analytics from '@vercel/analytics/astro';
 import { nav, footer, cvUrl, email, linkedinUrl, type Locale } from '../data/site';
 
 interface Props {
@@ -205,6 +206,8 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
         document.body.classList.add('theme-ready');
       });
     </script>
+
+    <Analytics />
 
     <style>
       .skip-link {
