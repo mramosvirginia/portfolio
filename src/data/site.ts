@@ -56,7 +56,8 @@ export const home = {
   en: {
     availability: ['Available for work', '3 yrs product design', '+7 yrs visual design'],
     heroName: 'Virginia Miner',
-    tagline: 'UX Strategy and Visual Design with an editorial craft.',
+    taglineTop: 'UX Strategy and Visual Design',
+    taglineBottom: 'with an editorial craft.',
     tags: ['UX Strategy', 'Design Systems & AI', 'Editorial Craft'],
     ctaTalk: "Let's talk!",
     processEyebrow: 'PROCESS',
@@ -188,7 +189,8 @@ export const home = {
   es: {
     availability: ['Disponible para trabajar', '3 años de product design', '+7 años de diseño visual'],
     heroName: 'Virginia Miner',
-    tagline: 'Estrategia UX y Diseño Visual con un enfoque editorial.',
+    taglineTop: 'Estrategia UX y Diseño Visual',
+    taglineBottom: 'con un enfoque editorial.',
     tags: ['Estrategia UX', 'Design Systems & IA', 'Criterio editorial'],
     ctaTalk: 'Hablemos',
     processEyebrow: 'PROCESO',

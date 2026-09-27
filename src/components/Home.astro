@@ -29,17 +29,17 @@ const processIcons = [
   <div class="hero-dots-spotlight" aria-hidden="true"></div>
   <div class="container hero-stack">
     <h1 class="hero-name">{t.heroName}</h1>
-    <p class="tagline">{t.tagline}</p>
+    <p class="tagline">{t.taglineTop}<br class="tagline-break" /> {t.taglineBottom}</p>
+  </div>
+
+  <div class="hero-meta">
+    <div class="container">
+      <ul class="hero-meta-list">
+        {[...t.availability.slice(1), ...t.tags].map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
   </div>
 </section>
-
-<div class="hero-meta">
-  <div class="container">
-    <ul class="hero-meta-list">
-      {[...t.availability.slice(1), ...t.tags].map((item) => <li>{item}</li>)}
-    </ul>
-  </div>
-</div>
 
 <script>
   // Cursor "spotlight" over the hero dot pattern — driven entirely by two
@@ -148,21 +148,28 @@ const processIcons = [
      compete with the headline now lives here, as quieter pill badges —
      already enough visual weight on their own, no separator line needed. */
   .hero-meta {
+    position: relative;
+    z-index: 1;
     padding-top: var(--space-4);
     padding-bottom: calc(var(--space-16) + var(--space-4));
   }
   .hero-meta-list {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
+    gap: var(--space-3);
     list-style: none;
     padding: 0;
     margin: 0;
-    gap: var(--space-2);
+    width: 100%;
   }
+  /* Pill badges keep their own content width — grouped closer together
+     and centered, rather than stretching to span the full container. */
   .hero-meta-list li {
-    display: inline-flex;
+    flex: 0 0 auto;
+    display: flex;
     align-items: center;
+    justify-content: center;
+    text-align: center;
     font-family: var(--font-mono);
     font-size: 0.62rem;
     letter-spacing: 0.02em;
@@ -172,6 +179,7 @@ const processIcons = [
     border: 1px solid transparent;
     border-radius: 999px;
     padding: 3px var(--space-2);
+    white-space: nowrap;
   }
   /* Decorative halftone-style dot grid behind the whole hero. Two layers of
      repeating radial-gradient dots at different scales/offsets (rather
@@ -253,6 +261,12 @@ const processIcons = [
     font-size: 1.3rem;
     color: var(--text-secondary);
     margin-bottom: var(--space-6);
+  }
+  /* Forced break only on phones (see the mobile query below), so the
+     first line reads as a short, complete phrase instead of wrapping
+     wherever the browser happens to run out of width. */
+  .tagline-break {
+    display: none;
   }
   .eyebrow {
     font-family: var(--font-mono);
@@ -460,7 +474,7 @@ const processIcons = [
 
   @media (max-width: 780px) {
     .hero {
-      padding-top: var(--space-8);
+      padding-top: calc(var(--space-8) + var(--space-4));
       padding-bottom: var(--space-8);
     }
     .hero-dots {
@@ -473,7 +487,18 @@ const processIcons = [
     }
     .hero-meta { padding-bottom: var(--space-8); }
     .tagline { font-size: 1.05rem; }
-    .hero-meta-list li { font-size: 0.58rem; }
+    .tagline-break {
+      display: inline;
+    }
+    .hero-meta-list {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-2);
+    }
+    .hero-meta-list li {
+      flex: none;
+    }
     .process-header { flex-direction: column; align-items: flex-start; gap: var(--space-1); margin-bottom: var(--space-6); }
     .process-grid { grid-template-columns: 1fr; }
     .card-header h3 { font-size: 1.125rem; }
