@@ -59,6 +59,24 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
     <meta name="twitter:image" content={new URL('/og-image.jpg', Astro.site)} />
 
     <!--
+      First-ever visit (nothing in localStorage yet) lands on the Spanish
+      homepage instead of guessing from the browser's language — this only
+      ever fires for the bare "/" entry point, runs before first paint, and
+      never fires again once a visit has been recorded, so any later,
+      explicit navigation to the English site is left alone.
+    -->
+    <script is:inline>
+      (function () {
+        if (!localStorage.getItem('lang') && window.location.pathname === '/') {
+          localStorage.setItem('lang', 'es');
+          window.location.replace('/es/' + window.location.search + window.location.hash);
+          return;
+        }
+        localStorage.setItem('lang', window.location.pathname.indexOf('/es') === 0 ? 'es' : 'en');
+      })();
+    </script>
+
+    <!--
       Theme is set synchronously, before first paint, using an inline
       (non-deferred) script. This is what prevents the flash-of-wrong-theme
       you saw on the Framer site when navigating between pages: by the time
@@ -84,7 +102,6 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
     <header class="site-header">
       <div class="container header-inner">
         <a href={locale === 'en' ? '/' : '/es/'} class="brand">
-          <svg class="brand-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2L12 3z"/></svg>
           Virginia Miner
         </a>
 
@@ -247,10 +264,6 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
         font-family: var(--font-headline);
         font-size: 1.1rem;
       }
-      .brand-icon {
-        color: var(--accent-highlight);
-        flex-shrink: 0;
-      }
       .main-nav {
         display: flex;
         gap: var(--space-6);
@@ -382,7 +395,7 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
         height: 100%;
       }
       .footer-brand h2 {
-        font-size: 1.75rem;
+        font-size: var(--text-h2);
         margin-bottom: var(--space-4);
         max-width: calc((min(100vw, 1160px) - var(--space-6) * 2) / 2);
       }

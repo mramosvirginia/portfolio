@@ -287,7 +287,7 @@ const titleHtml = l.title.replace(/\b(lab)\b/i, '<span class="lab-title-pink">$1
     padding-bottom: var(--space-16);
   }
   .lab-intro h1 {
-    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-size: var(--text-h2);
   }
   .lab-intro h1 :global(.lab-title-pink) {
     color: var(--accent-highlight);
@@ -322,7 +322,7 @@ const titleHtml = l.title.replace(/\b(lab)\b/i, '<span class="lab-title-pink">$1
     box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.35);
   }
   .lab-nav-card:focus-visible {
-    outline: 2px solid var(--lilac-500);
+    outline: 2px solid var(--accent-highlight);
     outline-offset: 3px;
   }
   .lab-nav-card-pink {
@@ -388,7 +388,7 @@ const titleHtml = l.title.replace(/\b(lab)\b/i, '<span class="lab-title-pink">$1
   }
   .lab-section-header h2,
   .lab-analog h2 {
-    font-size: 1.75rem;
+    font-size: var(--text-h2);
     margin-top: var(--space-1);
   }
   .ai-spark {
@@ -457,7 +457,7 @@ const titleHtml = l.title.replace(/\b(lab)\b/i, '<span class="lab-title-pink">$1
   }
   .ai-card h3 {
     font-family: var(--font-headline);
-    font-size: 1.3rem;
+    font-size: var(--text-h3);
     line-height: 1.3;
     margin-bottom: var(--space-3);
   }
@@ -489,7 +489,7 @@ const titleHtml = l.title.replace(/\b(lab)\b/i, '<span class="lab-title-pink">$1
     touch-action: pan-y;
   }
   .ccarousel:focus-visible {
-    outline: 2px solid var(--lilac-500);
+    outline: 2px solid var(--accent-highlight);
     outline-offset: 4px;
   }
   .cc-viewport {

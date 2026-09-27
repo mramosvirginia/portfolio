@@ -18,11 +18,12 @@
   --navy-500: #5E6A75;
   --white: #FFFFFF;
   --off-white: #FAFCFD;
-  --border-light: #E4E2EE;
+  --paper: #FCFCFB;
+  --border-light: #DDD8CB;
 
-  --bg-page: var(--off-white);
+  --bg-page: var(--paper);
   --bg-surface: var(--white);
-  --bg-surface-subtle: #F5F3FA;
+  --bg-surface-subtle: #F0F0EF;
   --text-primary: var(--navy-900);
   --text-secondary: var(--navy-700);
   --text-muted: var(--navy-500);
@@ -31,11 +32,28 @@
   --accent-cta: var(--navy-900);
   --accent-cta-text: #FFFFFF;
   --heading-ink: #3D2956;
-  --accent-highlight: #5B21B6;
+  --accent-highlight: #000000;
 
-  --font-headline: 'Stack Sans Headline', 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-headline: 'CS Briem', 'Stack Sans Headline', 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'Geist Mono', ui-monospace, monospace;
+
+  /* Fluid heading scale — CS Briem has no weight variants, so the level
+     hierarchy is carried by size alone. Each clamp() scales linearly
+     between a 375px and a 1440px viewport (min at 375px, max at 1440px),
+     so there are no fixed-breakpoint jumps between mobile and desktop. */
+  --text-h1: clamp(1.75rem, 0.96rem + 3.38vw, 4rem);      /* 28px → 64px: Home hero only */
+  --text-h2: clamp(1.75rem, 1.49rem + 1.13vw, 2.5rem);    /* 28px → 40px: page section titles */
+  --text-h3: clamp(1.375rem, 1.24rem + 0.56vw, 1.75rem);  /* 22px → 28px: card titles */
+  --text-h4: clamp(1.125rem, 1.08rem + 0.19vw, 1.25rem);  /* 18px → 20px: in-page subtitles */
+
+  /* Dedicated tokens below: same mobile (375px) endpoint as the shared
+     scale above so phones are untouched, only the 1440px desktop endpoint
+     differs per element to fix the hierarchy on large screens. */
+  --text-card-process: 1.375rem;                                    /* 22px flat: Home "Proceso" and "Trabajo seleccionado" card titles (shared) */
+  --text-case-title: clamp(1.375rem, 1.07rem + 1.32vw, 2.25rem);    /* 22px → 36px: case study page main title */
+  --text-case-section: clamp(1.125rem, 0.82rem + 1.32vw, 2rem);     /* 18px → 32px: case study section titles */
+  --text-case-related-card: clamp(1.125rem, 1.08rem + 0.19vw, 1.25rem); /* 18px → 20px: "Ver más trabajo" card titles */
 
   --space-1: 4px;
   --space-2: 8px;
@@ -64,7 +82,18 @@
   --accent-cta: #F5F3FA;
   --accent-cta-text: var(--navy-900);
   --heading-ink: #F5F3FA;
-  --accent-highlight: #E0B5FF;
+  --accent-highlight: #FFFFFF;
+}
+
+/* CS Briem (full Website License, single weight) — self-hosted, used
+   sitewide for the headline hierarchy via --font-headline above. */
+@font-face {
+  font-family: 'CS Briem';
+  src: url('/fonts/cs-briem/CSBriem-Regular.woff2') format('woff2'),
+       url('/fonts/cs-briem/CSBriem-Regular.woff') format('woff');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
 }
 
 *, *::before, *::after { box-sizing: border-box; }

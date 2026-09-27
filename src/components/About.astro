@@ -166,11 +166,8 @@ const aboutSizes = '(min-width: 901px) 540px, calc(100vw - 32px)';
     transition: background 0.2s ease, color 0.2s ease;
   }
   .about-tabs button.is-active {
-    background: #F7F7F7;
-    color: var(--text-primary);
-  }
-  :global([data-theme='dark']) .about-tabs button.is-active {
     background: var(--bg-surface-subtle);
+    color: var(--text-primary);
   }
   .about-tabs button:hover {
     color: var(--text-primary);
@@ -203,7 +200,7 @@ const aboutSizes = '(min-width: 901px) 540px, calc(100vw - 32px)';
     display: block;
   }
   .about-copy h1 {
-    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-size: var(--text-h2);
     margin-bottom: var(--space-6);
   }
   .about-copy p {
@@ -240,12 +237,9 @@ const aboutSizes = '(min-width: 901px) 540px, calc(100vw - 32px)';
     text-transform: uppercase;
     letter-spacing: 0.02em;
     color: var(--text-primary);
-    background: #F7F7F7;
+    background: var(--bg-surface-subtle);
     border-radius: 999px;
     padding: var(--space-2) var(--space-4);
-  }
-  :global([data-theme='dark']) .badges li {
-    background: var(--bg-surface-subtle);
   }
   .about-photo {
     aspect-ratio: 4 / 5;
@@ -271,7 +265,7 @@ const aboutSizes = '(min-width: 901px) 540px, calc(100vw - 32px)';
   }
   .skills h2,
   .experience h2 {
-    font-size: 1.5rem;
+    font-size: var(--text-h2);
     padding-top: var(--space-16);
     margin-bottom: var(--space-6);
   }

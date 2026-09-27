@@ -87,7 +87,7 @@ const filterGroupLabel = locale === 'en' ? 'Filter projects by category' : 'Filt
     padding-bottom: var(--space-8);
   }
   .work-intro h1 {
-    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-size: var(--text-h2);
     margin-bottom: var(--space-8);
   }
   .eyebrow {
@@ -117,11 +117,8 @@ const filterGroupLabel = locale === 'en' ? 'Filter projects by category' : 'Filt
     transition: background 0.2s ease, color 0.2s ease;
   }
   .filter-tab.is-active {
-    background: #F7F7F7;
-    color: var(--text-primary);
-  }
-  :global([data-theme='dark']) .filter-tab.is-active {
     background: var(--bg-surface-subtle);
+    color: var(--text-primary);
   }
 
   .work-list {
@@ -168,9 +165,6 @@ const filterGroupLabel = locale === 'en' ? 'Filter projects by category' : 'Filt
     opacity: 0;
     transform: translateY(6px);
     transition: opacity 0.2s ease, transform 0.2s ease;
-  }
-  .project-overlay svg {
-    color: var(--accent-highlight);
   }
   .project-overlay span {
     font-family: var(--font-mono);
