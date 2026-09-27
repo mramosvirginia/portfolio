@@ -55,11 +55,9 @@ export const linkedinUrl = 'https://www.linkedin.com/in/virginiamramos/';
 export const home = {
   en: {
     availability: ['Available for work', '3 yrs product design', '+7 yrs visual design'],
-    greeting: "Hi, I'm Virginia Miner,",
-    role: 'Product & Visual Designer',
+    heroName: 'Virginia Miner',
     tagline: 'UX Strategy and Visual Design with an editorial craft.',
     tags: ['UX Strategy', 'Design Systems & AI', 'Editorial Craft'],
-    ctaWork: 'See my work',
     ctaTalk: "Let's talk!",
     processEyebrow: 'PROCESS',
     processMoreLink: 'Learn more',
@@ -189,11 +187,9 @@ export const home = {
   },
   es: {
     availability: ['Disponible para trabajar', '3 años de product design', '+7 años de diseño visual'],
-    greeting: 'Hola, soy Virginia Miner,',
-    role: 'Product & Visual Designer',
+    heroName: 'Virginia Miner',
     tagline: 'Estrategia UX y Diseño Visual con un enfoque editorial.',
     tags: ['Estrategia UX', 'Design Systems & IA', 'Criterio editorial'],
-    ctaWork: 'Ver mi trabajo',
     ctaTalk: 'Hablemos',
     processEyebrow: 'PROCESO',
     processMoreLink: 'Saber más',

@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import Analytics from '@vercel/analytics/astro';
-import { nav, footer, cvUrl, email, linkedinUrl, type Locale } from '../data/site';
+import { nav, footer, home, cvUrl, email, linkedinUrl, type Locale } from '../data/site';
 
 interface Props {
   locale: Locale;
@@ -12,6 +12,7 @@ interface Props {
 const { locale, title, description } = Astro.props;
 const t = nav[locale];
 const f = footer[locale];
+const homeT = home[locale];
 
 // Build the equivalent path in the other language for the language switcher.
 // Static builds emit "/work/" (trailing slash) while the dev server serves
@@ -102,7 +103,7 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
     <header class="site-header">
       <div class="container header-inner">
         <a href={locale === 'en' ? '/' : '/es/'} class="brand">
-          Virginia Miner
+          Virginia M.
         </a>
 
         <nav class="main-nav">
@@ -173,6 +174,7 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
       <div class="container footer-grid">
         <div class="footer-brand">
           <h2>{f.connectTitle}</h2>
+          <a href={`mailto:${email}`} class="btn btn-primary">{homeT.ctaTalk}</a>
           <slot name="footer" />
         </div>
         <nav class="footer-col" aria-label={f.siteLabel}>
@@ -396,8 +398,32 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
       }
       .footer-brand h2 {
         font-size: var(--text-h2);
-        margin-bottom: var(--space-4);
+        margin-bottom: var(--space-8);
         max-width: calc((min(100vw, 1160px) - var(--space-6) * 2) / 2);
+      }
+      .footer-brand .btn {
+        align-self: flex-start;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--space-2) var(--space-6);
+        border-radius: var(--radius-sm);
+        font-family: var(--font-sans);
+        font-size: 0.95rem;
+        font-weight: 500;
+        white-space: nowrap;
+        margin-bottom: var(--space-6);
+        transition: opacity 0.2s ease;
+      }
+      .footer-brand .btn-primary {
+        background: var(--accent-highlight);
+        color: var(--accent-cta-text);
+        letter-spacing: -0.2px;
+      }
+      @media (hover: hover) {
+        .footer-brand .btn-primary:hover {
+          opacity: 0.85;
+        }
       }
       .footer-brand :global(p) {
         font-family: var(--font-mono);
@@ -436,7 +462,7 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
         .footer-grid { grid-template-columns: 1fr; gap: var(--space-6); }
         .footer-brand h2 { max-width: none; }
         .footer-brand { height: auto; }
-        .footer-brand :global(p) { margin-top: var(--space-4); }
+        .footer-brand :global(p) { margin-top: var(--space-6); }
       }
     </style>
   </body>

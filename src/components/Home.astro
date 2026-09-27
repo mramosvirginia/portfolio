@@ -28,15 +28,8 @@ const processIcons = [
   <div class="hero-dots" aria-hidden="true"></div>
   <div class="hero-dots-spotlight" aria-hidden="true"></div>
   <div class="container hero-stack">
-    <h1>{t.greeting}<br class="hero-break" /> {t.role}</h1>
+    <h1 class="hero-name">{t.heroName}</h1>
     <p class="tagline">{t.tagline}</p>
-    <div class="hero-cta">
-      <a href={`${base}/work`} class="btn btn-primary">
-        {t.ctaWork}
-        <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-      <a href="mailto:vminer.ramos@gmail.com" class="btn btn-ghost">{t.ctaTalk}</a>
-    </div>
   </div>
 </section>
 
@@ -77,6 +70,29 @@ const processIcons = [
   }
 </script>
 
+<section class="case-studies">
+  <div class="container">
+    <p class="eyebrow">{t.caseStudiesEyebrow}</p>
+    <h2>{t.caseStudiesTitle}</h2>
+    <div class="project-grid">
+      {t.projects.map((p, i) => (
+        <a href={p.href} class="project-card">
+          <div class={`project-thumb thumb-ratio-${i % 4} ${p.image ? 'has-image' : ''}`}>
+            {p.image && <Img src={p.image} alt="" sizes="(min-width: 781px) 544px, calc(100vw - 32px)" widths={[400, 640, 900, 1200]} loading={i === 0 ? 'eager' : 'lazy'} />}
+            <div class="project-overlay">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+              <span>{t.viewCaseStudy}</span>
+            </div>
+          </div>
+          <p class="project-meta">{p.year} · {p.category}</p>
+          <p class="project-title">{p.title}</p>
+          {p.impact && <p class="project-impact">{p.impact}</p>}
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
 <section class="process">
   <div class="container">
     <p class="eyebrow">{t.processEyebrow}</p>
@@ -98,29 +114,6 @@ const processIcons = [
             <p>{item.body}</p>
           </div>
         </div>
-      ))}
-    </div>
-  </div>
-</section>
-
-<section class="case-studies">
-  <div class="container">
-    <p class="eyebrow">{t.caseStudiesEyebrow}</p>
-    <h2>{t.caseStudiesTitle}</h2>
-    <div class="project-grid">
-      {t.projects.map((p, i) => (
-        <a href={p.href} class="project-card">
-          <div class={`project-thumb thumb-ratio-${i % 4} ${p.image ? 'has-image' : ''}`}>
-            {p.image && <Img src={p.image} alt="" sizes="(min-width: 781px) 544px, calc(100vw - 32px)" widths={[400, 640, 900, 1200]} loading={i === 0 ? 'eager' : 'lazy'} />}
-            <div class="project-overlay">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
-              <span>{t.viewCaseStudy}</span>
-            </div>
-          </div>
-          <p class="project-meta">{p.year} · {p.category}</p>
-          <p class="project-title">{p.title}</p>
-          {p.impact && <p class="project-impact">{p.impact}</p>}
-        </a>
       ))}
     </div>
   </div>
@@ -149,7 +142,7 @@ const processIcons = [
     position: relative;
     overflow: hidden;
     padding-top: calc(var(--space-16) * 2 + var(--space-8));
-    padding-bottom: var(--space-16);
+    padding-bottom: var(--space-8);
   }
   /* Second-tier meta strip: the experience/keyword info that used to
      compete with the headline now lives here, as quieter pill badges —
@@ -249,74 +242,18 @@ const processIcons = [
     align-items: center;
     text-align: center;
   }
-  .hero-stack h1 {
+  .hero-name {
     font-size: var(--text-h1);
     letter-spacing: -0.2px;
-    margin-bottom: var(--space-8);
     max-width: 44ch;
+    margin: 0 0 var(--space-2);
   }
   .tagline {
     font-family: var(--font-headline);
     font-size: 1.3rem;
     color: var(--text-secondary);
-    margin-bottom: var(--space-8);
+    margin-bottom: var(--space-6);
   }
-  .hero-cta {
-    display: inline-grid;
-    grid-auto-flow: column;
-    grid-auto-columns: 1fr;
-    gap: var(--space-3);
-  }
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-2);
-    padding: var(--space-2) var(--space-6);
-    border-radius: var(--radius-sm);
-    font-size: 0.95rem;
-    font-weight: 500;
-    white-space: nowrap;
-    transition: border-color 0.2s ease;
-  }
-  .btn-primary {
-    background: var(--accent-highlight);
-    color: var(--accent-cta-text);
-    letter-spacing: -0.2px;
-  }
-  .btn-arrow {
-    width: 0;
-    opacity: 0;
-    transform: translateX(-6px);
-    transition: width 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
-    overflow: hidden;
-  }
-  .btn-primary:focus-visible .btn-arrow {
-    width: 16px;
-    opacity: 1;
-    transform: translateX(0);
-  }
-  @media (hover: hover) {
-    .btn-primary:hover .btn-arrow {
-      width: 16px;
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-  .btn-ghost {
-    background: var(--bg-page);
-    border: 1px solid var(--border-default);
-    color: var(--text-primary);
-  }
-  .btn-ghost:focus-visible {
-    border-color: var(--text-primary);
-  }
-  @media (hover: hover) {
-    .btn-ghost:hover {
-      border-color: var(--text-primary);
-    }
-  }
-
   .eyebrow {
     font-family: var(--font-mono);
     font-size: 0.75rem;
@@ -425,7 +362,7 @@ const processIcons = [
     color: var(--text-primary);
   }
   .card-header, .card-body {
-    background: var(--bg-surface-subtle);
+    background: var(--bg-surface);
   }
   .card-body {
     flex: 1;
@@ -534,8 +471,6 @@ const processIcons = [
       background-size: 36px 36px, 18px 18px;
       background-position: 0 0, 9px 9px;
     }
-    .hero-cta { display: grid; grid-auto-columns: 1fr; }
-    .hero-cta .btn { padding-inline: var(--space-3); white-space: nowrap; }
     .hero-meta { padding-bottom: var(--space-8); }
     .tagline { font-size: 1.05rem; }
     .hero-meta-list li { font-size: 0.58rem; }
@@ -553,11 +488,6 @@ const processIcons = [
     .hero-stack h1 {
       line-height: 1.08;
       letter-spacing: -0.8px;
-    }
-    /* Let the headline flow and wrap naturally at phone widths instead of
-       forcing the desktop two-part break, which pushed it to 3-4 lines. */
-    .hero-break {
-      display: none;
     }
   }
 </style>
