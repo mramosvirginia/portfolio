@@ -650,7 +650,8 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
         .footer-grid > .footer-contact > a:nth-of-type(3) { grid-row: 6; }
         .footer-grid > .footer-brand :global(p) { grid-column: 1 / -1; grid-row: 8; margin-top: var(--space-4); }
         .footer-dots, .footer-dots-spotlight { background-size: 36px 36px, 18px 18px; background-position: 0 0, 9px 9px; }
-        .footer-brand h2 { max-width: none; font-size: 1.75rem; }
+        /* Scales with the viewport so the title fits on 2 lines in both languages. */
+        .footer-brand h2 { max-width: none; font-size: 6.2vw; }
         /* Smaller footer text on phones. */
         .footer-brand :global(p) { font-size: 0.75rem; }
         .footer-heading { font-size: 0.75rem; }
