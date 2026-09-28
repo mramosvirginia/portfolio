@@ -12,7 +12,7 @@ interface Props {
 const { locale, title, description } = Astro.props;
 const t = nav[locale];
 const f = footer[locale];
-const homeT = home[locale];
+const ctaTalk = home[locale].ctaTalk;
 
 // Build the equivalent path in the other language for the language switcher.
 // Static builds emit "/work/" (trailing slash) while the dev server serves
@@ -24,6 +24,8 @@ const otherHref =
   locale === 'en'
     ? `/es${currentPath === '/' ? '' : currentPath}`
     : currentPath.replace(/^\/es/, '') || '/';
+
+const isCaseStudy = /^(\/es)?\/projects\//.test(currentPath);
 
 // Nav hrefs + which one matches the current page, for the active-page indicator.
 const homeHref = locale === 'en' ? '/' : '/es/';
@@ -42,7 +44,9 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="icon" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
 
     <meta property="og:type" content="website" />
@@ -100,7 +104,7 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
   </head>
   <body>
     <a href="#main-content" class="skip-link">{locale === 'en' ? 'Skip to content' : 'Saltar al contenido'}</a>
-    <header class="site-header">
+    <header class:list={['site-header', { 'is-home': isActive(homeHref), 'is-case': isCaseStudy, 'is-plain': !isActive(homeHref) && !isCaseStudy }]}>
       <div class="container header-inner">
         <a href={locale === 'en' ? '/' : '/es/'} class="brand">
           Virginia M.
@@ -108,7 +112,7 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
 
         <nav class="main-nav">
           <a href={homeHref} class:list={{ active: isActive(homeHref) }}>{t.home}</a>
-          <a href={workHref} class:list={{ active: isWorkActive }}>{t.work}</a>
+          <a href={workHref} data-nav-work class:list={{ active: isWorkActive }}>{t.work}</a>
           <a href={aboutHref} class:list={{ active: isActive(aboutHref) }}>{t.about}</a>
           <a href={labHref} class:list={{ active: isActive(labHref) }}>{t.lab}</a>
         </nav>
@@ -171,10 +175,11 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
     </main>
 
     <footer class="site-footer">
+      <div class="footer-dots" aria-hidden="true"></div>
+      <div class="footer-dots-spotlight" aria-hidden="true"></div>
       <div class="container footer-grid">
         <div class="footer-brand">
           <h2>{f.connectTitle}</h2>
-          <a href={`mailto:${email}`} class="btn btn-primary">{homeT.ctaTalk}</a>
           <slot name="footer" />
         </div>
         <nav class="footer-col" aria-label={f.siteLabel}>
@@ -184,12 +189,13 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
           <a href={locale === 'en' ? '/about' : '/es/about'}>{t.about}</a>
           <a href={labHref}>{t.lab}</a>
         </nav>
-        <div class="footer-col" aria-label={f.contactLabel}>
+        <div class="footer-col footer-contact" aria-label={f.contactLabel}>
           <p class="footer-heading">{f.contactLabel}</p>
           <a href={`mailto:${email}`}>Email</a>
           <a href={linkedinUrl} target="_blank" rel="noopener">LinkedIn</a>
           <a href={cvUrl} target="_blank" rel="noopener">{f.downloadCv}</a>
         </div>
+        <a href={`mailto:${email}`} class="footer-cta">{ctaTalk}<svg class="footer-cta-arrow" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
       </div>
     </footer>
 
@@ -219,6 +225,67 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
         });
       });
 
+      // Case studies end flush with the right edge of the "Work" nav link:
+      // publish that distance (viewport right edge -> link's right edge) as a CSS variable.
+      const workLink = document.querySelector('[data-nav-work]');
+      const syncCaseInset = () => {
+        if (!workLink) return;
+        const r = workLink.getBoundingClientRect();
+        if (r.width > 0) {
+          document.documentElement.style.setProperty(
+            '--case-right-inset',
+            `${Math.round(document.documentElement.clientWidth - r.right)}px`
+          );
+        }
+      };
+      syncCaseInset();
+
+      // Footer dot pattern: cursor "spotlight" driven by two CSS variables
+      // (rAF-throttled), only on hover-capable fine-pointer devices.
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        const footerEl = document.querySelector('.site-footer');
+        if (footerEl) {
+          let frame = 0, px = 0, py = 0;
+          footerEl.addEventListener('mousemove', (e) => {
+            const rect = footerEl.getBoundingClientRect();
+            px = e.clientX - rect.left;
+            py = e.clientY - rect.top;
+            if (frame) return;
+            frame = requestAnimationFrame(() => {
+              footerEl.style.setProperty('--mouse-x', `${px}px`);
+              footerEl.style.setProperty('--mouse-y', `${py}px`);
+              frame = 0;
+            });
+          });
+        }
+      }
+      window.addEventListener('resize', syncCaseInset);
+      document.fonts?.ready.then(syncCaseInset);
+
+      // Auto-hide header: hide when scrolling down, show when scrolling up.
+      const header = document.querySelector('.site-header');
+      let lastY = window.scrollY;
+      let ticking = false;
+      const updateHeader = () => {
+        const y = window.scrollY;
+        const menuOpen = mobileNav?.classList.contains('is-open');
+        header?.classList.toggle('is-scrolled', y > 8);
+        if (y <= 8 || menuOpen) {
+          header?.classList.remove('is-hidden');
+        } else if (Math.abs(y - lastY) > 6) {
+          header?.classList.toggle('is-hidden', y > lastY && y > 80);
+        }
+        lastY = y;
+        ticking = false;
+      };
+      updateHeader();
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(updateHeader);
+        }
+      }, { passive: true });
+
       // Enable transitions only after the first paint, so the initial
       // theme application never visibly animates.
       requestAnimationFrame(() => {
@@ -247,11 +314,49 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
         top: var(--space-4);
       }
       .site-header {
-        position: sticky;
+        position: fixed;
         top: 0;
+        left: 0;
+        right: 0;
         z-index: 50;
-        background: var(--bg-page);
-        border-bottom: 1px solid var(--border-default);
+        /* Transparent at the top of every page; once scrolled (or while the
+           mobile menu is open) it becomes a translucent, blurred bar so the
+           content underneath stays legible without a hard gray block. */
+        background: transparent;
+        -webkit-backdrop-filter: blur(0);
+        backdrop-filter: blur(0);
+        transition: transform 0.25s ease, opacity 0.25s ease, background-color 0.25s ease,
+          backdrop-filter 0.25s ease, -webkit-backdrop-filter 0.25s ease;
+      }
+      /* Auto-hide: slides away on scroll down, returns on scroll up. */
+      .site-header.is-hidden {
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+      }
+      /* Dark theme, top of the Home: the bar sits over the (light) hero, so it
+         uses the light palette until it gets its own blurred background. */
+      :global([data-theme='dark']) .site-header.is-home:not(.is-scrolled):not(:has(.mobile-nav.is-open)) {
+        --bg-surface: var(--white);
+        --text-primary: var(--navy-900);
+        --text-secondary: var(--navy-700);
+        --text-muted: var(--navy-500);
+        --border-default: var(--border-light);
+        color: var(--navy-900);
+      }
+      .site-header.is-scrolled,
+      .site-header:has(.mobile-nav.is-open) {
+        background: color-mix(in srgb, var(--bg-page) 55%, transparent);
+        -webkit-backdrop-filter: blur(16px) saturate(1.3);
+        backdrop-filter: blur(16px) saturate(1.3);
+      }
+      /* Open mobile menu: a bit more opaque so the links stay readable. */
+      .site-header:has(.mobile-nav.is-open) {
+        background: color-mix(in srgb, var(--bg-page) 80%, transparent);
+      }
+      /* The header is out of flow, so reserve its height. */
+      :global(main) {
+        padding-top: var(--header-h);
       }
       .header-inner {
         display: flex;
@@ -268,26 +373,28 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
       }
       .main-nav {
         display: flex;
+        margin-left: auto;
+        margin-right: var(--nav-gap);
         gap: var(--space-6);
         font-size: 0.9rem;
       }
       .main-nav a {
-        color: var(--text-secondary);
+        color: var(--text-muted);
         font-family: var(--font-mono);
         text-transform: uppercase;
         letter-spacing: 0.02em;
         font-size: 0.8rem;
+        transition: color 0.18s ease;
       }
-      .main-nav a:hover {
-        color: var(--accent-highlight);
-      }
+      .main-nav a:hover,
       .main-nav a.active {
-        color: var(--accent-highlight);
-        font-weight: 700;
+        color: var(--text-primary);
       }
       .header-controls {
         display: flex;
         align-items: center;
+        justify-content: flex-end;
+        min-width: var(--controls-w);
         gap: var(--space-3);
       }
       .lang-switch {
@@ -301,6 +408,7 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
         padding: var(--space-1) var(--space-3);
         border: 1px solid var(--border-default);
         border-radius: var(--radius-sm);
+        background: var(--bg-surface);
         color: var(--text-secondary);
       }
       .theme-toggle {
@@ -331,6 +439,7 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
         padding: var(--space-1) var(--space-3);
         border: 1px solid var(--border-default);
         border-radius: var(--radius-sm);
+        background: var(--bg-surface);
         color: var(--text-secondary);
       }
       .cv-link:hover { color: var(--accent-highlight); }
@@ -357,6 +466,10 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
         gap: var(--space-1);
         padding: var(--space-4) var(--space-6) var(--space-6);
         border-top: 1px solid var(--border-default);
+        /* transparent: shows the header's own background, so bar and menu match */
+        background: transparent;
+        max-height: calc(100svh - var(--header-h));
+        overflow-y: auto;
       }
       .mobile-nav.is-open { display: flex; }
       .mobile-nav a {
@@ -365,11 +478,14 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
         text-transform: uppercase;
         letter-spacing: 0.02em;
         font-size: 0.85rem;
-        color: var(--text-secondary);
+        color: var(--text-muted);
+        transition: color 0.18s ease;
+      }
+      .mobile-nav a:hover {
+        color: var(--text-primary);
       }
       .mobile-nav a.active {
-        color: var(--accent-highlight);
-        font-weight: 700;
+        color: var(--text-primary);
       }
       .mobile-cv {
         display: flex;
@@ -381,15 +497,91 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
         color: var(--text-primary) !important;
       }
 
+      /* Always black with white text, in both themes: the tokens are redefined
+         locally so every child (including slotted content) picks them up. */
       .site-footer {
+        --text-primary: #ffffff;
+        --text-secondary: #d9d9d9;
+        --text-muted: #9b9b9b;
+        --border-default: #2b2b2b;
+        --accent-highlight: #ffffff;
+        background: #000;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
         border-top: 1px solid var(--border-default);
-        padding-block: var(--space-16);
+        padding-top: calc(var(--space-16) * 1.75);
+        padding-bottom: calc(var(--space-16) * 0.75);
         margin-top: var(--space-16);
       }
+      /* Halftone dot grid (same effect as the old hero): two dot layers at
+         different scales, faint white on the black footer. A second, brighter
+         layer is revealed only inside a soft radial mask following the cursor. */
+      .footer-dots,
+      .footer-dots-spotlight {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background-size: 56px 56px, 28px 28px;
+        background-position: 0 0, 14px 14px;
+      }
+      .footer-dots {
+        background-image:
+          radial-gradient(circle, #fff 1.6px, transparent 1.6px),
+          radial-gradient(circle, #fff 1px, transparent 1px);
+        opacity: 0.045;
+      }
+      .footer-dots-spotlight {
+        display: none;
+        background-image:
+          radial-gradient(circle, #fff 2.4px, transparent 2.4px),
+          radial-gradient(circle, #fff 1.6px, transparent 1.6px);
+        opacity: 0.7;
+        -webkit-mask-image: radial-gradient(circle 80px at var(--mouse-x, -9999px) var(--mouse-y, -9999px), black 0%, transparent 100%);
+        mask-image: radial-gradient(circle 80px at var(--mouse-x, -9999px) var(--mouse-y, -9999px), black 0%, transparent 100%);
+      }
+      @media (hover: hover) and (pointer: fine) {
+        .footer-dots-spotlight { display: block; }
+      }
       .footer-grid {
+        position: relative;
+        z-index: 1;
         display: grid;
         grid-template-columns: 1fr minmax(160px, auto) minmax(160px, auto);
         gap: var(--space-8);
+        /* Approximate width left for the title: container minus the two link
+           columns (~344px incl. their 64px gap) and the right-hand inset that
+           keeps the links away from the edge. */
+        --footer-links-inset: clamp(40px, 7vw, 130px);
+        --footer-col1: calc(min(100vw, 1920px) - var(--gutter) * 2 - 344px - var(--footer-links-inset));
+      }
+      @media (min-width: 901px) {
+        .footer-grid {
+          grid-template-columns: minmax(0, 1fr) max-content max-content;
+        }
+        /* Tighter gap between the Site and Contact columns. */
+        .footer-col + .footer-col { margin-left: var(--space-8); }
+        .footer-contact { margin-right: var(--footer-links-inset); }
+        /* Two rows: title + link columns on top, copyright (left) and the CTA
+           (right) on the bottom row, level with each other like in the hero. */
+        .footer-grid { row-gap: clamp(160px, 20vw, 340px); }
+        .footer-grid > .footer-brand { display: contents; }
+        .footer-grid > .footer-brand h2 { grid-column: 1; grid-row: 1; margin-bottom: 0; }
+        .footer-grid > .footer-brand :global(p) {
+          grid-column: 1;
+          grid-row: 2;
+          align-self: end;
+          margin-top: 0;
+        }
+        .footer-col { grid-row: 1; }
+        .footer-cta {
+          grid-column: 2 / 4;
+          grid-row: 2;
+          justify-self: end;
+          align-self: end;
+          margin-right: var(--footer-links-inset);
+        }
       }
       .footer-brand {
         display: flex;
@@ -397,37 +589,33 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
         height: 100%;
       }
       .footer-brand h2 {
-        font-size: var(--text-h2);
-        margin-bottom: var(--space-8);
-        max-width: calc((min(100vw, 1160px) - var(--space-6) * 2) / 2);
+        /* Size scales with the space left of the link columns; the narrow width
+           cap (in em, so it tracks the size) makes it break into 3 lines in both languages. */
+        font-size: clamp(2.25rem, calc(var(--footer-col1) / 14.2), 5.5rem);
+        margin-bottom: var(--space-4);
+        line-height: 1.02;
+        max-width: 11em;
+        text-wrap: balance;
       }
-      .footer-brand .btn {
-        align-self: flex-start;
+      /* Same treatment as the hero's "Let's talk!" link: Briem, underlined, with an arrow. */
+      .footer-cta {
         display: inline-flex;
         align-items: center;
-        justify-content: center;
-        padding: var(--space-2) var(--space-6);
-        border-radius: var(--radius-sm);
-        font-family: var(--font-sans);
-        font-size: 0.95rem;
-        font-weight: 500;
-        white-space: nowrap;
-        margin-bottom: var(--space-6);
-        transition: opacity 0.2s ease;
-      }
-      .footer-brand .btn-primary {
-        background: var(--accent-highlight);
-        color: var(--accent-cta-text);
-        letter-spacing: -0.2px;
+        gap: 0.3em;
+        font-family: var(--font-headline);
+        font-size: 22px;
+        line-height: 1.25;
+        color: var(--text-primary);
+        text-decoration: underline;
+        text-decoration-thickness: 1.5px;
+        text-underline-offset: 0.2em;
       }
       @media (hover: hover) {
-        .footer-brand .btn-primary:hover {
-          opacity: 0.85;
-        }
+        .footer-cta:hover { opacity: 0.6; }
       }
       .footer-brand :global(p) {
         font-family: var(--font-mono);
-        font-size: 0.75rem;
+        font-size: 0.95rem;
         color: var(--text-muted);
         text-transform: uppercase;
         margin-top: auto;
@@ -439,7 +627,7 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
       }
       .footer-heading {
         font-family: var(--font-mono);
-        font-size: 0.75rem;
+        font-size: 0.95rem;
         text-transform: uppercase;
         letter-spacing: 0.02em;
         color: var(--text-muted);
@@ -448,7 +636,7 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
       .footer-col a {
         color: var(--text-secondary);
         font-family: var(--font-sans);
-        font-size: 0.9rem;
+        font-size: 1.2rem;
       }
       .footer-col a:hover {
         color: var(--accent-highlight);
@@ -460,9 +648,10 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
         .header-controls { gap: var(--space-3); }
         .cv-link { display: none; }
         .footer-grid { grid-template-columns: 1fr; gap: var(--space-6); }
+        .footer-dots, .footer-dots-spotlight { background-size: 36px 36px, 18px 18px; background-position: 0 0, 9px 9px; }
         .footer-brand h2 { max-width: none; }
         .footer-brand { height: auto; }
-        .footer-brand :global(p) { margin-top: var(--space-6); }
+        .footer-brand :global(p) { margin-top: var(--space-4); }
       }
     </style>
   </body>

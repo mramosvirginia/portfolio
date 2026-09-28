@@ -23,8 +23,8 @@ const toc = [
   ...study.sections.map((s) => ({ id: s.id, label: s.title })),
 ];
 
-const contentSizes = '(min-width: 901px) 830px, calc(100vw - 32px)';
-const relatedSizes = '(min-width: 901px) 260px, calc(100vw - 32px)';
+const contentSizes = '(min-width: 901px) calc(100vw - 356px), calc(100vw - 32px)';
+const relatedSizes = '(min-width: 901px) calc((100vw - 404px) / 3), calc(100vw - 32px)';
 
 const related = t.projects.filter((p) => p.filter === study.filter && !p.href.endsWith(study.slug)).slice(0, 3);
 ---
@@ -229,13 +229,31 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
   }
   .case-layout {
     display: grid;
-    grid-template-columns: 220px 1fr;
+    grid-template-columns: var(--col1) 1fr;
     gap: var(--space-16);
     align-items: start;
   }
+  /* Content (columns 2-3) ends at the same x as the navbar's link block. */
+  @media (min-width: 901px) {
+    .case-layout {
+      padding-right: calc(var(--gutter) + var(--inset-right));
+      /* Narrow reading column (max 880px), pushed to the right so it always
+         ends flush with the navbar links, even on large screens. */
+      grid-template-columns: var(--col1) minmax(0, 880px);
+      justify-content: space-between;
+    }
+  }
+  /* From 1200px up there is room to end flush with the "Work" link (measured
+     in the layout script); below that the column would get too narrow, so it
+     keeps ending at the last nav link. */
+  @media (min-width: 1200px) {
+    .case-layout {
+      padding-right: var(--case-right-inset, calc(var(--gutter) + var(--inset-right)));
+    }
+  }
   .case-sidebar {
     position: sticky;
-    top: var(--space-8);
+    top: calc(var(--header-h) + var(--space-4));
     display: flex;
     flex-direction: column;
     gap: var(--space-8);
@@ -362,6 +380,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
     margin-bottom: var(--space-4);
   }
   .case-section p {
+    max-width: 75ch;
     color: var(--text-secondary);
     line-height: 1.7;
     margin-bottom: var(--space-4);

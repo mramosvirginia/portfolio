@@ -1,5 +1,5 @@
 ---
-import { home, type Locale } from '../data/site';
+import { home, email, type Locale } from '../data/site';
 import Img from './Img.astro';
 
 interface Props {
@@ -9,6 +9,11 @@ interface Props {
 const { locale } = Astro.props;
 const t = home[locale];
 const base = locale === 'en' ? '' : '/es';
+
+// Hero tags laid out in explicit rows of 2-3 so each row hugs its content.
+const heroTags = [...t.availability.slice(1), ...t.tags];
+const heroTagRows = [heroTags.slice(0, 2), heroTags.slice(2)];
+// Phone layout is 2 / 2 / 1: a break marker sits before the last tag.
 
 // One icon per process card, matched by index — not translated content,
 // so kept separate from the locale-aware copy in site.ts.
@@ -25,104 +30,102 @@ const processIcons = [
 ---
 
 <section class="hero">
-  <div class="hero-dots" aria-hidden="true"></div>
-  <div class="hero-dots-spotlight" aria-hidden="true"></div>
-  <div class="container hero-stack">
-    <h1 class="hero-name">{t.heroName}</h1>
-    <p class="tagline">{t.taglineTop}<br class="tagline-break" /> {t.taglineBottom}</p>
-  </div>
+  <div class="hero-stack">
+    <div class="hero-headline">
+      <h1 class="hero-name">
+        <span class="hero-line">{t.heroName}</span>
+        <span class="hero-line">{t.heroRole}</span>
+      </h1>
+      <div class="hero-meta-list">
+        {heroTagRows.map((row) => (
+          <ul class="tag-row">
+            {row.map((item, i) => (
+              <>
+                {row.length > 2 && i === row.length - 1 && <li class="tag-br" aria-hidden="true" />}
+                <li>{item}</li>
+              </>
+            ))}
+          </ul>
+        ))}
+      </div>
+    </div>
 
-  <div class="hero-meta">
-    <div class="container">
-      <ul class="hero-meta-list">
-        {[...t.availability.slice(1), ...t.tags].map((item) => <li>{item}</li>)}
-      </ul>
+    <div class="hero-bottom">
+      <p class="hero-intro"><span class="hero-intro-lead">{t.heroIntro}</span> {t.heroIntroRest} <span class="hero-location">{t.heroLocation}</span></p>
+      <a href={`mailto:${email}`} class="btn btn-primary">{t.ctaTalk}<svg class="btn-arrow" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
     </div>
   </div>
 </section>
 
-<script>
-  // Cursor "spotlight" over the hero dot pattern — driven entirely by two
-  // CSS custom properties (--mouse-x/--mouse-y) that position a radial
-  // mask over a second, brighter dot layer. No per-dot recalculation, no
-  // canvas: the browser's compositor handles the mask/gradient paint.
-  // rAF-throttled so mousemove firing per-pixel doesn't spam style writes.
-  // Only wired up on hover-capable, fine-pointer devices — touch just gets
-  // the static base pattern, per design.
-  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    const hero = document.querySelector<HTMLElement>('.hero');
-    if (hero) {
-      let frame = 0;
-      let pendingX = 0;
-      let pendingY = 0;
-      hero.addEventListener('mousemove', (e) => {
-        const rect = hero.getBoundingClientRect();
-        pendingX = e.clientX - rect.left;
-        pendingY = e.clientY - rect.top;
-        if (frame) return;
-        frame = requestAnimationFrame(() => {
-          hero.style.setProperty('--mouse-x', `${pendingX}px`);
-          hero.style.setProperty('--mouse-y', `${pendingY}px`);
-          frame = 0;
-        });
-      });
-    }
-  }
-</script>
-
 <section class="case-studies">
-  <div class="container">
-    <p class="eyebrow">{t.caseStudiesEyebrow}</p>
-    <h2>{t.caseStudiesTitle}</h2>
+  <div class="container grid-3">
+    <div class="section-head">
+      <p class="eyebrow">{t.caseStudiesEyebrow}</p>
+      <h2>{t.caseStudiesTitle}</h2>
+      <a href={`${base}/work`} class="process-more-link">
+        {t.seeAllWork}
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="span-23">
     <div class="project-grid">
       {t.projects.map((p, i) => (
         <a href={p.href} class="project-card">
           <div class={`project-thumb thumb-ratio-${i % 4} ${p.image ? 'has-image' : ''}`}>
-            {p.image && <Img src={p.image} alt="" sizes="(min-width: 781px) 544px, calc(100vw - 32px)" widths={[400, 640, 900, 1200]} loading={i === 0 ? 'eager' : 'lazy'} />}
+            {p.image && <Img src={p.image} alt="" sizes="(min-width: 781px) calc((100vw - 96px) / 2), calc(100vw - 32px)" widths={[400, 640, 900, 1200]} loading={i === 0 ? 'eager' : 'lazy'} />}
             <div class="project-overlay">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
-              <span>{t.viewCaseStudy}</span>
+              <span class="overlay-pill">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+                {t.viewCaseStudy}
+              </span>
             </div>
           </div>
           <p class="project-meta">{p.year} · {p.category}</p>
-          <p class="project-title">{p.title}</p>
+          <p class="project-title">{p.cardTitle ?? p.title}</p>
           {p.impact && <p class="project-impact">{p.impact}</p>}
         </a>
       ))}
+    </div>
     </div>
   </div>
 </section>
 
 <section class="process">
-  <div class="container">
-    <p class="eyebrow">{t.processEyebrow}</p>
-    <div class="process-header">
+  <div class="container grid-3">
+    <div class="section-head">
+      <p class="eyebrow">{t.processEyebrow}</p>
       <h2>{t.processTitle}</h2>
       <a href={`${base}/about`} class="process-more-link">
         {t.processMoreLink}
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
     </div>
-    <div class="process-grid">
-      {t.process.map((item, i) => (
-        <div class="process-card">
-          <div class={`card-header header-${i}`}>
-            <div class="card-icon" set:html={processIcons[i]} />
-            <h3>{item.title}</h3>
+    <div class="span-23">
+      <div class="process-grid">
+        {t.process.map((item, i) => (
+          <div class="process-card">
+            <div class="card-top">
+              <div class="card-icon" set:html={processIcons[i]} />
+              <span class="card-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            </div>
+            <div class="card-text">
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </div>
           </div>
-          <div class="card-body">
-            <p>{item.body}</p>
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   </div>
 </section>
 
 <section class="faq">
-  <div class="container">
-    <p class="eyebrow">{t.faqEyebrow}</p>
-    <h2>{t.faqTitle}</h2>
+  <div class="container grid-3">
+    <div class="section-head">
+      <p class="eyebrow">{t.faqEyebrow}</p>
+      <h2>{t.faqTitle}</h2>
+    </div>
+    <div class="span-23">
     <div class="faq-list">
       {t.faq.map((item) => (
         <details class="faq-item">
@@ -134,139 +137,262 @@ const processIcons = [
         </details>
       ))}
     </div>
+    </div>
   </div>
 </section>
+
+<script>
+  // Scroll reveal for "Selected work": same rise + fade as the hero, fired
+  // when each element enters the viewport. Skipped entirely (content stays
+  // visible) when the user prefers reduced motion or IntersectionObserver
+  // is unavailable.
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce && 'IntersectionObserver' in window) {
+    const targets = document.querySelectorAll<HTMLElement>(
+      '.case-studies .section-head, .case-studies .project-card'
+    );
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          e.target.classList.add('is-in');
+          io.unobserve(e.target);
+        });
+      },
+      { rootMargin: '0px 0px -3% 0px', threshold: 0.05 }
+    );
+    targets.forEach((el, i) => {
+      el.setAttribute('data-reveal', '');
+      // Small stagger between the two cards of a row.
+      if (el.classList.contains('project-card')) el.style.transitionDelay = `${(i % 2) * 0.1}s`;
+      io.observe(el);
+    });
+  }
+</script>
 
 <style>
   .hero {
     position: relative;
-    overflow: hidden;
-    padding-top: calc(var(--space-16) * 2 + var(--space-8));
-    padding-bottom: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    /* Fills the first screen below the 68px sticky header. */
+    min-height: calc(100svh - var(--header-h));
+    padding-top: clamp(32px, 5vw, 80px);
+    padding-bottom: clamp(24px, 3vw, 48px);
   }
-  /* Second-tier meta strip: the experience/keyword info that used to
-     compete with the headline now lives here, as quieter pill badges —
-     already enough visual weight on their own, no separator line needed. */
-  .hero-meta {
+  /* Experimental texture background (light gray halftone). Light theme shows
+     it as-is; dark theme inverts it so it reads as a dark texture. */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: calc(var(--header-h) * -1) 0 0 0; /* up behind the fixed header */
+    z-index: 0;
+    background: url('/images/hero/hero-texture.jpg') center / cover no-repeat;
+    opacity: 0.85;
+    pointer-events: none;
+  }
+  /* Dark theme: the hero keeps its light look. The light palette is re-applied
+     locally (so text, tags and CTA read dark on the light texture) and the
+     texture is backed by the paper color instead of the black page. */
+  :global([data-theme='dark']) .hero {
+    --bg-page: var(--paper);
+    --bg-surface: var(--white);
+    --text-primary: var(--navy-900);
+    --text-secondary: var(--navy-700);
+    --text-muted: var(--navy-500);
+    --border-default: var(--border-light);
+    --accent-primary: var(--navy-900);
+    --accent-cta: var(--navy-900);
+    --accent-cta-text: #FFFFFF;
+    --accent-highlight: #000000;
+    --heading-ink: var(--navy-900);
+  }
+  :global([data-theme='dark']) .hero::before {
+    background-color: var(--paper);
+    background-image:
+      linear-gradient(rgba(252, 252, 251, 0.15), rgba(252, 252, 251, 0.15)),
+      url('/images/hero/hero-texture.jpg');
+    opacity: 1;
+  }
+  :global([data-theme='dark']) .hero-name { color: #14181F; }
+  :global([data-theme='dark']) .hero-meta-list li { background: var(--white); }
+  /* Entrance: texture fades in while easing down from a slight zoom, then
+     headline lines, tags and intro/CTA rise in sequence. Only for users who
+     haven't asked for reduced motion. `backwards` keeps the final
+     opacity/position from the normal rules (theme-dependent). Uses
+     `translate` so it never clashes with the tags' own transform. */
+  @keyframes hero-bg-in {
+    from { opacity: 0; scale: 1.06; }
+  }
+  @keyframes hero-rise {
+    from { opacity: 0; translate: 0 28px; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero::before {
+      animation: hero-bg-in 1.6s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+    }
+    .hero-line,
+    .hero-meta-list,
+    .hero-bottom {
+      animation: hero-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+    }
+    .hero-line:nth-child(1) { animation-delay: 0.15s; }
+    .hero-line:nth-child(2) { animation-delay: 0.3s; }
+    .hero-meta-list { animation-delay: 0.6s; }
+    .hero-bottom { animation-delay: 0.8s; }
+  }
+  /* Scroll reveal (see script above): only ever hidden when JS has tagged
+     the element, so no-JS and reduced-motion users always see the content. */
+  :global([data-reveal]:not(.is-in)) {
+    opacity: 0;
+    translate: 0 16px;
+  }
+  /* `body.theme-ready *` (global.css) sets a transition on everything, so
+     this needs equal-or-higher specificity or the reveal would just snap. */
+  :global(body.theme-ready [data-reveal]),
+  :global([data-reveal]) {
+    transition: var(--transition-theme), opacity 0.6s ease-out, translate 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  /* Full-bleed section; horizontal margins come from the shared --gutter,
+     same as the page container, so hero, header and sections all align.
+     Headline pinned to the top, intro + CTA pinned to the bottom. */
+  .hero-stack {
     position: relative;
     z-index: 1;
-    padding-top: var(--space-4);
-    padding-bottom: calc(var(--space-16) + var(--space-4));
-  }
-  .hero-meta-list {
+    flex: 1;
     display: flex;
-    justify-content: center;
-    gap: var(--space-3);
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-8);
+    text-align: left;
+    padding-inline: var(--gutter);
+  }
+  .hero-headline {
+    position: relative;
+  }
+  .hero-name {
+    font-size: var(--text-h1);
+    line-height: 0.92;
+    letter-spacing: -0.055em;
+    margin: 0;
+  }
+  .hero-line {
+    display: block;
+  }
+  :global([data-theme='light']) .hero-name {
+    color: #14181F;
+  }
+  /* Tags as a compact 2-3 grid placed right after the end of "Visual
+     Designer" (5.785em is that line's width), bottom edge on that line's baseline.
+     em is relative to the headline size, so it tracks the fluid font-size. */
+  .hero-meta-list {
+    position: absolute;
+    font-size: var(--text-h1);
+    left: calc(5.785em + 32px);
+    top: 1.727em; /* baseline of the second headline line */
+    transform: translateY(-100%);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+    margin: 0;
+  }
+  .tag-row {
+    display: flex;
+    gap: 8px 14px;
     list-style: none;
     padding: 0;
     margin: 0;
-    width: 100%;
   }
-  /* Pill badges keep their own content width — grouped closer together
-     and centered, rather than stretching to span the full container. */
   .hero-meta-list li {
-    flex: 0 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     font-family: var(--font-mono);
-    font-size: 0.62rem;
+    font-size: 0.74rem;
     letter-spacing: 0.02em;
     text-transform: uppercase;
     color: var(--text-primary);
-    background: var(--bg-surface-subtle);
-    border: 1px solid transparent;
+    background: transparent;
+    border: 1.5px solid var(--text-primary);
     border-radius: 999px;
-    padding: 3px var(--space-2);
+    /* 2 rows tuned so the block matches the x-height of the adjacent lowercase letters. */
+    padding: 8.1px 15px;
     white-space: nowrap;
   }
-  /* Decorative halftone-style dot grid behind the whole hero. Two layers of
-     repeating radial-gradient dots at different scales/offsets (rather
-     than a single uniform grid) so it reads like a print screen tint
-     instead of a flat mechanical pattern — pure CSS, no SVG/canvas/JS. */
-  .hero-dots {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background-image:
-      radial-gradient(circle, var(--accent-highlight) 1.6px, transparent 1.6px),
-      radial-gradient(circle, var(--accent-highlight) 1px, transparent 1px);
-    background-size: 40px 40px, 20px 20px;
-    background-position: 0 0, 10px 10px;
-    opacity: 0.06;
+  :global([data-theme='light']) .hero-meta-list li {
+    background: var(--white);
   }
-  :global([data-theme='dark']) .hero-dots {
-    background-image:
-      radial-gradient(circle, var(--border-default) 1.6px, transparent 1.6px),
-      radial-gradient(circle, var(--border-default) 1px, transparent 1px);
-    background-size: 56px 56px, 28px 28px;
-    background-position: 0 0, 14px 14px;
-    opacity: 0.5;
-  }
-  /* Light theme: dots pulled close to the background color so they read
-     as texture, not decoration — the brighter accent-colored layer only
-     shows up inside the hover spotlight below. */
-  :global([data-theme='light']) .hero-dots {
-    background-image:
-      radial-gradient(circle, var(--border-default) 1.6px, transparent 1.6px),
-      radial-gradient(circle, var(--border-default) 1px, transparent 1px);
-    opacity: 0.5;
-  }
-  /* Keep the spotlight's grid aligned to the base pattern's spacing in
-     dark mode, so the reveal reads as the same dots growing, not a
-     mismatched second grid. */
-  :global([data-theme='dark']) .hero-dots-spotlight {
-    background-size: 56px 56px, 28px 28px;
-    background-position: 0 0, 14px 14px;
-  }
-  /* Cursor "spotlight": a second, brighter dot layer revealed only inside a
-     soft radial mask centered on the mouse position. --mouse-x/--mouse-y
-     are written by the script below (rAF-throttled); the compositor does
-     the rest, so nothing here is recalculated per dot or per frame in JS. */
-  .hero-dots-spotlight {
-    display: none;
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background-image:
-      radial-gradient(circle, var(--accent-highlight) 2.4px, transparent 2.4px),
-      radial-gradient(circle, var(--accent-highlight) 1.6px, transparent 1.6px);
-    background-size: 40px 40px, 20px 20px;
-    background-position: 0 0, 10px 10px;
-    -webkit-mask-image: radial-gradient(circle 70px at var(--mouse-x, -9999px) var(--mouse-y, -9999px), black 0%, transparent 100%);
-    mask-image: radial-gradient(circle 70px at var(--mouse-x, -9999px) var(--mouse-y, -9999px), black 0%, transparent 100%);
-  }
-  @media (hover: hover) and (pointer: fine) {
-    .hero-dots-spotlight {
-      display: block;
-    }
-  }
-  .hero-stack {
-    position: relative;
-    z-index: 1;
+  .hero-meta-list li.tag-br { display: none; }
+  .hero-bottom {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--space-6);
   }
-  .hero-name {
-    font-size: var(--text-h1);
-    letter-spacing: -0.2px;
-    max-width: 44ch;
-    margin: 0 0 var(--space-2);
-  }
-  .tagline {
+  .hero-intro {
     font-family: var(--font-headline);
-    font-size: 1.3rem;
-    color: var(--text-secondary);
-    margin-bottom: var(--space-6);
+    font-size: 22px;
+    line-height: 1.25;
+    color: var(--text-primary);
+    max-width: 30ch;
+    margin: 0;
   }
-  /* Forced break only on phones (see the mobile query below), so the
-     first line reads as a short, complete phrase instead of wrapping
-     wherever the browser happens to run out of width. */
-  .tagline-break {
-    display: none;
+  /* Lead in full contrast, the rest in a softer gray (theme-aware token). */
+  .hero-intro { color: var(--text-muted); }
+  .hero-intro-lead { color: var(--text-primary); }
+  /* Location sentence wraps as one unit, so it drops to the last line intact. */
+  .hero-location { display: inline-block; }
+  /* The Spanish copy is longer: give it more measure so it stays within 3 lines on desktop. */
+  :global(html[lang='es']) .hero-intro {
+    max-width: 40ch;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
+    flex-shrink: 0;
+    padding: 0;
+    font-family: var(--font-headline);
+    font-size: 22px;
+    line-height: 1.25;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+  }
+  /* Text link: underlined, black in light mode / white in dark (text-primary). */
+  .btn-primary {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.2em;
+  }
+  @media (hover: hover) {
+    .btn-primary:hover { opacity: 0.6; }
+  }
+  /* Not enough room beside the headline (needs ~1300px): tags drop below it as one wrapping
+     row (rows flattened with display: contents). */
+  @media (max-width: 1320px) {
+    .hero-meta-list {
+      position: static;
+      font-size: 16px;
+      transform: none;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 4px 14px;
+      margin: clamp(24px, 3vw, 48px) 0 0;
+    }
+    .tag-row { display: contents; }
+  }
+  /* Process + FAQ: the column-1 heading follows the reader through the
+     long content in columns 2-3, bounded by the section's own grid. */
+  @media (min-width: 901px) {
+    .case-studies .section-head,
+    .process .section-head,
+    .faq .section-head {
+      position: sticky;
+      top: calc(var(--header-h) + var(--space-6));
+    }
   }
   .eyebrow {
     font-family: var(--font-mono);
@@ -276,18 +402,9 @@ const processIcons = [
     color: var(--text-muted);
     margin-bottom: var(--space-2);
   }
-  .process-header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: var(--space-4);
-    margin-bottom: var(--space-8);
-  }
-  .process-header h2 {
-    margin-bottom: 0;
-  }
   .process-more-link {
     display: inline-flex;
+    margin-top: var(--space-4);
     align-items: center;
     gap: var(--space-1);
     font-family: var(--font-mono);
@@ -311,7 +428,7 @@ const processIcons = [
     padding-block: var(--space-16);
     border-top: 1px solid var(--border-default);
   }
-  .process h2, .case-studies h2, .faq h2 { margin-bottom: var(--space-8); font-size: var(--text-h2); }
+  .process h2, .case-studies h2, .faq h2 { margin-bottom: 0; font-size: 32px; }
 
   .faq-item {
     border-bottom: 1px solid var(--border-default);
@@ -352,52 +469,72 @@ const processIcons = [
   .process-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-4);
+    gap: var(--space-3);
   }
   .process-card {
     display: flex;
     flex-direction: column;
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    border: 1px solid var(--border-default);
-  }
-  .card-header {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    padding: var(--space-4) var(--space-6) 0;
-  }
-  .card-icon {
-    color: var(--accent-highlight);
-    flex-shrink: 0;
-  }
-  .card-header h3 {
-    font-size: var(--text-card-process);
-    color: var(--text-primary);
-  }
-  .card-header, .card-body {
+    gap: var(--space-4);
+    padding: var(--space-4) var(--space-6) var(--space-6);
     background: var(--bg-surface);
   }
-  .card-body {
-    flex: 1;
-    padding: var(--space-2) var(--space-6) var(--space-4);
-    min-height: 80px;
+  /* Header row: small icon on the left, oversized faint ordinal on the right.
+     The ordinal is fully inside the card (no clipping) so every digit renders whole. */
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  .card-icon {
+    /* Same tone family as the faint ordinal, but dark enough to read as an icon. */
+    color: color-mix(in srgb, var(--text-primary) 28%, transparent);
+    flex-shrink: 0;
+  }
+  .card-icon :global(svg) {
+    display: block;
+    width: 40px;
+    height: 40px;
+  }
+  .card-num {
+    font-family: var(--font-headline);
+    font-size: 88px;
+    line-height: 0.8;
+    letter-spacing: -0.04em;
+    color: var(--text-primary);
+    opacity: 0.08;
+    pointer-events: none;
+    user-select: none;
+  }
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    :global(body.theme-ready) .card-num,
+    .card-num {
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .process-card:hover .card-num {
+      opacity: 0.14;
+      transform: translateY(-3px);
+    }
+  }
+  .card-text h3 {
+    font-family: var(--font-headline);
+    font-size: 22px;
+    color: var(--text-primary);
+    margin-bottom: var(--space-2);
   }
   .process-card p { font-size: 0.95rem; }
 
   .project-grid {
     column-count: 2;
-    column-gap: var(--space-6);
+    column-gap: var(--space-4);
   }
   .project-card {
     display: block;
     break-inside: avoid;
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-4);
   }
   .project-thumb {
     position: relative;
     overflow: hidden;
-    border-radius: var(--radius-md);
     background: var(--bg-surface-subtle);
     border: 1px solid var(--border-default);
     margin-bottom: var(--space-3);
@@ -430,11 +567,26 @@ const processIcons = [
     transform: translateY(6px);
     transition: opacity 0.25s ease, transform 0.25s ease;
   }
-  .project-overlay span {
+  /* Same pill as the hero tags (mono, uppercase, outlined, fully rounded), eye
+     icon first. Light: white fill. Dark: transparent, white outline. */
+  .overlay-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.74rem;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    white-space: nowrap;
+    color: var(--text-primary);
+    background: transparent;
+    border: 1.5px solid var(--text-primary);
+    border-radius: 999px;
+    padding: 8.1px 15px;
+  }
+  .overlay-pill svg { flex-shrink: 0; }
+  :global([data-theme='light']) .overlay-pill {
+    background: var(--white);
   }
   .project-card:hover .project-overlay,
   .project-card:focus-visible .project-overlay {
@@ -451,7 +603,7 @@ const processIcons = [
   }
   .project-title {
     font-family: var(--font-headline);
-    font-size: var(--text-card-process);
+    font-size: 18px;
     color: var(--text-primary);
     line-height: 1.3;
   }
@@ -473,46 +625,55 @@ const processIcons = [
 
 
   @media (max-width: 780px) {
-    .hero {
-      padding-top: calc(var(--space-8) + var(--space-4));
-      padding-bottom: var(--space-8);
-    }
-    .hero-dots {
-      background-size: 28px 28px, 14px 14px;
-      background-position: 0 0, 7px 7px;
-    }
-    :global([data-theme='dark']) .hero-dots {
-      background-size: 36px 36px, 18px 18px;
-      background-position: 0 0, 9px 9px;
-    }
-    .hero-meta { padding-bottom: var(--space-8); }
-    .tagline { font-size: 1.05rem; }
-    .tagline-break {
-      display: inline;
-    }
+    /* 15vw makes the longest line ("Visual Designer") fill the width; it still fits down to 320px. */
+    .hero-name { font-size: 15vw; }
+  }
+
+  @media (max-width: 780px) {
+    /* Phone hero: giant headline pinned under the navbar; tags, intro and
+       CTA stacked at the bottom of the viewport, negative space between. */
+    .hero-headline { display: contents; }
+    .hero-stack { justify-content: flex-start; gap: var(--space-4); }
+    .hero-name { order: 1; }
     .hero-meta-list {
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: var(--space-2);
+      order: 2;
+      font-size: 12px;
+      gap: 4px 8px;
+      margin: 0;
     }
     .hero-meta-list li {
-      flex: none;
+      /* Scales with the viewport so two tags always fit per row
+         (longest pair is the ES one: ~32em wide plus padding and gap). */
+      font-size: clamp(7.5px, calc((100vw - 80px) / 32), 9.9px);
+      padding: 5px 8px;
+      border-width: 1px;
     }
-    .process-header { flex-direction: column; align-items: flex-start; gap: var(--space-1); margin-bottom: var(--space-6); }
+    /* Forces the 2 / 2 / 1 rows. */
+    .hero-meta-list li.tag-br {
+      display: block;
+      flex: 0 0 100%;
+      height: 0;
+      margin-top: -4px; /* cancel the extra row gap the empty line adds */
+      padding: 0;
+      border: 0;
+      background: none;
+    }
+    .hero-bottom {
+      order: 3;
+      margin-top: auto;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-4);
+    }
+    .hero-intro { font-size: 16px; max-width: none; }
+    .hero-bottom .btn { font-size: 16px; }
     .process-grid { grid-template-columns: 1fr; }
-    .card-header h3 { font-size: 1.125rem; }
+    .card-num { font-size: 72px; }
+    .card-text h3 { font-size: 18px; }
+    .card-icon :global(svg) { width: 32px; height: 32px; }
     .project-grid { column-count: 1; }
     .project-title { font-size: 1.125rem; }
     .faq-item summary { font-size: 1.05rem; }
   }
 
-  /* Phone-only: size now scales fluidly via --text-h1, but the tighter
-     line-height/letter-spacing tuned for phone readability still apply. */
-  @media (max-width: 640px) {
-    .hero-stack h1 {
-      line-height: 1.08;
-      letter-spacing: -0.8px;
-    }
-  }
 </style>

@@ -37,14 +37,16 @@ const filterGroupLabel = locale === 'en' ? 'Filter projects by category' : 'Filt
       {t.projects.map((p, i) => (
         <a href={p.href} class="project-card" data-category={p.filter}>
           <div class={`project-thumb thumb-ratio-${i % 4} ${p.image ? 'has-image' : ''}`}>
-            {p.image && <Img src={p.image} alt="" sizes="(min-width: 901px) 355px, (min-width: 641px) calc((100vw - 72px) / 2), calc(100vw - 32px)" widths={[320, 480, 640, 900, 1200]} loading={i === 0 ? 'eager' : 'lazy'} />}
+            {p.image && <Img src={p.image} alt="" sizes="(min-width: 901px) calc((100vw - 120px) / 3), (min-width: 641px) calc((100vw - 72px) / 2), calc(100vw - 32px)" widths={[320, 480, 640, 900, 1200]} loading={i === 0 ? 'eager' : 'lazy'} />}
             <div class="project-overlay">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
-              <span>{t.viewCaseStudy}</span>
+              <span class="overlay-pill">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+                {t.viewCaseStudy}
+              </span>
             </div>
           </div>
           <p class="project-meta">{p.year} · {p.category}</p>
-          <p class="project-title">{p.title}</p>
+          <p class="project-title">{p.cardTitle ?? p.title}</p>
         </a>
       ))}
     </div>
@@ -127,7 +129,7 @@ const filterGroupLabel = locale === 'en' ? 'Filter projects by category' : 'Filt
   .work-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-6);
+    gap: var(--space-4);
   }
   .project-card.is-hidden {
     display: none;
@@ -135,7 +137,6 @@ const filterGroupLabel = locale === 'en' ? 'Filter projects by category' : 'Filt
   .project-thumb {
     position: relative;
     overflow: hidden;
-    border-radius: var(--radius-md);
     background: var(--bg-surface-subtle);
     border: 1px solid var(--border-default);
     margin-bottom: var(--space-3);
@@ -166,11 +167,26 @@ const filterGroupLabel = locale === 'en' ? 'Filter projects by category' : 'Filt
     transform: translateY(6px);
     transition: opacity 0.2s ease, transform 0.2s ease;
   }
-  .project-overlay span {
+  /* Same pill as the hero tags (mono, uppercase, outlined, fully rounded), eye
+     icon first. Light: white fill. Dark: transparent, white outline. */
+  .overlay-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.74rem;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    white-space: nowrap;
+    color: var(--text-primary);
+    background: transparent;
+    border: 1.5px solid var(--text-primary);
+    border-radius: 999px;
+    padding: 8.1px 15px;
+  }
+  .overlay-pill svg { flex-shrink: 0; }
+  :global([data-theme='light']) .overlay-pill {
+    background: var(--white);
   }
   .project-card:hover .project-overlay,
   .project-card:focus-visible .project-overlay {

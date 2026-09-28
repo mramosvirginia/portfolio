@@ -4,6 +4,8 @@ export interface WorkProject {
   year: string;
   category: string;
   title: string;
+  /** Shorter title for listing cards (keeps them on one line); falls back to `title`. */
+  cardTitle?: string;
   href: string;
   filter: 'product' | 'visual';
   image?: string;
@@ -56,8 +58,10 @@ export const home = {
   en: {
     availability: ['Available for work', '3 yrs product design', '+7 yrs visual design'],
     heroName: 'Virginia Miner',
-    taglineTop: 'UX Strategy and Visual Design',
-    taglineBottom: 'with an editorial craft.',
+    heroRole: 'Visual Designer',
+    heroIntro: 'Product & Visual Designer',
+    heroIntroRest: "who's always asking what's worth solving, before deciding how it should look.",
+    heroLocation: 'Based in Valencia, Spain.',
     tags: ['UX Strategy', 'Design Systems & AI', 'Editorial Craft'],
     ctaTalk: "Let's talk!",
     processEyebrow: 'PROCESS',
@@ -84,6 +88,7 @@ export const home = {
     caseStudiesEyebrow: 'CASE STUDIES',
     caseStudiesTitle: 'Selected work',
     viewCaseStudy: 'View case study',
+    seeAllWork: 'See all work',
     projects: [
       {
         year: '2023/2025',
@@ -189,8 +194,10 @@ export const home = {
   es: {
     availability: ['Disponible para trabajar', '3 años de product design', '+7 años de diseño visual'],
     heroName: 'Virginia Miner',
-    taglineTop: 'Estrategia UX y Diseño Visual',
-    taglineBottom: 'con un enfoque editorial.',
+    heroRole: 'Visual Designer',
+    heroIntro: 'Diseñadora de Producto y Visual,',
+    heroIntroRest: 'siempre preguntándome qué merece la pena resolver antes de decidir cómo debería verse.',
+    heroLocation: 'Con base en Valencia, España.',
     tags: ['Estrategia UX', 'Design Systems & IA', 'Criterio editorial'],
     ctaTalk: 'Hablemos',
     processEyebrow: 'PROCESO',
@@ -217,11 +224,13 @@ export const home = {
     caseStudiesEyebrow: 'CASOS DE ESTUDIO',
     caseStudiesTitle: 'Trabajo seleccionado',
     viewCaseStudy: 'Ver caso de estudio',
+    seeAllWork: 'Ver todo el trabajo',
     projects: [
       {
         year: '2023/2025',
         category: 'Diseño de Producto, IA',
         title: 'Generador web con IA de qdq usando tres datos, presentado en el MWC 2024',
+        cardTitle: 'Generador web con IA de qdq presentado en MWC 2024',
         href: '/es/projects/webia',
         filter: 'product',
         image: '/images/case-studies/webia/cover.webp',
@@ -231,6 +240,7 @@ export const home = {
         year: '2026',
         category: 'Diseño de Producto, Desarrollo Web',
         title: 'Un producto propio para auditorías UX rápidas y basadas en evidencia',
+        cardTitle: 'Producto propio de auditorías UX basadas en evidencia',
         href: '/es/projects/uxquickaudit',
         filter: 'product',
         image: '/images/case-studies/uxquickaudit/cover.webp',
@@ -240,6 +250,7 @@ export const home = {
         year: '2019-2026',
         category: 'Diseño Editorial, Branding',
         title: '7 años de liderazgo de marca: 40+ cubiertas editoriales y rediseño de ecommerce',
+        cardTitle: '7 años de marca: 40+ cubiertas editoriales y ecommerce',
         href: '/es/projects/auroradorada',
         filter: 'visual',
         image: '/images/case-studies/auroradorada/cover.webp',
@@ -249,6 +260,7 @@ export const home = {
         year: '2026',
         category: 'Diseño de Producto, Design Systems',
         title: 'Diseño de producto end-to-end para una plataforma de experiencias rurales',
+        cardTitle: 'Diseño end-to-end de plataforma de experiencias rurales',
         href: '/es/projects/landora',
         filter: 'product',
         image: '/images/case-studies/landora/cover.webp',
@@ -258,6 +270,7 @@ export const home = {
         year: '2024',
         category: 'Estrategia de Producto, Branding',
         title: 'Rebranding de qdq: rediseño del directorio y nuevos canales de ingresos',
+        cardTitle: 'Rebranding de qdq: directorio y canales de ingresos',
         href: '/es/projects/rebranding-qdq',
         filter: 'product',
         image: '/images/case-studies/rebranding-qdq/cover.webp',
@@ -267,6 +280,7 @@ export const home = {
         year: '2016-2022',
         category: 'Diseño Editorial, Fotografía',
         title: 'Diseño editorial para dos zines personales de fotografía analógica',
+        cardTitle: 'Diseño editorial de dos zines de fotografía analógica',
         href: '/es/projects/levedadzine',
         filter: 'visual',
         image: '/images/case-studies/levedadzine/cover.jpg',

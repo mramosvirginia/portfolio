@@ -14,7 +14,7 @@ const photoAlt = {
   experience: locale === 'en' ? 'Collage of Virginia\'s work: team sessions, UX research boards, and product screens' : 'Collage del trabajo de Virginia: sesiones de equipo, tableros de investigación UX y pantallas de producto',
   personal: locale === 'en' ? 'Virginia Miner in a personal, candid moment' : 'Virginia Miner en un momento personal',
 };
-const aboutSizes = '(min-width: 901px) 540px, calc(100vw - 32px)';
+const aboutSizes = '(min-width: 901px) calc((100vw - 96px) / 2), calc(100vw - 32px)';
 ---
 
 <section class="about-hero">
@@ -200,7 +200,7 @@ const aboutSizes = '(min-width: 901px) 540px, calc(100vw - 32px)';
     display: block;
   }
   .about-copy h1 {
-    font-size: var(--text-h2);
+    font-size: 40px;
     margin-bottom: var(--space-6);
   }
   .about-copy p {
@@ -244,7 +244,6 @@ const aboutSizes = '(min-width: 901px) 540px, calc(100vw - 32px)';
   .about-photo {
     aspect-ratio: 4 / 5;
     margin-top: var(--space-8);
-    border-radius: var(--radius-md);
     background: var(--bg-surface-subtle);
     overflow: hidden;
   }
@@ -256,7 +255,6 @@ const aboutSizes = '(min-width: 901px) 540px, calc(100vw - 32px)';
     height: 100%;
     object-fit: cover;
     display: block;
-    border-radius: inherit;
   }
 
   .skills {
@@ -265,7 +263,7 @@ const aboutSizes = '(min-width: 901px) 540px, calc(100vw - 32px)';
   }
   .skills h2,
   .experience h2 {
-    font-size: var(--text-h2);
+    font-size: 32px;
     padding-top: var(--space-16);
     margin-bottom: var(--space-6);
   }
@@ -354,6 +352,7 @@ const aboutSizes = '(min-width: 901px) 540px, calc(100vw - 32px)';
   }
   @media (max-width: 640px) {
     .about-hero { padding-top: var(--space-8); }
+    .about-copy h1 { font-size: 32px; }
     .about-tabs { padding-top: var(--space-4); }
     .skills-grid { grid-template-columns: 1fr; }
   }

@@ -19,7 +19,7 @@
   --white: #FFFFFF;
   --off-white: #FAFCFD;
   --paper: #FCFCFB;
-  --border-light: #DDD8CB;
+  --border-light: #E4E2DD;
 
   --bg-page: var(--paper);
   --bg-surface: var(--white);
@@ -42,7 +42,7 @@
      hierarchy is carried by size alone. Each clamp() scales linearly
      between a 375px and a 1440px viewport (min at 375px, max at 1440px),
      so there are no fixed-breakpoint jumps between mobile and desktop. */
-  --text-h1: clamp(2.25rem, 0.58rem + 7.14vw, 7rem);      /* 36px → 112px: Home hero only */
+  --text-h1: clamp(2rem, -0.42rem + 10.33vw, 8.875rem);     /* 32px → 142px: Home hero headline */
   --text-h2: clamp(1.75rem, 1.49rem + 1.13vw, 2.5rem);    /* 28px → 40px: page section titles */
   --text-h3: clamp(1.375rem, 1.24rem + 0.56vw, 1.75rem);  /* 22px → 28px: card titles */
   --text-h4: clamp(1.125rem, 1.08rem + 0.19vw, 1.25rem);  /* 18px → 20px: in-page subtitles */
@@ -54,6 +54,19 @@
   --text-case-title: clamp(1.375rem, 1.07rem + 1.32vw, 2.25rem);    /* 22px → 36px: case study page main title */
   --text-case-section: clamp(1.125rem, 0.82rem + 1.32vw, 2rem);     /* 18px → 32px: case study section titles */
   --text-case-related-card: clamp(1.125rem, 1.08rem + 0.19vw, 1.25rem); /* 18px → 20px: "Ver más trabajo" card titles */
+
+  /* Site-wide side margin: 16px on phones, ~32px at 1280px, ~36px at 1440px, capped at 44px. */
+  --gutter: clamp(16px, calc(2.8vw - 4px), 44px);
+
+  /* Asymmetric 3-column grid: a narrow column 1 (left breathing room / TOC)
+     and columns 2-3 for content. The navbar's link block ends where the
+     case-study content ends: --inset-right is the width the header spends on
+     the CV/lang/theme controls plus the gap that separates them from the links. */
+  --header-h: 68px;
+  --col1: 220px;
+  --controls-w: 168px;
+  --nav-gap: 64px;
+  --inset-right: calc(var(--controls-w) + var(--nav-gap));
 
   --space-1: 4px;
   --space-2: 8px;
@@ -71,13 +84,13 @@
 }
 
 [data-theme='dark'] {
-  --bg-page: #101114;
+  --bg-page: #000000;
   --bg-surface: #1D1E21;
   --bg-surface-subtle: #1D1E21;
   --text-primary: #F5F3FA;
   --text-secondary: #C7C4D6;
   --text-muted: #8C89A0;
-  --border-default: #2A2A2E;
+  --border-default: #2C2D32;
   --accent-primary: var(--text-primary);
   --accent-cta: #F5F3FA;
   --accent-cta-text: var(--navy-900);
@@ -126,13 +139,34 @@ img { max-width: 100%; display: block; }
 
 .container {
   width: 100%;
-  max-width: 1160px;
+  max-width: 1920px;
   margin-inline: auto;
-  padding-inline: var(--space-6);
+  padding-inline: var(--gutter);
 }
 
-@media (max-width: 640px) {
-  .container { padding-inline: var(--space-4); }
+/* Reusable 3-column layout; direct children use .span-23 to sit in columns 2-3. */
+.grid-3 {
+  display: grid;
+  grid-template-columns: var(--col1) minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: var(--space-6);
+  row-gap: var(--space-6);
+  align-items: start;
+}
+/* Section heading (eyebrow + title) lives in column 1, level with the top of
+   the content in columns 2-3. */
+.grid-3 > .section-head {
+  grid-column: 1;
+}
+.grid-3 > .section-head h2 {
+  margin-bottom: 0;
+}
+.grid-3 > .span-23 {
+  grid-column: 2 / 4;
+}
+@media (max-width: 900px) {
+  .grid-3 { grid-template-columns: minmax(0, 1fr); }
+  .grid-3 > .section-head,
+  .grid-3 > .span-23 { grid-column: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
