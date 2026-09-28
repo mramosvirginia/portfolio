@@ -628,9 +628,34 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
         .menu-toggle { display: grid; }
         .header-controls { gap: var(--space-3); }
         .cv-link { display: none; }
-        .footer-grid { grid-template-columns: 1fr; gap: var(--space-6); }
+        /* Title higher up; Site and Contact side by side, brand block and CTA full width. */
+        .site-footer { padding-top: calc(var(--space-16) * 0.75); }
+        /* Phone footer as one shared grid: the link columns dissolve into it
+           (display: contents) so Site and Contact stay close together while the CTA
+           sits right under the title. Rows: title / CTA / headings / links / copyright. */
+        .footer-grid { grid-template-columns: max-content max-content 1fr; gap: var(--space-3) var(--space-8); }
+        .footer-brand, .footer-col { display: contents; }
+        .footer-grid > .footer-brand h2 { grid-column: 1 / -1; grid-row: 1; margin-bottom: var(--space-2); }
+        .footer-cta { grid-column: 1 / -1; grid-row: 2; justify-self: start; margin: 0; }
+        .footer-grid > nav.footer-col > .footer-heading { grid-column: 1; grid-row: 3; margin: var(--space-3) 0 0; }
+        .footer-grid > .footer-contact > .footer-heading { grid-column: 2; grid-row: 3; margin: var(--space-3) 0 0; }
+        .footer-grid > nav.footer-col > a { grid-column: 1; }
+        .footer-grid > nav.footer-col > a:nth-of-type(1) { grid-row: 4; }
+        .footer-grid > nav.footer-col > a:nth-of-type(2) { grid-row: 5; }
+        .footer-grid > nav.footer-col > a:nth-of-type(3) { grid-row: 6; }
+        .footer-grid > nav.footer-col > a:nth-of-type(4) { grid-row: 7; }
+        .footer-grid > .footer-contact > a { grid-column: 2; }
+        .footer-grid > .footer-contact > a:nth-of-type(1) { grid-row: 4; }
+        .footer-grid > .footer-contact > a:nth-of-type(2) { grid-row: 5; }
+        .footer-grid > .footer-contact > a:nth-of-type(3) { grid-row: 6; }
+        .footer-grid > .footer-brand :global(p) { grid-column: 1 / -1; grid-row: 8; margin-top: var(--space-4); }
         .footer-dots, .footer-dots-spotlight { background-size: 36px 36px, 18px 18px; background-position: 0 0, 9px 9px; }
-        .footer-brand h2 { max-width: none; }
+        .footer-brand h2 { max-width: none; font-size: 1.75rem; }
+        /* Smaller footer text on phones. */
+        .footer-brand :global(p) { font-size: 0.75rem; }
+        .footer-heading { font-size: 0.75rem; }
+        .footer-col a { font-size: 1rem; }
+        .footer-cta { font-size: 18px; }
         .footer-brand { height: auto; }
         .footer-brand :global(p) { margin-top: var(--space-4); }
       }
