@@ -76,6 +76,7 @@
   --space-8: 32px;
   --space-16: 64px;
 
+  --radius-image: 10px; /* every image/thumbnail */
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;

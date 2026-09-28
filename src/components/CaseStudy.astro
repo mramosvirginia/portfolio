@@ -2,6 +2,7 @@
 import { home, type Locale } from '../data/site';
 import type { CaseStudyContent } from '../data/caseStudyTypes';
 import Img from './Img.astro';
+import { getImage } from '../lib/images';
 
 interface Props {
   locale: Locale;
@@ -23,6 +24,10 @@ const toc = [
   ...study.sections.map((s) => ({ id: s.id, label: s.title })),
 ];
 
+// Portrait covers (e.g. Aurora Dorada, 4:5) keep their own ratio instead of being cropped to 16:9.
+const heroMeta = study.heroImage ? getImage(study.heroImage) : null;
+const heroPortrait = !!heroMeta && heroMeta.height > heroMeta.width;
+const heroRatio = heroPortrait && heroMeta ? `${heroMeta.width} / ${heroMeta.height}` : undefined;
 const contentSizes = '(min-width: 901px) calc(100vw - 356px), calc(100vw - 32px)';
 const relatedSizes = '(min-width: 901px) calc((100vw - 404px) / 3), calc(100vw - 32px)';
 
@@ -52,7 +57,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
         )}
       </header>
       {study.heroImage ? (
-        <div class="hero-image has-image">
+        <div class:list={['hero-image', 'has-image', { 'is-portrait': heroPortrait }]} style={heroRatio ? `--hero-ar: ${heroRatio}` : undefined}>
           <Img src={study.heroImage} alt={study.title} sizes={contentSizes} loading="eager" />
         </div>
       ) : (
@@ -331,7 +336,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
   }
   .hero-image {
     aspect-ratio: 16 / 9;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-image);
     background: var(--bg-surface-subtle);
     border: 1px solid var(--border-default);
     margin-bottom: var(--space-16);
@@ -366,6 +371,14 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
     height: 100%;
     object-fit: cover;
     display: block;
+  }
+  /* Portrait cover: full column width (same as the title) at the image's own ratio,
+     so nothing is cropped; it is simply taller than a landscape cover. */
+  .hero-image.is-portrait {
+    aspect-ratio: var(--hero-ar);
+  }
+  .hero-image.is-portrait :global(img) {
+    object-fit: contain;
   }
 
   .case-section {
@@ -522,16 +535,16 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
   .figure-image.framed {
     background: var(--off-white);
     border: 1px solid var(--border-light);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-image);
     padding: var(--space-6);
     box-shadow: 0 12px 32px -16px rgba(20, 15, 40, 0.25);
   }
   .figure-image.framed :global(.section-image) {
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-image);
   }
   :global(.section-image) {
     aspect-ratio: 16 / 10;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-image);
     background: var(--bg-surface-subtle);
     border: 1px solid var(--border-default);
   }
@@ -545,7 +558,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
     width: 100%;
     height: auto;
     display: block;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-image);
     border: 1px solid var(--border-default);
     margin-top: var(--space-6);
   }
@@ -582,7 +595,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
   }
   .related-thumb {
     aspect-ratio: 4 / 3;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-image);
     background: var(--bg-surface-subtle);
     border: 1px solid var(--border-default);
     margin-bottom: var(--space-3);
