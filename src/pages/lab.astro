@@ -3,15 +3,15 @@ import Layout from '../layouts/Layout.astro';
 import Lab from '../components/Lab.astro';
 import { home } from '../data/site';
 
-const t = home.en;
+const t = home.es;
 ---
 
 <Layout
-  locale="en"
+  locale="es"
   title="Lab — Virginia Miner"
-  description="AI-assisted code experiments and personal analog work — film photography, illustration and motion."
+  description="Experimentos de código con IA y trabajo personal analógico — fotografía analógica, ilustración y motion."
 >
-  <Lab locale="en" />
+  <Lab locale="es" />
   <Fragment slot="footer">
     <p>{t.footerTagline}</p>
   </Fragment>

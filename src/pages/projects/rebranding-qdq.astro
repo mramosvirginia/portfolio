@@ -4,15 +4,15 @@ import CaseStudy from '../../components/CaseStudy.astro';
 import { home } from '../../data/site';
 import { rebrandingQdq } from '../../data/case-studies/rebranding-qdq';
 
-const t = home.en;
+const t = home.es;
 ---
 
 <Layout
-  locale="en"
+  locale="es"
   title="Rebranding qdq — Virginia Miner"
-  description={rebrandingQdq.en.title}
+  description={rebrandingQdq.es.title}
 >
-  <CaseStudy locale="en" study={rebrandingQdq.en} />
+  <CaseStudy locale="es" study={rebrandingQdq.es} />
   <Fragment slot="footer">
     <p>{t.footerTagline}</p>
   </Fragment>

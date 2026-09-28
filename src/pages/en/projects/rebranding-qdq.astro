@@ -2,17 +2,17 @@
 import Layout from '../../../layouts/Layout.astro';
 import CaseStudy from '../../../components/CaseStudy.astro';
 import { home } from '../../../data/site';
-import { levedadzine } from '../../../data/case-studies/levedadzine';
+import { rebrandingQdq } from '../../../data/case-studies/rebranding-qdq';
 
-const t = home.es;
+const t = home.en;
 ---
 
 <Layout
-  locale="es"
-  title="Levedad & Somos Paisajes — Virginia Miner"
-  description={levedadzine.es.title}
+  locale="en"
+  title="Rebranding qdq — Virginia Miner"
+  description={rebrandingQdq.en.title}
 >
-  <CaseStudy locale="es" study={levedadzine.es} />
+  <CaseStudy locale="en" study={rebrandingQdq.en} />
   <Fragment slot="footer">
     <p>{t.footerTagline}</p>
   </Fragment>

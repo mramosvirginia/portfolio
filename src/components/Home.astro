@@ -8,7 +8,7 @@ interface Props {
 
 const { locale } = Astro.props;
 const t = home[locale];
-const base = locale === 'en' ? '' : '/es';
+const base = locale === 'es' ? '' : '/en';
 
 // Hero tags laid out in explicit rows of 2-3 so each row hugs its content.
 const heroTags = [...t.availability.slice(1), ...t.tags];

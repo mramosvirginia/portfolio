@@ -2,17 +2,17 @@
 import Layout from '../../../layouts/Layout.astro';
 import CaseStudy from '../../../components/CaseStudy.astro';
 import { home } from '../../../data/site';
-import { auroradorada } from '../../../data/case-studies/auroradorada';
+import { webia } from '../../../data/case-studies/webia';
 
-const t = home.es;
+const t = home.en;
 ---
 
 <Layout
-  locale="es"
-  title="Aurora Dorada — Virginia Miner"
-  description={auroradorada.es.title}
+  locale="en"
+  title="Web IA — Virginia Miner"
+  description={webia.en.title}
 >
-  <CaseStudy locale="es" study={auroradorada.es} />
+  <CaseStudy locale="en" study={webia.en} />
   <Fragment slot="footer">
     <p>{t.footerTagline}</p>
   </Fragment>

@@ -4,15 +4,15 @@ import CaseStudy from '../../components/CaseStudy.astro';
 import { home } from '../../data/site';
 import { levedadzine } from '../../data/case-studies/levedadzine';
 
-const t = home.en;
+const t = home.es;
 ---
 
 <Layout
-  locale="en"
+  locale="es"
   title="Levedad & Somos Paisajes — Virginia Miner"
-  description={levedadzine.en.title}
+  description={levedadzine.es.title}
 >
-  <CaseStudy locale="en" study={levedadzine.en} />
+  <CaseStudy locale="es" study={levedadzine.es} />
   <Fragment slot="footer">
     <p>{t.footerTagline}</p>
   </Fragment>

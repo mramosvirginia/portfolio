@@ -8,7 +8,7 @@ interface Props {
 
 const { locale } = Astro.props;
 const a = about[locale];
-const zineHref = locale === 'en' ? '/projects/levedadzine' : '/es/projects/levedadzine';
+const zineHref = locale === 'es' ? '/projects/levedadzine' : '/en/projects/levedadzine';
 const photoAlt = {
   overview: locale === 'en' ? 'Portrait of Virginia Miner outdoors' : 'Retrato de Virginia Miner al aire libre',
   experience: locale === 'en' ? 'Collage of Virginia\'s work: team sessions, UX research boards, and product screens' : 'Collage del trabajo de Virginia: sesiones de equipo, tableros de investigación UX y pantallas de producto',

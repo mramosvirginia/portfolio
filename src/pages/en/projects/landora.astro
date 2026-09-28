@@ -4,15 +4,15 @@ import CaseStudy from '../../../components/CaseStudy.astro';
 import { home } from '../../../data/site';
 import { landora } from '../../../data/case-studies/landora';
 
-const t = home.es;
+const t = home.en;
 ---
 
 <Layout
-  locale="es"
+  locale="en"
   title="Landora — Virginia Miner"
-  description={landora.es.title}
+  description={landora.en.title}
 >
-  <CaseStudy locale="es" study={landora.es} />
+  <CaseStudy locale="en" study={landora.en} />
   <Fragment slot="footer">
     <p>{t.footerTagline}</p>
   </Fragment>

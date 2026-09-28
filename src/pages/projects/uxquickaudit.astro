@@ -4,15 +4,15 @@ import CaseStudy from '../../components/CaseStudy.astro';
 import { home } from '../../data/site';
 import { uxquickaudit } from '../../data/case-studies/uxquickaudit';
 
-const t = home.en;
+const t = home.es;
 ---
 
 <Layout
-  locale="en"
+  locale="es"
   title="UX QuickAudit — Virginia Miner"
-  description={uxquickaudit.en.title}
+  description={uxquickaudit.es.title}
 >
-  <CaseStudy locale="en" study={uxquickaudit.en} />
+  <CaseStudy locale="es" study={uxquickaudit.es} />
   <Fragment slot="footer">
     <p>{t.footerTagline}</p>
   </Fragment>

@@ -3,15 +3,15 @@ import Layout from '../layouts/Layout.astro';
 import Work from '../components/Work.astro';
 import { home } from '../data/site';
 
-const t = home.en;
+const t = home.es;
 ---
 
 <Layout
-  locale="en"
-  title="Work — Virginia Miner"
-  description="Selected product, UX/UI and visual design work by Virginia Miner."
+  locale="es"
+  title="Trabajo — Virginia Miner"
+  description="Trabajo seleccionado de producto, UX/UI y diseño visual de Virginia Miner."
 >
-  <Work locale="en" />
+  <Work locale="es" />
   <Fragment slot="footer">
     <p>{t.footerTagline}</p>
   </Fragment>

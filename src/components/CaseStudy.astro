@@ -10,7 +10,7 @@ interface Props {
 
 const { locale, study } = Astro.props;
 const t = home[locale];
-const base = locale === 'en' ? '' : '/es';
+const base = locale === 'es' ? '' : '/en';
 const workHref = `${base}/work`;
 const backLabel = locale === 'en' ? 'Back to work' : 'Volver a trabajo';
 const tocLabel = locale === 'en' ? 'On this page' : 'En esta página';

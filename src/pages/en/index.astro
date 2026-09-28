@@ -3,15 +3,15 @@ import Layout from '../../layouts/Layout.astro';
 import Home from '../../components/Home.astro';
 import { home } from '../../data/site';
 
-const t = home.es;
+const t = home.en;
 ---
 
 <Layout
-  locale="es"
+  locale="en"
   title="Virginia Miner — Product & Visual Designer"
-  description="Product & Visual Designer en Valencia, España. Estrategia UX y Sistemas de Diseño con un enfoque editorial."
+  description="Product & Visual Designer based in Valencia, Spain. UX Strategy and Systems with an editorial craft."
 >
-  <Home locale="es" />
+  <Home locale="en" />
   <Fragment slot="footer">
     <p>{t.footerTagline}</p>
   </Fragment>

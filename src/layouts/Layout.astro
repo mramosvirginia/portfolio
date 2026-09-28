@@ -20,19 +20,20 @@ const ctaTalk = home[locale].ctaTalk;
 const rawPath = Astro.url.pathname;
 const currentPath = rawPath.length > 1 && rawPath.endsWith('/') ? rawPath.slice(0, -1) : rawPath;
 const otherLocale: Locale = locale === 'en' ? 'es' : 'en';
+// Spanish is the default locale and lives at "/"; English lives under "/en".
 const otherHref =
-  locale === 'en'
-    ? `/es${currentPath === '/' ? '' : currentPath}`
-    : currentPath.replace(/^\/es/, '') || '/';
+  locale === 'es'
+    ? `/en${currentPath === '/' ? '' : currentPath}`
+    : currentPath.replace(/^\/en/, '') || '/';
 
-const isCaseStudy = /^(\/es)?\/projects\//.test(currentPath);
+const isCaseStudy = /^(\/en)?\/projects\//.test(currentPath);
 
 // Nav hrefs + which one matches the current page, for the active-page indicator.
-const homeHref = locale === 'en' ? '/' : '/es/';
-const workHref = locale === 'en' ? '/work' : '/es/work';
-const aboutHref = locale === 'en' ? '/about' : '/es/about';
-const labHref = locale === 'en' ? '/lab' : '/es/lab';
-// currentPath has no trailing slash, so strip it from the href too (Spanish home is "/es/").
+const homeHref = locale === 'es' ? '/' : '/en/';
+const workHref = locale === 'es' ? '/work' : '/en/work';
+const aboutHref = locale === 'es' ? '/about' : '/en/about';
+const labHref = locale === 'es' ? '/lab' : '/en/lab';
+// currentPath has no trailing slash, so strip it from the href too (English home is "/en/").
 const isActive = (href: string) => currentPath === (href.length > 1 ? href.replace(/\/$/, '') : href);
 const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
 ---
@@ -64,21 +65,11 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
     <meta name="twitter:image" content={new URL('/og-image.jpg', Astro.site)} />
 
     <!--
-      First-ever visit (nothing in localStorage yet) lands on the Spanish
-      homepage instead of guessing from the browser's language — this only
-      ever fires for the bare "/" entry point, runs before first paint, and
-      never fires again once a visit has been recorded, so any later,
-      explicit navigation to the English site is left alone.
+      Spanish is the default language and lives at "/", so there is nothing to
+      redirect: just remember which language the visitor last used.
     -->
     <script is:inline>
-      (function () {
-        if (!localStorage.getItem('lang') && window.location.pathname === '/') {
-          localStorage.setItem('lang', 'es');
-          window.location.replace('/es/' + window.location.search + window.location.hash);
-          return;
-        }
-        localStorage.setItem('lang', window.location.pathname.indexOf('/es') === 0 ? 'es' : 'en');
-      })();
+      localStorage.setItem('lang', window.location.pathname.indexOf('/en') === 0 ? 'en' : 'es');
     </script>
 
     <!--
@@ -106,7 +97,7 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
     <a href="#main-content" class="skip-link">{locale === 'en' ? 'Skip to content' : 'Saltar al contenido'}</a>
     <header class:list={['site-header', { 'is-home': isActive(homeHref), 'is-case': isCaseStudy, 'is-plain': !isActive(homeHref) && !isCaseStudy }]}>
       <div class="container header-inner">
-        <a href={locale === 'en' ? '/' : '/es/'} class="brand">
+        <a href={homeHref} class="brand">
           Virginia M.
         </a>
 
@@ -184,9 +175,9 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
         </div>
         <nav class="footer-col" aria-label={f.siteLabel}>
           <p class="footer-heading">{f.siteLabel}</p>
-          <a href={locale === 'en' ? '/' : '/es/'}>{t.home}</a>
-          <a href={locale === 'en' ? '/work' : '/es/work'}>{t.work}</a>
-          <a href={locale === 'en' ? '/about' : '/es/about'}>{t.about}</a>
+          <a href={homeHref}>{t.home}</a>
+          <a href={workHref}>{t.work}</a>
+          <a href={aboutHref}>{t.about}</a>
           <a href={labHref}>{t.lab}</a>
         </nav>
         <div class="footer-col footer-contact" aria-label={f.contactLabel}>
