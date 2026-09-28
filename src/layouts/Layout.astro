@@ -228,6 +228,12 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
             `${Math.round(document.documentElement.clientWidth - r.right)}px`
           );
         }
+        // Left edge of the first nav link ("Inicio"), used to align the About photo.
+        const first = document.querySelector('.main-nav a');
+        if (first) {
+          const fr = first.getBoundingClientRect();
+          if (fr.width > 0) document.documentElement.style.setProperty('--nav-left', `${Math.round(fr.left)}px`);
+        }
       };
       syncCaseInset();
 

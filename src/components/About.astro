@@ -179,11 +179,19 @@ const aboutSizes = '(min-width: 901px) calc((100vw - 96px) / 2), calc(100vw - 32
   }
   .about-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    /* The photo column runs from a bit left of where the navbar links start
+       (--nav-left is measured in the layout script; --photo-extra is how far it
+       reaches past it) to the end of the navbar; the text column fills the rest. */
+    --photo-extra: 96px;
+    grid-template-columns: minmax(0, calc(var(--nav-left, 50vw) - var(--gutter) - 120px - var(--photo-extra))) minmax(0, 1fr);
     grid-template-rows: auto 1fr;
     column-gap: 120px;
     row-gap: 0;
     align-items: start;
+  }
+  /* Narrower windows: no extra reach to the left, so the text keeps enough room. */
+  @media (max-width: 1100px) {
+    .about-grid { --photo-extra: 0px; }
   }
   .about-copy {
     grid-column: 1;
@@ -207,6 +215,11 @@ const aboutSizes = '(min-width: 901px) calc((100vw - 96px) / 2), calc(100vw - 32
     color: var(--text-secondary);
     margin-bottom: var(--space-4);
     line-height: 1.7;
+    /* Shorter measure so lines don't run too long. */
+    max-width: 56ch;
+  }
+  @media (min-width: 901px) {
+    .about-copy p { font-size: 1.125rem; } /* 18px, +2px on desktop */
   }
   .panel-cta {
     display: inline-block;
@@ -243,7 +256,9 @@ const aboutSizes = '(min-width: 901px) calc((100vw - 96px) / 2), calc(100vw - 32
   }
   .about-photo {
     aspect-ratio: 4 / 5;
+    width: 100%;
     margin-top: var(--space-8);
+    border-radius: var(--radius-image);
     background: var(--bg-surface-subtle);
     overflow: hidden;
   }
