@@ -346,6 +346,8 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
     align-items: center;
     gap: var(--space-1);
     margin-top: calc(var(--space-16) * -1 + var(--space-4));
+    /* Equal breathing room above and below the divider line (the section's border-top). */
+    margin-bottom: calc(var(--space-6) + var(--space-1));
     font-family: var(--font-sans);
     font-size: 0.95rem;
     color: var(--text-muted);
@@ -441,8 +443,8 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
     /* Pulls up into the section's own padding-top (space-16), so it sits
        close to the impact line/divider above instead of floating in the
        middle of that gap. */
-    margin-top: calc(var(--space-2) - var(--space-16));
-    margin-bottom: var(--space-8);
+    margin-top: calc(var(--space-6) + var(--space-1) - var(--space-16));
+    margin-bottom: calc(var(--space-6) + var(--space-1));
   }
   .case-section .stack-label {
     font-family: var(--font-mono);
@@ -624,5 +626,8 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
   }
   @media (max-width: 640px) {
     .case-study { padding-top: var(--space-8); }
+    /* Phones: the pills flow on the same line as the STACK label (they become
+       items of the wrapping row) and only wrap underneath once the row is full. */
+    .case-section .stack-list { display: contents; }
   }
 </style>

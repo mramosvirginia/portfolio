@@ -576,6 +576,10 @@ const processIcons = [
     opacity: 1;
     transform: translateY(0);
   }
+  /* No hover overlay on phones/touch: a tap would leave it stuck on. */
+  @media (max-width: 780px), (hover: none) {
+    .project-overlay { display: none; }
+  }
   .project-meta {
     font-family: var(--font-mono);
     font-size: 0.75rem;
@@ -649,6 +653,8 @@ const processIcons = [
       gap: var(--space-4);
     }
     .hero-intro { font-size: 16px; max-width: none; }
+    /* On phones the location flows inline with the sentence instead of dropping to its own line. */
+    .hero-location { display: inline; }
     .hero-bottom .btn { font-size: 16px; }
     .process-grid { grid-template-columns: 1fr; }
     .card-num { font-size: 72px; }

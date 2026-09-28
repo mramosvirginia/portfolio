@@ -193,6 +193,10 @@ const filterGroupLabel = locale === 'en' ? 'Filter projects by category' : 'Filt
     opacity: 1;
     transform: translateY(0);
   }
+  /* No hover overlay on phones/touch: a tap would leave it stuck on. */
+  @media (max-width: 780px), (hover: none) {
+    .project-overlay { display: none; }
+  }
   .project-meta {
     font-family: var(--font-mono);
     font-size: 0.75rem;
