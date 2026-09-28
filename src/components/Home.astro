@@ -191,31 +191,12 @@ const processIcons = [
     opacity: 0.85;
     pointer-events: none;
   }
-  /* Dark theme: the hero keeps its light look. The light palette is re-applied
-     locally (so text, tags and CTA read dark on the light texture) and the
-     texture is backed by the paper color instead of the black page. */
-  :global([data-theme='dark']) .hero {
-    --bg-page: var(--paper);
-    --bg-surface: var(--white);
-    --text-primary: var(--navy-900);
-    --text-secondary: var(--navy-700);
-    --text-muted: var(--navy-500);
-    --border-default: var(--border-light);
-    --accent-primary: var(--navy-900);
-    --accent-cta: var(--navy-900);
-    --accent-cta-text: #FFFFFF;
-    --accent-highlight: #000000;
-    --heading-ink: var(--navy-900);
-  }
+  /* Dark theme: a dedicated inverted version of the texture (dark gray on black),
+     so the hero follows the theme like the rest of the page. */
   :global([data-theme='dark']) .hero::before {
-    background-color: var(--paper);
-    background-image:
-      linear-gradient(rgba(252, 252, 251, 0.15), rgba(252, 252, 251, 0.15)),
-      url('/images/hero/hero-texture.jpg');
+    background-image: url('/images/hero/hero-texture-dark.jpg');
     opacity: 1;
   }
-  :global([data-theme='dark']) .hero-name { color: #14181F; }
-  :global([data-theme='dark']) .hero-meta-list li { background: var(--white); }
   /* Entrance: texture fades in while easing down from a slight zoom, then
      headline lines, tags and intro/CTA rise in sequence. Only for users who
      haven't asked for reduced motion. `backwards` keeps the final
@@ -339,9 +320,11 @@ const processIcons = [
     max-width: 30ch;
     margin: 0;
   }
-  /* Lead in full contrast, the rest in a softer gray (theme-aware token). */
-  .hero-intro { color: var(--text-muted); }
-  .hero-intro-lead { color: var(--text-primary); }
+  /* Single color for the whole intro: near-black in light mode, white in dark
+     (same ink as the headline). */
+  .hero-intro { color: var(--text-primary); }
+  :global([data-theme='light']) .hero-intro { color: #14181F; }
+  .hero-intro-lead { color: inherit; }
   /* Location sentence wraps as one unit, so it drops to the last line intact. */
   .hero-location { display: inline-block; }
   /* The Spanish copy is longer: give it more measure so it stays within 3 lines on desktop. */

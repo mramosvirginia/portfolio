@@ -325,16 +325,6 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
         opacity: 0;
         pointer-events: none;
       }
-      /* Dark theme, top of the Home: the bar sits over the (light) hero, so it
-         uses the light palette until it gets its own blurred background. */
-      :global([data-theme='dark']) .site-header.is-home:not(.is-scrolled):not(:has(.mobile-nav.is-open)) {
-        --bg-surface: var(--white);
-        --text-primary: var(--navy-900);
-        --text-secondary: var(--navy-700);
-        --text-muted: var(--navy-500);
-        --border-default: var(--border-light);
-        color: var(--navy-900);
-      }
       .site-header.is-scrolled,
       .site-header:has(.mobile-nav.is-open) {
         background: color-mix(in srgb, var(--bg-page) 55%, transparent);
