@@ -436,7 +436,8 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: var(--space-3);
+    /* Tight row gap so the STACK label sits right above the pills when they wrap. */
+    gap: var(--space-2) var(--space-3);
     /* Pulls up into the section's own padding-top (space-16), so it sits
        close to the impact line/divider above instead of floating in the
        middle of that gap. */
@@ -459,6 +460,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
     gap: var(--space-2);
     list-style: none;
     padding-left: 0;
+    margin: 0; /* drop the default list margins that pushed it away from the label */
   }
   .stack-list li {
     font-family: var(--font-mono);
