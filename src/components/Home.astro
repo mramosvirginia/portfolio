@@ -10,9 +10,10 @@ const { locale } = Astro.props;
 const t = home[locale];
 const base = locale === 'es' ? '' : '/en';
 
-// Hero tags: the three strongest, laid out as 2 + 1 so each row hugs its content.
-const heroTags = [t.availability[1], t.availability[2], t.tags[1]];
+// Hero tags laid out in explicit rows of 2-3 so each row hugs its content.
+const heroTags = [...t.availability.slice(1), ...t.tags];
 const heroTagRows = [heroTags.slice(0, 2), heroTags.slice(2)];
+// Phone layout is 2 / 2 / 1: a break marker sits before the last tag.
 
 // One icon per process card, matched by index — not translated content,
 // so kept separate from the locale-aware copy in site.ts.
