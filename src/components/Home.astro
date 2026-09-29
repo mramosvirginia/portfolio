@@ -10,10 +10,9 @@ const { locale } = Astro.props;
 const t = home[locale];
 const base = locale === 'es' ? '' : '/en';
 
-// Hero tags laid out in explicit rows of 2-3 so each row hugs its content.
-const heroTags = [...t.availability.slice(1), ...t.tags];
+// Hero tags: the three strongest, laid out as 2 + 1 so each row hugs its content.
+const heroTags = [t.availability[1], t.availability[2], t.tags[1]];
 const heroTagRows = [heroTags.slice(0, 2), heroTags.slice(2)];
-// Phone layout is 2 / 2 / 1: a break marker sits before the last tag.
 
 // One icon per process card, matched by index — not translated content,
 // so kept separate from the locale-aware copy in site.ts.
@@ -50,15 +49,12 @@ const processIcons = [
       </div>
     </div>
 
-    <div class="hero-card">
-      <div class="hero-card-photo">
-        <Img src="/images/about/overview.png" alt="" sizes="220px" widths={[220, 440]} loading="eager" />
-      </div>
-      <p class="hero-card-status"><span class="hero-card-dot" aria-hidden="true"></span>{t.availability[0]}</p>
-    </div>
-
     <div class="hero-bottom">
       <p class="hero-intro"><span class="hero-intro-lead">{t.heroIntro}</span> {t.heroIntroRest} <span class="hero-location">{t.heroLocation}</span></p>
+      <div class="hero-card">
+        <Img src="/images/about/overview.png" alt="" sizes="220px" widths={[220, 440]} loading="eager" />
+        <p class="hero-card-status"><span class="hero-card-dot" aria-hidden="true"></span>{t.availability[0]}</p>
+      </div>
     </div>
   </div>
 </section>
@@ -183,29 +179,22 @@ const processIcons = [
     position: relative;
     display: flex;
     flex-direction: column;
-    /* Fills the first screen below the 68px sticky header. */
-    min-height: calc(100svh - var(--header-h));
     padding-top: clamp(32px, 5vw, 80px);
     padding-bottom: clamp(24px, 3vw, 48px);
   }
-  /* Small sharp portrait card in the bottom-right corner, above the CTA. */
+  /* Portrait + availability as one component: the status is a small translucent badge
+     in the bottom-left corner of the photo. The card sits in the same row as the intro
+     text, so its bottom edge shares the intro's baseline (flex-end). */
   .hero-card {
-    position: absolute;
-    right: var(--gutter);
-    bottom: 0; /* same baseline as the intro text on the left */
-    z-index: 1;
+    position: relative;
+    flex-shrink: 0;
     width: 220px;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-  }
-  .hero-card-photo {
     aspect-ratio: 3 / 2;
     border-radius: var(--radius-image);
     overflow: hidden;
     background: var(--bg-surface-subtle);
   }
-  .hero-card-photo :global(img) {
+  .hero-card :global(img) {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -213,14 +202,29 @@ const processIcons = [
     display: block;
   }
   .hero-card-status {
+    position: absolute;
+    left: 8px;
+    bottom: 8px;
     display: flex;
     align-items: center;
     gap: var(--space-2);
+    margin: 0;
+    padding: 5px 10px;
+    border-radius: 6px;
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.66rem;
     text-transform: uppercase;
     letter-spacing: 0.02em;
-    color: var(--text-secondary);
+    white-space: nowrap;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.55);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+  }
+  /* Dark theme: the same treatment inverted. */
+  :global([data-theme='dark']) .hero-card-status {
+    color: #0A0A0B;
+    background: rgba(255, 255, 255, 0.72);
   }
   .hero-card-dot {
     width: 7px;
@@ -251,15 +255,13 @@ const processIcons = [
   @media (prefers-reduced-motion: no-preference) {
     .hero-line,
     .hero-meta-list,
-    .hero-bottom,
-    .hero-card {
+    .hero-bottom {
       animation: hero-rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) backwards;
     }
     .hero-line:nth-child(1) { animation-delay: 0s; }
     .hero-line:nth-child(2) { animation-delay: 0.07s; }
     .hero-meta-list { animation-delay: 0.14s; }
     .hero-bottom { animation-delay: 0.21s; }
-    .hero-card { animation-delay: 0.28s; }
   }
   /* Scroll reveal (see script above): only ever hidden when JS has tagged
      the element, so no-JS and reduced-motion users always see the content. */
@@ -282,7 +284,7 @@ const processIcons = [
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: var(--space-8);
     text-align: left;
     padding-inline: var(--gutter);
@@ -658,7 +660,6 @@ const processIcons = [
     }
     .hero-bottom {
       order: 3;
-      margin-top: auto;
       flex-direction: column;
       align-items: flex-start;
       gap: var(--space-4);
