@@ -32,7 +32,7 @@ const withSlash = (path: string) => (rawPath.endsWith('/') && !path.endsWith('/'
 const esPath = withSlash(locale === 'es' ? currentPath : otherHref);
 const enPath = withSlash(locale === 'en' ? currentPath : otherHref);
 const siteName = 'Virginia Miner';
-const ogImage = new URL('/og-image.jpg?v=2', Astro.site); // ?v bumps the cache when the image changes
+const ogImage = new URL('/og-image.jpg?v=3', Astro.site); // ?v bumps the cache when the image changes
 const websiteJsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -90,8 +90,8 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
     <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="2400" />
-    <meta property="og:image:height" content="1260" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Virginia Miner, Product & Visual Designer" />
     <meta property="og:locale" content={locale === 'en' ? 'en_US' : 'es_ES'} />
     <meta name="twitter:card" content="summary_large_image" />
