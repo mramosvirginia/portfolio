@@ -4,7 +4,7 @@ export const webia: { en: CaseStudyContent; es: CaseStudyContent } = {
   en: {
     slug: 'webia',
     filter: 'product',
-    title: 'AI-powered web creation engine generating complete sites from three inputs',
+    title: "qdq's AI website builder using three data points, featured at MWC 2024",
     heroImage: '/images/case-studies/webia/cover.webp',
     heroCtaLabel: 'View Live Project',
     heroCtaHref: 'https://landingia.qdq.com/',
@@ -161,7 +161,7 @@ export const webia: { en: CaseStudyContent; es: CaseStudyContent } = {
   es: {
     slug: 'webia',
     filter: 'product',
-    title: 'Motor de creación web con IA que genera sitios completos a partir de tres datos',
+    title: 'Generador web con IA de qdq usando tres datos, presentado en el MWC 2024',
     heroImage: '/images/case-studies/webia/cover.webp',
     heroCtaLabel: 'Ver proyecto en vivo',
     heroCtaHref: 'https://landingia.qdq.com/',

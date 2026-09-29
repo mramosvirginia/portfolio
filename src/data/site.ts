@@ -260,7 +260,7 @@ export const home = {
         year: '2024',
         category: 'Estrategia de Producto, Branding',
         title: 'Rebranding de qdq: rediseño del directorio y nuevos canales de ingresos',
-        cardTitle: 'Rebranding de qdq: directorio y canales de ingresos',
+        cardTitle: 'Rebranding de qdq: rediseño del directorio y nuevos canales de ingresos',
         href: '/projects/rebranding-qdq',
         filter: 'product',
         image: '/images/case-studies/rebranding-qdq/cover.webp',
