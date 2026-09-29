@@ -70,7 +70,7 @@ const processIcons = [
     <div class="span-23">
     <div class="project-grid">
       {t.projects.map((p, i) => (
-        <a href={p.href} class="project-card">
+        <a href={p.href} class="project-card" data-slug={p.href.split('/').pop()}>
           <div class={`project-thumb thumb-ratio-${i % 4} ${p.image ? 'has-image' : ''}`}>
             {p.image && <Img src={p.image} alt="" sizes="(min-width: 781px) calc((100vw - 96px) / 2), calc(100vw - 32px)" widths={[400, 640, 900, 1200]} loading={i === 0 ? 'eager' : 'lazy'} />}
             <div class="project-overlay">
@@ -106,7 +106,6 @@ const processIcons = [
           <div class="process-card">
             <div class="card-top">
               <div class="card-icon" set:html={processIcons[i]} />
-              <span class="card-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
             </div>
             <div class="card-text">
               <h3>{item.title}</h3>
@@ -479,26 +478,6 @@ const processIcons = [
     width: 40px;
     height: 40px;
   }
-  .card-num {
-    font-family: var(--font-headline);
-    font-size: 88px;
-    line-height: 0.8;
-    letter-spacing: -0.04em;
-    color: var(--text-primary);
-    opacity: 0.08;
-    pointer-events: none;
-    user-select: none;
-  }
-  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-    :global(body.theme-ready) .card-num,
-    .card-num {
-      transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-    .process-card:hover .card-num {
-      opacity: 0.14;
-      transform: translateY(-3px);
-    }
-  }
   .card-text h3 {
     font-family: var(--font-headline);
     font-size: 22px;
@@ -659,10 +638,13 @@ const processIcons = [
     .hero-location { display: inline; }
     .hero-bottom .btn { font-size: 16px; }
     .process-grid { grid-template-columns: 1fr; }
-    .card-num { font-size: 72px; }
     .card-text h3 { font-size: 18px; }
     .card-icon :global(svg) { width: 32px; height: 32px; }
-    .project-grid { column-count: 1; }
+    .project-grid { column-count: 1; display: flex; flex-direction: column; }
+    /* On phones Web IA stays first and the qdq rebranding moves to second place. */
+    .project-card { order: 2; }
+    .project-card[data-slug='webia'] { order: 0; }
+    .project-card[data-slug='rebranding-qdq'] { order: 1; }
     .project-title { font-size: 1.125rem; }
     .faq-item summary { font-size: 1.05rem; }
   }
