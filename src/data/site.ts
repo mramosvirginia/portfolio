@@ -363,8 +363,8 @@ export const about = {
     experiencePanel: {
       title: 'Experience that compounds',
       body: [
-        'At qdq, I led the end-to-end design and launch of 5+ digital products, collaborated with Más Móvil and Yoigo on branded product experiences, redesigned 20+ web templates in Duda CMS, and participated as Product representative in an internal AI Lab — all while covering a senior designer role from day one.',
-        "In parallel, I've spent 6+ years as the sole designer for Aurora Dorada Ediciones — designing 40+ covers, typesetting books distributed across national and international bookstores and marketplaces, and redesigning their e-commerce from scratch.",
+        'At qdq, I led the end-to-end design and launch of 5+ digital products, collaborated with Más Móvil and Yoigo on branded product experiences, redesigned 20+ web templates in Duda CMS, and participated as Product representative in an internal AI Lab, all while covering a senior designer role from day one.',
+        "In parallel, I've spent 6+ years as the sole designer for Aurora Dorada Ediciones, designing 40+ covers, typesetting books distributed across national and international bookstores and marketplaces, and redesigning their e-commerce from scratch.",
         'At OCR Branding, I delivered brand and digital design across landing pages, social media, and print for multiple clients.',
       ],
       cta: 'Download CV / Resume',
@@ -409,7 +409,7 @@ export const about = {
       {
         role: 'Editorial & Visual Designer (freelance)',
         company: 'Aurora Dorada Ed.',
-        description: 'Designing brand identity and layout for an independent publishing house — over 30 books and 40+ covers, managing each project end-to-end.',
+        description: 'Designing brand identity and layout for an independent publishing house: over 30 books and 40+ covers, managing each project end-to-end.',
         years: '2019 - now',
       },
       {
@@ -461,8 +461,8 @@ export const about = {
     experiencePanel: {
       title: 'Una experiencia que suma',
       body: [
-        'En qdq, lideré el diseño y lanzamiento de más de 5 productos digitales, colaboré con Más Móvil y Yoigo en experiencias de producto de marca, rediseñé más de 20 plantillas web en Duda CMS, y participé como representante de producto en un AI Lab interno — todo ello asumiendo un rol de diseñadora senior desde el primer día.',
-        'En paralelo, llevo más de 6 años como diseñadora única para Aurora Dorada Ediciones — diseñando 40+ portadas, maquetando libros distribuidos en librerías y marketplaces nacionales e internacionales, y rediseñando su ecommerce desde cero.',
+        'En qdq, lideré el diseño y lanzamiento de más de 5 productos digitales, colaboré con Más Móvil y Yoigo en experiencias de producto de marca, rediseñé más de 20 plantillas web en Duda CMS, y participé como representante de producto en un AI Lab interno, todo ello asumiendo un rol de diseñadora senior desde el primer día.',
+        'En paralelo, llevo más de 6 años como diseñadora única para Aurora Dorada Ediciones, diseñando 40+ portadas, maquetando libros distribuidos en librerías y marketplaces nacionales e internacionales, y rediseñando su ecommerce desde cero.',
         'En OCR Branding, entregué diseño de marca y digital para landing pages, redes sociales y materiales impresos para varios clientes.',
       ],
       cta: 'Descargar CV / Currículum',
@@ -507,7 +507,7 @@ export const about = {
       {
         role: 'Diseñadora Editorial y Visual (freelance)',
         company: 'Aurora Dorada Ed.',
-        description: 'Diseño de identidad de marca y maquetación para una editorial independiente — más de 30 libros y 40+ portadas, gestionando cada proyecto de principio a fin.',
+        description: 'Diseño de identidad de marca y maquetación para una editorial independiente: más de 30 libros y 40+ portadas, gestionando cada proyecto de principio a fin.',
         years: '2019 - act.',
       },
       {

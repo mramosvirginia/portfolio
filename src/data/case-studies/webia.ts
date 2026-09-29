@@ -20,14 +20,14 @@ export const webia: { en: CaseStudyContent; es: CaseStudyContent } = {
     stackLabel: 'Stack',
     stack: ['Figma', 'Miro', 'OpenAI/ChatGPT', 'eformless', 'GA4'],
     overviewIntro:
-      "Freelancers and small businesses without a digital presence face a simple problem: building a website is slow, expensive, and requires technical knowledge they don't have. This AI-powered tool generates a complete site — copy, images, and structure — from just three data points. A real product in production, presented at Mobile World Congress 2024.",
+      "Freelancers and small businesses without a digital presence face a simple problem: building a website is slow, expensive, and requires technical knowledge they don't have. This AI-powered tool generates a complete site (copy, images, and structure) from just three data points. A real product in production, presented at Mobile World Congress 2024.",
     overviewImages: [
       { src: '/images/case-studies/webia/image1.jpg' },
       { src: '/images/case-studies/webia/image2.webp' },
     ],
     challengeTitle: 'Challenge',
     challengeBody:
-      "Creating a website requires time, money, and technical skills that most freelancers don't possess. Existing tools are either too complex or require extensive manual configuration. The goal was to reduce this process to minutes — three input fields, one website ready to publish.",
+      "Creating a website requires time, money, and technical skills that most freelancers don't possess. Existing tools are either too complex or require extensive manual configuration. The goal was to reduce this process to minutes, three input fields, one website ready to publish.",
     roleLabel: 'My Role',
     role: 'Product Design UX/UI · Feature definition, interface design, internal usability testing, in collaboration with the development team.',
     roleImages: [{ src: '/images/case-studies/webia/image3.webp' }],
@@ -39,7 +39,7 @@ export const webia: { en: CaseStudyContent; es: CaseStudyContent } = {
         'Increase product activation rates.',
         'Reduce the generation funnel time.',
         'Scale the product as a white-label model for third parties.',
-        'Freemium model — free trial, publishing from €5-6/month.',
+        'Freemium model: free trial, publishing from €5-6/month.',
       ],
       user: [
         'Generate a website without technical knowledge.',
@@ -68,7 +68,7 @@ export const webia: { en: CaseStudyContent; es: CaseStudyContent } = {
           rows: [
             [
               'High drop-off rate on the first screen (detected via analytics)',
-              'Removed intro screen — reduced flow from 3 to 2 steps',
+              'Removed intro screen: reduced flow from 3 to 2 steps',
               'Direct improvement in funnel completion rate',
             ],
             [
@@ -84,7 +84,7 @@ export const webia: { en: CaseStudyContent; es: CaseStudyContent } = {
             [
               'Product was difficult to sell as a standalone',
               'Created a dynamic brand component adaptable by partner',
-              'Scalability — marketed to partners like CE Consulting and AECEM',
+              'Scalability: marketed to partners like CE Consulting and AECEM',
             ],
           ],
         },
@@ -136,7 +136,7 @@ export const webia: { en: CaseStudyContent; es: CaseStudyContent } = {
         id: 'design-learnings',
         title: 'b) Design Learnings',
         paragraphs: [
-          "Designing an AI-driven product forces you to think about output constraints, not just user inputs. The most critical decision wasn't about the interface, but coordination: precisely defining business categories, color palettes, and image types so the AI generated output consistent with the design system. What seemed like a development issue was actually a system design challenge. It also confirmed that analytics are non-negotiable—a high-bounce welcome screen was the exact signal that unlocked the funnel's most significant improvement.",
+          "Designing an AI-driven product forces you to think about output constraints, not just user inputs. The most critical decision wasn't about the interface, but coordination: precisely defining business categories, color palettes, and image types so the AI generated output consistent with the design system. What seemed like a development issue was actually a system design challenge. It also confirmed that analytics are non-negotiable, a high-bounce welcome screen was the exact signal that unlocked the funnel's most significant improvement.",
         ],
       },
       {
@@ -152,7 +152,7 @@ export const webia: { en: CaseStudyContent; es: CaseStudyContent } = {
         id: 'outcome',
         title: 'Outcome',
         paragraphs: [
-          'Presented at MWC 2024 — attendees completed the flow live and praised the speed of the results. Funnel reduced from 3 to 2 screens based on data analysis. Major post-generation friction solved via an integrated guide. Scalable product actively marketed and sold to partners.',
+          'Presented at MWC 2024: attendees completed the flow live and praised the speed of the results. Funnel reduced from 3 to 2 screens based on data analysis. Major post-generation friction solved via an integrated guide. Scalable product actively marketed and sold to partners.',
         ],
       },
     ],
@@ -177,7 +177,7 @@ export const webia: { en: CaseStudyContent; es: CaseStudyContent } = {
     stackLabel: 'Stack',
     stack: ['Figma', 'Miro', 'OpenAI/ChatGPT', 'eformless', 'GA4'],
     overviewIntro:
-      'Los autónomos y pequeños negocios sin presencia digital se enfrentan a un problema simple: crear una web es lento, caro y requiere conocimientos técnicos que no tienen. Esta herramienta con IA genera un sitio completo —copy, imágenes y estructura— a partir de solo tres datos. Un producto real en producción, presentado en el Mobile World Congress 2024.',
+      'Los autónomos y pequeños negocios sin presencia digital se enfrentan a un problema simple: crear una web es lento, caro y requiere conocimientos técnicos que no tienen. Esta herramienta con IA genera un sitio completo (copy, imágenes y estructura) a partir de solo tres datos. Un producto real en producción, presentado en el Mobile World Congress 2024.',
     overviewImages: [
       { src: '/images/case-studies/webia/image1.jpg' },
       { src: '/images/case-studies/webia/image2.webp' },
@@ -196,7 +196,7 @@ export const webia: { en: CaseStudyContent; es: CaseStudyContent } = {
         'Aumentar las tasas de activación del producto.',
         'Reducir el tiempo del embudo de generación.',
         'Escalar el producto como modelo white-label para terceros.',
-        'Modelo freemium — prueba gratuita, publicación desde 5-6€/mes.',
+        'Modelo freemium: prueba gratuita, publicación desde 5-6€/mes.',
       ],
       user: [
         'Generar una web sin conocimientos técnicos.',
@@ -225,7 +225,7 @@ export const webia: { en: CaseStudyContent; es: CaseStudyContent } = {
           rows: [
             [
               'Alta tasa de abandono en la primera pantalla (detectada vía analítica)',
-              'Se eliminó la pantalla de introducción — flujo reducido de 3 a 2 pasos',
+              'Se eliminó la pantalla de introducción: flujo reducido de 3 a 2 pasos',
               'Mejora directa en la tasa de finalización del embudo',
             ],
             [
@@ -241,7 +241,7 @@ export const webia: { en: CaseStudyContent; es: CaseStudyContent } = {
             [
               'El producto era difícil de vender como algo independiente',
               'Se creó un componente de marca dinámico adaptable por partner',
-              'Escalabilidad — comercializado con partners como CE Consulting y AECEM',
+              'Escalabilidad: comercializado con partners como CE Consulting y AECEM',
             ],
           ],
         },
@@ -309,7 +309,7 @@ export const webia: { en: CaseStudyContent; es: CaseStudyContent } = {
         id: 'outcome',
         title: 'Resultado',
         paragraphs: [
-          'Presentado en el MWC 2024 — los asistentes completaron el flujo en directo y valoraron la rapidez de los resultados. Embudo reducido de 3 a 2 pantallas gracias al análisis de datos. Resuelta la principal fricción post-generación mediante una guía integrada. Producto escalable comercializado activamente con partners.',
+          'Presentado en el MWC 2024: los asistentes completaron el flujo en directo y valoraron la rapidez de los resultados. Embudo reducido de 3 a 2 pantallas gracias al análisis de datos. Resuelta la principal fricción post-generación mediante una guía integrada. Producto escalable comercializado activamente con partners.',
         ],
       },
     ],

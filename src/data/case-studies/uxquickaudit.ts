@@ -20,14 +20,14 @@ export const uxquickaudit: { en: CaseStudyContent; es: CaseStudyContent } = {
     stackLabel: 'Stack',
     stack: ['Figma', 'VS Code', 'GitHub'],
     overviewIntro:
-      'Designers often leave accessibility, heuristics, and design psychology for the end — or ignore them altogether. There is no quick tool to consult these foundations in a way that is contextualized to the type of product being designed. UX QuickAudit solves this: select the product type and focus, and get technical arguments ready to copy and paste into any document. No registration, no plugins, no friction — 96 unique audit points combining heuristics, WCAG accessibility, and design psychology.',
+      'Designers often leave accessibility, heuristics, and design psychology for the end, or ignore them altogether. There is no quick tool to consult these foundations in a way that is contextualized to the type of product being designed. UX QuickAudit solves this: select the product type and focus, and get technical arguments ready to copy and paste into any document. No registration, no plugins, no friction, 96 unique audit points combining heuristics, WCAG accessibility, and design psychology.',
     overviewImages: [
       { src: '/images/case-studies/uxquickaudit/image2.webp' },
       { src: '/images/case-studies/uxquickaudit/image3.webp' },
     ],
     challengeTitle: 'Challenge',
     challengeBody:
-      'The visual layer tends to grab all the attention in the design process — accessibility and usability are often postponed or omitted. Lack of contextualized tools: while NNGroup or W3C rules exist, they are not organized by product type or in a directly usable format. The goal was not just to inform, but to empower the designer to justify decisions with a technical base, not just an aesthetic one.',
+      'The visual layer tends to grab all the attention in the design process, so accessibility and usability are often postponed or omitted. Lack of contextualized tools: while NNGroup or W3C rules exist, they are not organized by product type or in a directly usable format. The goal was not just to inform, but to empower the designer to justify decisions with a technical base, not just an aesthetic one.',
     roleLabel: 'My Role',
     role: 'Product Design & Front-End Development · Solo: framework definition, UI design, build.',
     roleImages: [{ src: '/images/case-studies/uxquickaudit/image1.webp' }],
@@ -75,18 +75,18 @@ export const uxquickaudit: { en: CaseStudyContent; es: CaseStudyContent } = {
             [
               'Output must be usable outside the tool',
               '"Copy to clipboard" report with a single click',
-              'Real utility — the designer uses the output directly',
+              'Real utility: the designer uses the output directly',
             ],
             [
               'Keep the project lightweight',
-              'Vanilla JavaScript without frameworks — data.js + app.js architecture',
+              'Vanilla JavaScript without frameworks: data.js + app.js architecture',
               'Instant performance and maintainable code',
             ],
           ],
         },
         paragraphs: [
           'Four product types were chosen (landing page, ecommerce, dashboard, and form) as they are the most common in the UX/UI market and have distinct usability needs.',
-          'The three audit categories — heuristics & usability, accessibility (WCAG), and design psychology — cover the aspects most often overlooked in daily work.',
+     'The three audit categories (heuristics and usability, WCAG accessibility, and design psychology) cover the aspects most often overlooked in daily work.',
           'The copyable report was a core feature from the start to ensure real utility: not just a passive reference site, but a tool designers can use directly in presentations and documentation.',
         ],
       },
@@ -95,19 +95,19 @@ export const uxquickaudit: { en: CaseStudyContent; es: CaseStudyContent } = {
         title: '2. User Flow',
         labeledItems: [
           {
-            label: 'Step 1 — Product Selection',
+            label: 'Step 1: Product Selection',
             body: 'The user chooses the product type (landing page, ecommerce, dashboard, or form). Each selection filters content instantly.',
           },
           {
-            label: 'Step 2 — Focus Selection',
+            label: 'Step 2: Focus Selection',
             body: 'The user selects the audit area. The combination of product + focus determines the content (8 specific cards per combination, totaling 96 points).',
           },
           {
-            label: 'Step 3 — Card Review',
+            label: 'Step 3: Card Review',
             body: '8 cards are dynamically rendered. The user marks relevant cards to be included in the report.',
           },
           {
-            label: 'Step 4 — Report Generation',
+            label: 'Step 4: Report Generation',
             body: 'Clicking "Copy selected report" copies only the marked content to the clipboard, including category, title, and technical argument.',
           },
         ],
@@ -129,12 +129,12 @@ export const uxquickaudit: { en: CaseStudyContent; es: CaseStudyContent } = {
           'A scalable component architecture in Vanilla JavaScript was chosen to keep the project lightweight and demonstrate core language mastery.',
         ],
         items: [
-          'index.html — semantic site structure.',
-          'style.css — main stylesheet with responsive design.',
-          'app.js — interaction logic and DOM management.',
-          'data.js — structured object with all audit content.',
-          'assets/ — icons SVG and visual assets.',
-          'README.md + LICENSE — documentation and MIT license.',
+          'index.html: semantic site structure.',
+          'style.css: main stylesheet with responsive design.',
+          'app.js: interaction logic and DOM management.',
+          'data.js: structured object with all audit content.',
+          'assets/: icons SVG and visual assets.',
+          'README.md + LICENSE: documentation and MIT license.',
         ],
         labeledItems: [
           {
@@ -158,7 +158,7 @@ export const uxquickaudit: { en: CaseStudyContent; es: CaseStudyContent } = {
         id: 'design-learnings',
         title: 'b) Design Learnings',
         paragraphs: [
-          "Building a tool that I use myself changed how I understand product design. The decision to avoid frameworks wasn't just technical—it was about design discipline: if you can't control it without React, you don't fully understand it. I also learned that documenting your own project is harder than documenting a client's: it's easy to assume context the reader doesn't have, forcing you to be more explicit and honest about the decisions made.",
+          "Building a tool that I use myself changed how I understand product design. The decision to avoid frameworks wasn't just technical, it was about design discipline: if you can't control it without React, you don't fully understand it. I also learned that documenting your own project is harder than documenting a client's: it's easy to assume context the reader doesn't have, forcing you to be more explicit and honest about the decisions made.",
         ],
       },
       {
@@ -203,14 +203,14 @@ export const uxquickaudit: { en: CaseStudyContent; es: CaseStudyContent } = {
     stackLabel: 'Stack',
     stack: ['Figma', 'VS Code', 'GitHub'],
     overviewIntro:
-      'Los diseñadores suelen dejar la accesibilidad, la heurística y la psicología del diseño para el final —o directamente las ignoran. No existe una herramienta rápida para consultar estos fundamentos de forma contextualizada al tipo de producto que se está diseñando. UX QuickAudit resuelve esto: selecciona el tipo de producto y el foco, y obtén argumentos técnicos listos para copiar y pegar en cualquier documento. Sin registro, sin plugins, sin fricción — 96 puntos de auditoría únicos que combinan heurística, accesibilidad WCAG y psicología del diseño.',
+      'Los diseñadores suelen dejar la accesibilidad, la heurística y la psicología del diseño para el final, o directamente las ignoran. No existe una herramienta rápida para consultar estos fundamentos de forma contextualizada al tipo de producto que se está diseñando. UX QuickAudit resuelve esto: selecciona el tipo de producto y el foco, y obtén argumentos técnicos listos para copiar y pegar en cualquier documento. Sin registro, sin plugins, sin fricción, 96 puntos de auditoría únicos que combinan heurística, accesibilidad WCAG y psicología del diseño.',
     overviewImages: [
       { src: '/images/case-studies/uxquickaudit/image2.webp' },
       { src: '/images/case-studies/uxquickaudit/image3.webp' },
     ],
     challengeTitle: 'Reto',
     challengeBody:
-      'La capa visual suele acaparar toda la atención en el proceso de diseño —la accesibilidad y la usabilidad a menudo se posponen o se omiten. Falta de herramientas contextualizadas: aunque existen las reglas de NNGroup o W3C, no están organizadas por tipo de producto ni en un formato directamente utilizable. El objetivo no era solo informar, sino capacitar al diseñador para justificar decisiones con una base técnica, no solo estética.',
+      'La capa visual suele acaparar toda la atención en el proceso de diseño, así que la accesibilidad y la usabilidad a menudo se posponen o se omiten. Falta de herramientas contextualizadas: aunque existen las reglas de NNGroup o W3C, no están organizadas por tipo de producto ni en un formato directamente utilizable. El objetivo no era solo informar, sino capacitar al diseñador para justificar decisiones con una base técnica, no solo estética.',
     roleLabel: 'Mi rol',
     role: 'Diseño de producto y desarrollo Front-End · En solitario: definición del framework, diseño de UI, construcción.',
     roleImages: [{ src: '/images/case-studies/uxquickaudit/image1.webp' }],
@@ -258,18 +258,18 @@ export const uxquickaudit: { en: CaseStudyContent; es: CaseStudyContent } = {
             [
               'El resultado debe poder usarse fuera de la herramienta',
               'Informe "Copiar al portapapeles" con un solo clic',
-              'Utilidad real — el diseñador usa el resultado directamente',
+              'Utilidad real: el diseñador usa el resultado directamente',
             ],
             [
               'Mantener el proyecto ligero',
-              'JavaScript puro sin frameworks — arquitectura data.js + app.js',
+              'JavaScript puro sin frameworks: arquitectura data.js + app.js',
               'Rendimiento instantáneo y código mantenible',
             ],
           ],
         },
         paragraphs: [
           'Se eligieron cuatro tipos de producto (landing page, ecommerce, dashboard y formulario) por ser los más comunes en el mercado UX/UI y tener necesidades de usabilidad distintas.',
-          'Las tres categorías de auditoría —heurística y usabilidad, accesibilidad (WCAG) y psicología del diseño— cubren los aspectos que más se pasan por alto en el día a día.',
+     'Las tres categorías de auditoría (heurística y usabilidad, accesibilidad WCAG y psicología del diseño) cubren los aspectos que más se pasan por alto en el día a día.',
           'El informe copiable fue una funcionalidad central desde el inicio para garantizar utilidad real: no solo un sitio de referencia pasivo, sino una herramienta que los diseñadores pueden usar directamente en presentaciones y documentación.',
         ],
       },
@@ -278,19 +278,19 @@ export const uxquickaudit: { en: CaseStudyContent; es: CaseStudyContent } = {
         title: '2. Flujo de usuario',
         labeledItems: [
           {
-            label: 'Paso 1 — Selección de producto',
+            label: 'Paso 1: Selección de producto',
             body: 'El usuario elige el tipo de producto (landing page, ecommerce, dashboard o formulario). Cada selección filtra el contenido al instante.',
           },
           {
-            label: 'Paso 2 — Selección de foco',
+            label: 'Paso 2: Selección de foco',
             body: 'El usuario selecciona el área de auditoría. La combinación de producto + foco determina el contenido (8 tarjetas específicas por combinación, 96 puntos en total).',
           },
           {
-            label: 'Paso 3 — Revisión de tarjetas',
+            label: 'Paso 3: Revisión de tarjetas',
             body: 'Se renderizan 8 tarjetas dinámicamente. El usuario marca las relevantes para incluirlas en el informe.',
           },
           {
-            label: 'Paso 4 — Generación del informe',
+            label: 'Paso 4: Generación del informe',
             body: 'Al hacer clic en "Copiar informe seleccionado" se copia solo el contenido marcado al portapapeles, incluyendo categoría, título y argumento técnico.',
           },
         ],
@@ -312,12 +312,12 @@ export const uxquickaudit: { en: CaseStudyContent; es: CaseStudyContent } = {
           'Se eligió una arquitectura de componentes escalable en JavaScript puro para mantener el proyecto ligero y demostrar dominio del lenguaje base.',
         ],
         items: [
-          'index.html — estructura semántica del sitio.',
-          'style.css — hoja de estilos principal con diseño responsive.',
-          'app.js — lógica de interacción y gestión del DOM.',
-          'data.js — objeto estructurado con todo el contenido de auditoría.',
-          'assets/ — iconos SVG y recursos visuales.',
-          'README.md + LICENSE — documentación y licencia MIT.',
+          'index.html: estructura semántica del sitio.',
+          'style.css: hoja de estilos principal con diseño responsive.',
+          'app.js: lógica de interacción y gestión del DOM.',
+          'data.js: objeto estructurado con todo el contenido de auditoría.',
+          'assets/: iconos SVG y recursos visuales.',
+          'README.md + LICENSE: documentación y licencia MIT.',
         ],
         labeledItems: [
           {
@@ -341,7 +341,7 @@ export const uxquickaudit: { en: CaseStudyContent; es: CaseStudyContent } = {
         id: 'design-learnings',
         title: 'b) Aprendizajes de diseño',
         paragraphs: [
-          'Construir una herramienta que yo misma uso cambió mi forma de entender el diseño de producto. La decisión de evitar frameworks no fue solo técnica —fue una cuestión de disciplina de diseño: si no puedes controlarlo sin React, no lo entiendes del todo. También aprendí que documentar tu propio proyecto es más difícil que documentar el de un cliente: es fácil asumir contexto que el lector no tiene, lo que te obliga a ser más explícita y honesta sobre las decisiones tomadas.',
+          'Construir una herramienta que yo misma uso cambió mi forma de entender el diseño de producto. La decisión de evitar frameworks no fue solo técnica, fue una cuestión de disciplina de diseño: si no puedes controlarlo sin React, no lo entiendes del todo. También aprendí que documentar tu propio proyecto es más difícil que documentar el de un cliente: es fácil asumir contexto que el lector no tiene, lo que te obliga a ser más explícita y honesta sobre las decisiones tomadas.',
         ],
       },
       {

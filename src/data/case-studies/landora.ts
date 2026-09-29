@@ -21,14 +21,14 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
     stackLabel: 'Stack',
     stack: ['Figma', 'FigJam', 'Notion', 'Figma Tokens'],
     overviewIntro:
-      "Rural experiences in Spain exist but are scattered and difficult to find or book. Current platforms fail to combine good UX with a rural focus and local community support — the booking process is often confusing and visual information is scarce. Landora centralizes the discovery and booking of rural experiences — cultural, gastronomic, and natural — in a simple, accessible way that supports local communities.",
+      "Rural experiences in Spain exist but are scattered and difficult to find or book. Current platforms fail to combine good UX with a rural focus and local community support, and the booking process is often confusing and visual information is scarce. Landora centralizes the discovery and booking of rural experiences (cultural, gastronomic, and natural) in a simple, accessible way that supports local communities.",
     overviewImages: [
       { src: '/images/case-studies/landora/image3.avif' },
       { src: '/images/case-studies/landora/image2.png' },
     ],
     challengeTitle: 'Challenge',
     challengeBody:
-      'Rural areas are depopulating while cities face mass tourism — there is a high demand for unique experiences but no centralized platform to host them. The booking process in existing options is often confusing, outdated, or incomplete. Users find themselves searching multiple sites without finding a unified solution.',
+      'Rural areas are depopulating while cities face mass tourism, and there is a high demand for unique experiences but no centralized platform to host them. The booking process in existing options is often confusing, outdated, or incomplete. Users find themselves searching multiple sites without finding a unified solution.',
     roleLabel: 'My Role',
     role: 'Product Design & Design System · Solo, end-to-end: research, IA, UI design, accessibility (WCAG AA), dev handoff.',
     roleImages: [{ src: '/images/case-studies/landora/image4.avif' }],
@@ -66,9 +66,9 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
           ],
         },
         items: [
-          'Key insight — Booking Complexity',
-          'Key insight — Visual Trust',
-          'Key insight — Fragmented Search',
+          'Key insight: Booking Complexity',
+          'Key insight: Visual Trust',
+          'Key insight: Fragmented Search',
         ],
         images: [
           { src: '/images/case-studies/landora/image5.webp' },
@@ -129,14 +129,14 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
             ],
             [
               "Purple brand color didn't meet WCAG 2.1 AA",
-              'Separated brand color from interaction color — calibrated level 600 lilac primary ramp',
+              'Separated brand color from interaction color, calibrated level 600 lilac primary ramp',
               'Full accessibility without sacrificing visual identity',
             ],
           ],
         },
         paragraphs: [
-          "Purple was chosen over green — it's more distinctive and aligns with the user's motivation: escaping routine and seeking meaningful experiences.",
-          'The original purple did not meet WCAG 2.1 AA (minimum 4.5:1 ratio), verified via Figma plugin. The original purple was reserved for decorative branding, and the primary lilac ramp was calibrated to level 600 for all interactive elements — meeting the 4.5:1 ratio for all text and interaction use cases.',
+          "Purple was chosen over green because it's more distinctive and aligns with the user's motivation of escaping routine and seeking meaningful experiences.",
+          'The original purple did not meet WCAG 2.1 AA (minimum 4.5:1 ratio), verified via Figma plugin. The original purple was reserved for decorative branding, and the primary lilac ramp was calibrated to level 600 for all interactive elements, meeting the 4.5:1 ratio for all text and interaction use cases.',
         ],
         items: [
           'Pre-checkout screen: date, time, and guest selection with real-time cost visualization.',
@@ -144,10 +144,10 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
           'Activity information remains visible throughout the entire process.',
           'Cancellation policy and support notice included at the payment step.',
           'Component library published in Figma as an independent library, separate from the screen layout file.',
-          'Token architecture structured in two layers — primitive values and semantic aliases — covering color, typography, spacing, padding, radius, and grid.',
+     'Token architecture structured in two layers, primitive values and semantic aliases, covering color, typography, spacing, padding, radius, and grid.',
           'Accessible color palette, verified against WCAG 2.1 AA contrast standards.',
           '20+ components: buttons, text fields, calendar selector, nav bar, cards, stepper, checkout summary, and modular cards.',
-          'Fully documented for developer handoff — audited for consistency and published as a standalone documentation site.',
+          'Fully documented for developer handoff, audited for consistency and published as a standalone documentation site.',
         ],
         images: [{ src: '/images/case-studies/landora/image12.webp' }],
       },
@@ -157,24 +157,24 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
         paragraphs: [
           "Beyond the interface design, I treated Landora's UI kit as a system meant to be handed off, not just a set of screens. That meant auditing every token for consistency, structuring a two-layer token architecture, and documenting accessibility compliance before calling it done.",
           "Color was already defined as Figma Styles, but spacing, padding, radius, and typography weren't yet structured as reusable tokens. I converted the color styles to Variables, then built the remaining scales from scratch.",
-          'Rather than inventing an arbitrary scale, I scanned actual usage across the component library to see what values were already in play — surfacing a clear core pattern in spacing and padding (4, 8, 12, 16, 24, 32, 64) alongside dozens of one-off values that didn\'t belong. That core pattern became the primitive scale.',
+          'Rather than inventing an arbitrary scale, I scanned actual usage across the component library to see what values were already in play, surfacing a clear core pattern in spacing and padding (4, 8, 12, 16, 24, 32, 64) alongside dozens of one-off values that didn\'t belong. That core pattern became the primitive scale.',
           'Before generating any handoff documentation, I ran a token audit across the full component library rather than trusting it was already consistent. The audit surfaced real inconsistencies: 213 spacing and padding values, a 6px and 10px pattern, and corner radius outliers.',
-          "Instead of documenting the system as it stood, I used the audit to enforce a clean 4px-based scale — resolving each outlier by context rather than blindly rounding to the nearest value. For example, a tab bar container's radius (20px) was raised to 24px to match its larger surface area, keeping it visually distinct from smaller interactive elements at 8px. Decorative elements outside the actual design system, like a mockup's status bar battery icon, were deliberately excluded from the token scale rather than forced into it.",
-          'With tokens and components audited and cleanly named, I generated a standalone documentation site in Zeroheight — covering foundations (color, typography, spacing, padding, radius), component specs (anatomy, variants, states), and accessibility guidelines — built directly from the Figma file for accurate developer handoff.',
+          "Instead of documenting the system as it stood, I used the audit to enforce a clean 4px-based scale, resolving each outlier by context rather than blindly rounding to the nearest value. For example, a tab bar container's radius (20px) was raised to 24px to match its larger surface area, keeping it visually distinct from smaller interactive elements at 8px. Decorative elements outside the actual design system, like a mockup's status bar battery icon, were deliberately excluded from the token scale rather than forced into it.",
+     'With tokens and components audited and cleanly named, I generated a standalone documentation site in Zeroheight, covering foundations (color, typography, spacing, padding, radius), component specs (anatomy, variants, states), and accessibility guidelines, built directly from the Figma file for accurate developer handoff.',
         ],
       },
       {
         id: 'key-deliverables',
         title: 'a) Key Deliverables',
         paragraphs: [
-          'The final design delivers a cohesive digital solution combining a solid visual system with a clear, accessible booking experience. Through a streamlined flow and design decisions justified by real research, Landora offers users a trustworthy platform to manage bookings with minimal cognitive effort — backed by a fully documented, production-ready design system with primitive and semantic tokens, ready for developer handoff.',
+          'The final design delivers a cohesive digital solution combining a solid visual system with a clear, accessible booking experience. Through a streamlined flow and design decisions justified by real research, Landora offers users a trustworthy platform to manage bookings with minimal cognitive effort, backed by a fully documented, production-ready design system with primitive and semantic tokens, ready for developer handoff.',
         ],
       },
       {
         id: 'design-learnings',
         title: 'b) Design Learnings',
         paragraphs: [
-          "Consistency isn't something you get right by construction — it erodes through hundreds of small manual adjustments, even in a careful process. Auditing the token system after the fact, rather than assuming it was clean, surfaced real inconsistencies I wouldn't have caught otherwise. And not every irregular value is a mistake to fix: distinguishing a legitimate design decision (a larger radius on a bigger surface) from actual drift (a decimal value from resizing by hand) required judgment, not just automation.",
+          "Consistency isn't something you get right by construction: it erodes through hundreds of small manual adjustments, even in a careful process. Auditing the token system after the fact, rather than assuming it was clean, surfaced real inconsistencies I wouldn't have caught otherwise. And not every irregular value is a mistake to fix: distinguishing a legitimate design decision (a larger radius on a bigger surface) from actual drift (a decimal value from resizing by hand) required judgment, not just automation.",
         ],
       },
       {
@@ -191,7 +191,7 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
         id: 'outcome',
         title: 'Outcome',
         paragraphs: [
-          'Identified a real market opportunity: no existing platform combines high-quality UX with a rural focus and community support. Simplified the booking process to 1 configuration screen + 3 checkout steps with persistent contextual information. Accessible color system: level 600 primary lilac ramp to comply with WCAG 2.1 AA (> 4.5:1 ratio). UI Kit documented as a production-ready design system — 20+ components, primitive and semantic tokens, audited for consistency and published as a standalone handoff library. Fully testable interactive prototype in Figma.',
+          'Identified a real market opportunity: no existing platform combines high-quality UX with a rural focus and community support. Simplified the booking process to 1 configuration screen + 3 checkout steps with persistent contextual information. Accessible color system: level 600 primary lilac ramp to comply with WCAG 2.1 AA (> 4.5:1 ratio). UI Kit documented as a production-ready design system, 20+ components, primitive and semantic tokens, audited for consistency and published as a standalone handoff library. Fully testable interactive prototype in Figma.',
         ],
         images: [{ src: '/images/case-studies/landora/image13.webp' }],
       },
@@ -218,14 +218,14 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
     stackLabel: 'Stack',
     stack: ['Figma', 'FigJam', 'Notion', 'Figma Tokens'],
     overviewIntro:
-      'Las experiencias rurales en España existen pero están dispersas y son difíciles de encontrar o reservar. Las plataformas actuales no combinan una buena UX con un enfoque rural y apoyo a la comunidad local —el proceso de reserva suele ser confuso y la información visual escasa. Landora centraliza el descubrimiento y la reserva de experiencias rurales —culturales, gastronómicas y naturales— de forma sencilla y accesible, apoyando a las comunidades locales.',
+      'Las experiencias rurales en España existen pero están dispersas y son difíciles de encontrar o reservar. Las plataformas actuales no combinan una buena UX con un enfoque rural y apoyo a la comunidad local, y el proceso de reserva suele ser confuso y la información visual escasa. Landora centraliza el descubrimiento y la reserva de experiencias rurales (culturales, gastronómicas y naturales) de forma sencilla y accesible, apoyando a las comunidades locales.',
     overviewImages: [
       { src: '/images/case-studies/landora/image3.avif' },
       { src: '/images/case-studies/landora/image2.png' },
     ],
     challengeTitle: 'Reto',
     challengeBody:
-      'Las zonas rurales se despueblan mientras las ciudades sufren turismo masivo —existe una alta demanda de experiencias únicas pero ninguna plataforma centralizada que las albergue. El proceso de reserva en las opciones existentes suele ser confuso, anticuado o incompleto. Los usuarios acaban buscando en varios sitios sin encontrar una solución unificada.',
+      'Las zonas rurales se despueblan mientras las ciudades sufren turismo masivo, y existe una alta demanda de experiencias únicas pero ninguna plataforma centralizada que las albergue. El proceso de reserva en las opciones existentes suele ser confuso, anticuado o incompleto. Los usuarios acaban buscando en varios sitios sin encontrar una solución unificada.',
     roleLabel: 'Mi rol',
     role: 'Diseño de Producto y Design System · En solitario, de principio a fin: investigación, IA, diseño de UI, accesibilidad (WCAG AA), handoff a desarrollo.',
     roleImages: [{ src: '/images/case-studies/landora/image4.avif' }],
@@ -263,9 +263,9 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
           ],
         },
         items: [
-          'Insight clave — Complejidad de la reserva',
-          'Insight clave — Confianza visual',
-          'Insight clave — Búsqueda fragmentada',
+          'Insight clave: Complejidad de la reserva',
+          'Insight clave: Confianza visual',
+          'Insight clave: Búsqueda fragmentada',
         ],
         images: [
           { src: '/images/case-studies/landora/image5.webp' },
@@ -326,14 +326,14 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
             ],
             [
               'El morado de marca no cumplía WCAG 2.1 AA',
-              'Se separó el color de marca del color de interacción — rampa lila primaria calibrada al nivel 600',
+              'Se separó el color de marca del color de interacción, rampa lila primaria calibrada al nivel 600',
               'Accesibilidad completa sin sacrificar la identidad visual',
             ],
           ],
         },
         paragraphs: [
-          'Se eligió el morado sobre el verde —es más distintivo y encaja con la motivación del usuario: escapar de la rutina y buscar experiencias con sentido.',
-          'El morado original no cumplía WCAG 2.1 AA (ratio mínimo 4.5:1), verificado con un plugin de Figma. El morado original se reservó para el branding decorativo, y la rampa lila primaria se calibró al nivel 600 para todos los elementos interactivos —cumpliendo el ratio 4.5:1 en todos los casos de texto e interacción.',
+          'Se eligió el morado sobre el verde porque es más distintivo y encaja con la motivación del usuario de escapar de la rutina y buscar experiencias con sentido.',
+          'El morado original no cumplía WCAG 2.1 AA (ratio mínimo 4.5:1), verificado con un plugin de Figma. El morado original se reservó para el branding decorativo, y la rampa lila primaria se calibró al nivel 600 para todos los elementos interactivos, cumpliendo el ratio 4.5:1 en todos los casos de texto e interacción.',
         ],
         items: [
           'Pantalla de pre-checkout: selección de fecha, hora y número de personas con visualización de coste en tiempo real.',
@@ -341,10 +341,10 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
           'La información de la actividad permanece visible durante todo el proceso.',
           'Política de cancelación y aviso de soporte incluidos en el paso de pago.',
           'Librería de componentes publicada en Figma como librería independiente, separada del archivo de pantallas.',
-          'Arquitectura de tokens estructurada en dos capas —valores primitivos y alias semánticos— cubriendo color, tipografía, espaciado, padding, radio y grid.',
+     'Arquitectura de tokens estructurada en dos capas, valores primitivos y alias semánticos, cubriendo color, tipografía, espaciado, padding, radio y grid.',
           'Paleta de color accesible, verificada contra los estándares de contraste WCAG 2.1 AA.',
           '20+ componentes: botones, campos de texto, selector de calendario, barra de navegación, tarjetas, stepper, resumen de checkout y tarjetas modulares.',
-          'Completamente documentado para handoff a desarrollo —auditado por consistencia y publicado como sitio de documentación independiente.',
+          'Completamente documentado para handoff a desarrollo, auditado por consistencia y publicado como sitio de documentación independiente.',
         ],
         images: [{ src: '/images/case-studies/landora/image12.webp' }],
       },
@@ -354,24 +354,24 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
         paragraphs: [
           'Más allá del diseño de la interfaz, traté el UI kit de Landora como un sistema pensado para ser entregado, no solo un conjunto de pantallas. Eso implicó auditar cada token por consistencia, estructurar una arquitectura de tokens en dos capas y documentar el cumplimiento de accesibilidad antes de darlo por terminado.',
           'El color ya estaba definido como Estilos de Figma, pero el espaciado, el padding, el radio y la tipografía aún no estaban estructurados como tokens reutilizables. Convertí los estilos de color a Variables y construí el resto de escalas desde cero.',
-          'En lugar de inventar una escala arbitraria, revisé el uso real en toda la librería de componentes para ver qué valores ya estaban en juego —lo que reveló un patrón claro en espaciado y padding (4, 8, 12, 16, 24, 32, 64) junto a decenas de valores sueltos que no encajaban. Ese patrón se convirtió en la escala primitiva.',
+          'En lugar de inventar una escala arbitraria, revisé el uso real en toda la librería de componentes para ver qué valores ya estaban en juego, lo que reveló un patrón claro en espaciado y padding (4, 8, 12, 16, 24, 32, 64) junto a decenas de valores sueltos que no encajaban. Ese patrón se convirtió en la escala primitiva.',
           'Antes de generar cualquier documentación de handoff, hice una auditoría de tokens en toda la librería de componentes en lugar de asumir que ya era consistente. La auditoría reveló inconsistencias reales: 213 valores de espaciado y padding, un patrón de 6px y 10px, y radios de esquina fuera de escala.',
-          'En lugar de documentar el sistema tal cual estaba, usé la auditoría para imponer una escala limpia basada en 4px —resolviendo cada excepción según su contexto en lugar de redondear ciegamente al valor más cercano. Por ejemplo, el radio del contenedor de una tab bar (20px) se subió a 24px para ajustarse a su superficie mayor, manteniéndolo visualmente distinto de elementos interactivos más pequeños a 8px. Los elementos decorativos ajenos al sistema de diseño real, como el icono de batería de la barra de estado de un mockup, se excluyeron deliberadamente de la escala de tokens en lugar de forzarlos en ella.',
-          'Con los tokens y componentes auditados y bien nombrados, generé un sitio de documentación independiente en Zeroheight —cubriendo fundamentos (color, tipografía, espaciado, padding, radio), especificaciones de componentes (anatomía, variantes, estados) y guías de accesibilidad— construido directamente desde el archivo de Figma para un handoff preciso a desarrollo.',
+          'En lugar de documentar el sistema tal cual estaba, usé la auditoría para imponer una escala limpia basada en 4px, resolviendo cada excepción según su contexto en lugar de redondear ciegamente al valor más cercano. Por ejemplo, el radio del contenedor de una tab bar (20px) se subió a 24px para ajustarse a su superficie mayor, manteniéndolo visualmente distinto de elementos interactivos más pequeños a 8px. Los elementos decorativos ajenos al sistema de diseño real, como el icono de batería de la barra de estado de un mockup, se excluyeron deliberadamente de la escala de tokens en lugar de forzarlos en ella.',
+     'Con los tokens y componentes auditados y bien nombrados, generé un sitio de documentación independiente en Zeroheight, cubriendo fundamentos (color, tipografía, espaciado, padding, radio), especificaciones de componentes (anatomía, variantes, estados) y guías de accesibilidad, construido directamente desde el archivo de Figma para un handoff preciso a desarrollo.',
         ],
       },
       {
         id: 'key-deliverables',
         title: 'a) Entregables clave',
         paragraphs: [
-          'El diseño final ofrece una solución digital coherente que combina un sistema visual sólido con una experiencia de reserva clara y accesible. Mediante un flujo optimizado y decisiones de diseño justificadas con investigación real, Landora ofrece a los usuarios una plataforma fiable para gestionar reservas con el mínimo esfuerzo cognitivo —respaldada por un design system totalmente documentado y listo para producción, con tokens primitivos y semánticos, preparado para el handoff a desarrollo.',
+          'El diseño final ofrece una solución digital coherente que combina un sistema visual sólido con una experiencia de reserva clara y accesible. Mediante un flujo optimizado y decisiones de diseño justificadas con investigación real, Landora ofrece a los usuarios una plataforma fiable para gestionar reservas con el mínimo esfuerzo cognitivo, respaldada por un design system totalmente documentado y listo para producción, con tokens primitivos y semánticos, preparado para el handoff a desarrollo.',
         ],
       },
       {
         id: 'design-learnings',
         title: 'b) Aprendizajes de diseño',
         paragraphs: [
-          'La consistencia no es algo que se consigue por construcción —se erosiona a través de cientos de pequeños ajustes manuales, incluso en un proceso cuidadoso. Auditar el sistema de tokens a posteriori, en lugar de asumir que estaba limpio, reveló inconsistencias reales que no habría detectado de otra forma. Y no todo valor irregular es un error a corregir: distinguir una decisión de diseño legítima (un radio mayor en una superficie más grande) de una desviación real (un valor decimal por redimensionar a mano) requirió criterio, no solo automatización.',
+          'La consistencia no es algo que se consigue por construcción: se erosiona a través de cientos de pequeños ajustes manuales, incluso en un proceso cuidadoso. Auditar el sistema de tokens a posteriori, en lugar de asumir que estaba limpio, reveló inconsistencias reales que no habría detectado de otra forma. Y no todo valor irregular es un error a corregir: distinguir una decisión de diseño legítima (un radio mayor en una superficie más grande) de una desviación real (un valor decimal por redimensionar a mano) requirió criterio, no solo automatización.',
         ],
       },
       {
@@ -388,7 +388,7 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
         id: 'outcome',
         title: 'Resultado',
         paragraphs: [
-          'Se identificó una oportunidad de mercado real: ninguna plataforma existente combina UX de alta calidad con enfoque rural y apoyo comunitario. Se simplificó el proceso de reserva a 1 pantalla de configuración + 3 pasos de checkout con información contextual persistente. Sistema de color accesible: rampa lila primaria de nivel 600 para cumplir WCAG 2.1 AA (ratio > 4.5:1). UI Kit documentado como design system listo para producción —20+ componentes, tokens primitivos y semánticos, auditados por consistencia y publicados como librería de handoff independiente. Prototipo interactivo completamente testeable en Figma.',
+          'Se identificó una oportunidad de mercado real: ninguna plataforma existente combina UX de alta calidad con enfoque rural y apoyo comunitario. Se simplificó el proceso de reserva a 1 pantalla de configuración + 3 pasos de checkout con información contextual persistente. Sistema de color accesible: rampa lila primaria de nivel 600 para cumplir WCAG 2.1 AA (ratio > 4.5:1). UI Kit documentado como design system listo para producción, 20+ componentes, tokens primitivos y semánticos, auditados por consistencia y publicados como librería de handoff independiente. Prototipo interactivo completamente testeable en Figma.',
         ],
         images: [{ src: '/images/case-studies/landora/image13.webp' }],
       },

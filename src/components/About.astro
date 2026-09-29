@@ -256,6 +256,9 @@ const aboutSizes = '(min-width: 901px) calc((100vw - 96px) / 2), calc(100vw - 32
   }
   .about-photo {
     aspect-ratio: 4 / 5;
+    /* On desktop the photo never grows taller than the viewport below the navbar, so it is not cut off. */
+    max-height: calc(100svh - 210px);
+    min-height: 420px;
     width: 100%;
     margin-top: var(--space-8);
     border-radius: var(--radius-image);
@@ -359,7 +362,7 @@ const aboutSizes = '(min-width: 901px) calc((100vw - 96px) / 2), calc(100vw - 32
   @media (max-width: 900px) {
     .about-grid { grid-template-columns: 1fr; grid-template-rows: auto auto auto; gap: var(--space-6); }
     .about-tabs { grid-column: 1; grid-row: 1; margin-bottom: 0; }
-    .about-photo { grid-column: 1; grid-row: 2; order: -1; aspect-ratio: 4 / 3; margin-top: 0; }
+    .about-photo { grid-column: 1; grid-row: 2; order: -1; aspect-ratio: 4 / 3; margin-top: 0; max-height: none; min-height: 0; }
     .about-copy { grid-column: 1; grid-row: 3; }
     .skills-grid { grid-template-columns: 1fr 1fr; }
     .row { grid-template-columns: 1fr; gap: var(--space-2); }
