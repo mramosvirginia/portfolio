@@ -24,6 +24,8 @@ export interface CaseStudyObjectives {
 export interface CaseStudyImage {
   src: string;
   caption?: string;
+  /** Turns the first occurrence of `text` inside the caption into a link. */
+  captionLink?: { text: string; href: string };
   /** Wraps the image in a light card frame — for mockups with a baked-in
    * light/synthetic background that would otherwise clash with dark mode. */
   framed?: boolean;

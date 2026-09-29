@@ -17,6 +17,15 @@ const backLabel = locale === 'en' ? 'Back to work' : 'Volver a trabajo';
 const tocLabel = locale === 'en' ? 'On this page' : 'En esta página';
 const impactLabel = locale === 'en' ? 'Impact:' : 'Impacto:';
 
+const captionHtml = (image: { caption?: string; captionLink?: { text: string; href: string } }) => {
+  const esc = (v: string) => v.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const { caption, captionLink } = image;
+  if (!caption) return '';
+  if (!captionLink || !caption.includes(captionLink.text)) return `(${esc(caption)})`;
+  const [before, ...rest] = caption.split(captionLink.text);
+  return `(${esc(before)}<a href="${captionLink.href}" target="_blank" rel="noopener">${esc(captionLink.text)}</a>${esc(rest.join(captionLink.text))})`;
+};
+
 const toc = [
   { id: 'overview', label: study.overviewTitle },
   { id: 'challenge', label: study.challengeTitle },
@@ -99,7 +108,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
         {study.overviewImages?.map((image) => (
           <figure class:list={['figure-image', { framed: image.framed }]}>
             <Img class="section-image has-image" src={image.src} alt={image.caption || study.overviewTitle} sizes={contentSizes} />
-            {image.caption && <figcaption>({image.caption})</figcaption>}
+            {image.caption && <figcaption set:html={captionHtml(image)} />}
           </figure>
         ))}
       </section>
@@ -116,7 +125,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
         {study.roleImages?.map((image) => (
           <figure class:list={['figure-image', { framed: image.framed }]}>
             <Img class="section-image has-image" src={image.src} alt={image.caption || study.roleLabel || study.title} sizes={contentSizes} />
-            {image.caption && <figcaption>({image.caption})</figcaption>}
+            {image.caption && <figcaption set:html={captionHtml(image)} />}
           </figure>
         ))}
       </section>
@@ -181,7 +190,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
           {section.images?.map((image) => (
             <figure class:list={['figure-image', { framed: image.framed }]}>
               <Img class="section-image has-image" src={image.src} alt={image.caption || section.title} sizes={contentSizes} />
-              {image.caption && <figcaption>({image.caption})</figcaption>}
+              {image.caption && <figcaption set:html={captionHtml(image)} />}
             </figure>
           ))}
         </section>
@@ -561,6 +570,11 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
     border-radius: var(--radius-image);
     border: 1px solid var(--border-default);
     margin-top: var(--space-6);
+  }
+  figcaption :global(a) {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
   figcaption {
     font-size: 0.8rem;

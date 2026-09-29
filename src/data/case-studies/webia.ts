@@ -130,7 +130,6 @@ export const webia: { en: CaseStudyContent; es: CaseStudyContent } = {
         ],
         images: [
           { src: '/images/case-studies/webia/image6.webp' },
-          { src: '/images/case-studies/webia/image5.webp' },
         ],
       },
       {
@@ -288,7 +287,6 @@ export const webia: { en: CaseStudyContent; es: CaseStudyContent } = {
         ],
         images: [
           { src: '/images/case-studies/webia/image6.webp' },
-          { src: '/images/case-studies/webia/image5.webp' },
         ],
       },
       {
