@@ -34,7 +34,7 @@ const processIcons = [
     <div class="hero-headline">
       <h1 class="hero-name">
         <span class="hero-line">{t.heroName}</span>
-        <span class="hero-line">{t.heroRole}</span>
+        <span class="hero-line"><span class="hero-role-prefix">Product &amp; </span>{t.heroRole}</span>
       </h1>
       <div class="hero-meta-list">
         {heroTagRows.map((row) => (
@@ -175,36 +175,10 @@ const processIcons = [
   import '../scripts/countup';
 </script>
 <script>
-  // Hero cursor trail: small flat coloured squares (Nina-style) dropped along the mouse path while
-  // it moves over the hero, each one fading and shrinking away. Only for real pointers that can hover
-  // and for people who haven't asked for reduced motion. Purely decorative, behind the text.
+  // Hero cursor trail (shared with the footer): see src/scripts/cursorTrail.ts.
+  import { attachCursorTrail } from '../scripts/cursorTrail';
   const trailHero = document.querySelector<HTMLElement>('.hero');
-  const canTrail = window.matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)').matches;
-  if (trailHero && canTrail) {
-    const palette = ['#F4A0C8', '#F8E39A', '#4A8FE0', '#C9A7F0', '#E8894A', '#E94B2A']; // no green
-    const STEP = 34; // px of mouse travel between two squares
-    let last: { x: number; y: number } | null = null;
-    let live = 0;
-    trailHero.addEventListener('pointermove', (e) => {
-      if (e.pointerType !== 'mouse') return;
-      const box = trailHero.getBoundingClientRect();
-      const x = e.clientX - box.left;
-      const y = e.clientY - box.top;
-      if (last && Math.hypot(x - last.x, y - last.y) < STEP) return;
-      last = { x, y };
-      if (live > 14) return;
-      const el = document.createElement('span');
-      el.className = 'hero-trail';
-      el.setAttribute('aria-hidden', 'true');
-      el.style.left = `${x}px`;
-      el.style.top = `${y}px`;
-      el.style.background = palette[Math.floor(Math.random() * palette.length)];
-      live++;
-      el.addEventListener('animationend', () => { el.remove(); live--; });
-      trailHero.appendChild(el);
-    });
-    trailHero.addEventListener('pointerleave', () => { last = null; });
-  }
+  if (trailHero) attachCursorTrail(trailHero);
 
   // Touch / no-hover devices have no cursor to trail, so instead 4 squares are scattered over the
   // hero background at random spots each visit (like Nina's mobile hero). They keep clear of every
@@ -296,20 +270,6 @@ const processIcons = [
     opacity: 0.22;
     -webkit-mask-image: linear-gradient(to bottom, #000 40%, transparent 100%);
     mask-image: linear-gradient(to bottom, #000 40%, transparent 100%);
-  }
-  /* Cursor trail squares (added by the script above). Behind the text, never interactive. */
-  .hero :global(.hero-trail) {
-    position: absolute;
-    z-index: 0;
-    width: 10px;
-    height: 10px;
-    margin: -5px 0 0 -5px; /* centred on the pointer */
-    pointer-events: none;
-    animation: trail-out 0.9s ease-out forwards;
-  }
-  @keyframes trail-out {
-    from { opacity: 1; scale: 1; }
-    to { opacity: 0; scale: 0.3; }
   }
   /* Static squares for touch devices (added by the script above). Behind the text, never interactive. */
   .hero :global(.hero-square) {
@@ -444,6 +404,7 @@ const processIcons = [
   .hero-line {
     display: block;
   }
+  .hero-role-prefix { display: none; }
   :global([data-theme='light']) .hero-name {
     color: #14181F;
   }
@@ -772,6 +733,8 @@ const processIcons = [
        line right under it. */
     .hero-name { font-size: 17.8vw; }
     .hero-line:nth-child(1) { white-space: nowrap; }
+    /* On phones the small role line reads "Product & Visual Designer". */
+    .hero-role-prefix { display: inline; }
     .hero-line:nth-child(2) {
       font-size: 5.8vw;
       line-height: 1.2;
