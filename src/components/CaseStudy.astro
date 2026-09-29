@@ -73,7 +73,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
         <div class="hero-image" aria-hidden="true"></div>
       )}
       {study.highlight && (
-        <p class="case-highlight"><strong>{impactLabel}</strong> {study.highlight}</p>
+        <p class="case-highlight"><strong>{impactLabel}</strong> <span data-countup>{study.highlight}</span></p>
       )}
 
       <section id="overview" class="case-section">
@@ -216,6 +216,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
 </article>
 
 <script>
+  import '../scripts/countup';
   const links = document.querySelectorAll<HTMLAnchorElement>('.toc a');
   const sections = Array.from(links)
     .map((link) => document.querySelector(link.getAttribute('href') || ''))

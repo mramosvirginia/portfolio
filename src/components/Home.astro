@@ -50,6 +50,13 @@ const processIcons = [
       </div>
     </div>
 
+    <div class="hero-card">
+      <div class="hero-card-photo">
+        <Img src="/images/about/overview.png" alt="" sizes="220px" widths={[220, 440]} loading="eager" />
+      </div>
+      <p class="hero-card-status"><span class="hero-card-dot" aria-hidden="true"></span>{t.availability[0]}</p>
+    </div>
+
     <div class="hero-bottom">
       <p class="hero-intro"><span class="hero-intro-lead">{t.heroIntro}</span> {t.heroIntroRest} <span class="hero-location">{t.heroLocation}</span></p>
       <a href={`mailto:${email}`} class="btn btn-primary">{t.ctaTalk}<svg class="btn-arrow" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
@@ -82,7 +89,7 @@ const processIcons = [
           </div>
           <p class="project-meta">{p.year} · {p.category}</p>
           <p class="project-title">{p.cardTitle ?? p.title}</p>
-          {p.impact && <p class="project-impact">{p.impact}</p>}
+          {p.impact && <p class="project-impact"><span data-countup>{p.impact}</span></p>}
         </a>
       ))}
     </div>
@@ -168,6 +175,9 @@ const processIcons = [
     });
   }
 </script>
+<script>
+  import '../scripts/countup';
+</script>
 
 <style>
   .hero {
@@ -179,47 +189,82 @@ const processIcons = [
     padding-top: clamp(32px, 5vw, 80px);
     padding-bottom: clamp(24px, 3vw, 48px);
   }
-  /* Experimental texture background (light gray halftone). Light theme shows
-     it as-is; dark theme inverts it so it reads as a dark texture. */
-  .hero::before {
-    content: '';
+  /* Small sharp portrait card in the bottom-right corner, above the CTA. */
+  .hero-card {
     position: absolute;
-    inset: calc(var(--header-h) * -1) 0 0 0; /* up behind the fixed header */
-    z-index: 0;
-    background: url('/images/hero/hero-texture.jpg') center / cover no-repeat;
-    opacity: 0.85;
-    pointer-events: none;
+    right: var(--gutter);
+    bottom: 0; /* same baseline as the intro text on the left */
+    z-index: 1;
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
   }
-  /* Dark theme: a dedicated inverted version of the texture (dark gray on black),
-     so the hero follows the theme like the rest of the page. */
-  :global([data-theme='dark']) .hero::before {
-    background-image: url('/images/hero/hero-texture-dark.jpg');
-    opacity: 1;
+  .hero-card-photo {
+    aspect-ratio: 3 / 2;
+    border-radius: var(--radius-image);
+    overflow: hidden;
+    background: var(--bg-surface-subtle);
   }
-  /* Entrance: texture fades in while easing down from a slight zoom, then
-     headline lines, tags and intro/CTA rise in sequence. Only for users who
-     haven't asked for reduced motion. `backwards` keeps the final
-     opacity/position from the normal rules (theme-dependent). Uses
-     `translate` so it never clashes with the tags' own transform. */
-  @keyframes hero-bg-in {
-    from { opacity: 0; scale: 1.06; }
+  .hero-card-photo :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 28%;
+    display: block;
   }
-  @keyframes hero-rise {
-    from { opacity: 0; translate: 0 28px; }
+  .hero-card-status {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--text-secondary);
+  }
+  .hero-card-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #3DDC84;
+    flex-shrink: 0;
+  }
+  /* Live status indicator: a soft, continuous "breathing" pulse. */
+  @keyframes dot-pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.15); opacity: 0.6; }
   }
   @media (prefers-reduced-motion: no-preference) {
-    .hero::before {
-      animation: hero-bg-in 1.6s cubic-bezier(0.22, 1, 0.36, 1) backwards;
-    }
+    .hero-card-dot { animation: dot-pulse 2s ease-in-out infinite; }
+  }
+  @media (max-width: 900px) {
+    .hero-card { display: none; }
+  }
+  /* Desktop: the CTA sits right above the portrait card (card = 220 / 1.5 photo + 8 gap + ~16 status line). */
+  @media (min-width: 901px) {
+    .hero-bottom .btn { margin-bottom: calc(220px / 1.5 + 8px + 16px + var(--space-4)); }
+  }
+  /* Entrance: a discreet fade-up, staggered ~70ms (headline, tags, intro, photo
+     card), 450ms each with a soft ease-out (no overshoot). Only for users who
+     haven't asked for reduced motion. `backwards` keeps the final
+     opacity/position from the normal rules. Uses `translate` so it never
+     clashes with the tags' own transform. */
+  @keyframes hero-rise {
+    from { opacity: 0; translate: 0 14px; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
     .hero-line,
     .hero-meta-list,
-    .hero-bottom {
-      animation: hero-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+    .hero-bottom,
+    .hero-card {
+      animation: hero-rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) backwards;
     }
-    .hero-line:nth-child(1) { animation-delay: 0.15s; }
-    .hero-line:nth-child(2) { animation-delay: 0.3s; }
-    .hero-meta-list { animation-delay: 0.6s; }
-    .hero-bottom { animation-delay: 0.8s; }
+    .hero-line:nth-child(1) { animation-delay: 0s; }
+    .hero-line:nth-child(2) { animation-delay: 0.07s; }
+    .hero-meta-list { animation-delay: 0.14s; }
+    .hero-bottom { animation-delay: 0.21s; }
+    .hero-card { animation-delay: 0.28s; }
   }
   /* Scroll reveal (see script above): only ever hidden when JS has tagged
      the element, so no-JS and reduced-motion users always see the content. */
@@ -279,7 +324,7 @@ const processIcons = [
   }
   .tag-row {
     display: flex;
-    gap: 8px 14px;
+    gap: 8px 6px;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -305,6 +350,13 @@ const processIcons = [
     background: var(--white);
   }
   .hero-meta-list li.tag-br { display: none; }
+  @media (hover: hover) {
+    .hero-meta-list li:not(.tag-br) { transition: var(--transition-theme); }
+    .hero-meta-list li:not(.tag-br):hover,
+    :global([data-theme='light']) .hero-meta-list li:not(.tag-br):hover {
+      background: var(--bg-surface-subtle);
+    }
+  }
   .hero-bottom {
     display: flex;
     justify-content: space-between;
@@ -313,7 +365,7 @@ const processIcons = [
   }
   .hero-intro {
     font-family: var(--font-headline);
-    font-size: 22px;
+    font-size: 18px;
     line-height: 1.25;
     color: var(--text-primary);
     max-width: 30ch;
@@ -361,7 +413,7 @@ const processIcons = [
       transform: none;
       flex-direction: row;
       flex-wrap: wrap;
-      gap: 4px 14px;
+      gap: 4px 6px;
       margin: clamp(24px, 3vw, 48px) 0 0;
     }
     .tag-row { display: contents; }
@@ -517,6 +569,11 @@ const processIcons = [
     display: block;
   }
 
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .project-thumb :global(img) { transition: transform 0.33s ease-out; }
+    .project-card:hover .project-thumb :global(img),
+    .project-card:focus-visible .project-thumb :global(img) { transform: scale(1.03); }
+  }
   .project-overlay {
     position: absolute;
     inset: 0;

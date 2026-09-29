@@ -189,6 +189,11 @@ const filterGroupLabel = locale === 'en' ? 'Filter projects by category' : 'Filt
   :global([data-theme='light']) .overlay-pill {
     background: var(--white);
   }
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .project-thumb :global(img) { transition: transform 0.33s ease-out; }
+    .project-card:hover .project-thumb :global(img),
+    .project-card:focus-visible .project-thumb :global(img) { transform: scale(1.03); }
+  }
   .project-card:hover .project-overlay,
   .project-card:focus-visible .project-overlay {
     opacity: 1;
