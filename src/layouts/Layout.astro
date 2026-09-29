@@ -125,7 +125,7 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Stack+Sans+Headline:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Stack+Sans+Headline:wght@400;500;600;700&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -391,8 +391,11 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
         display: inline-flex;
         align-items: center;
         gap: var(--space-2);
-        font-family: var(--font-headline);
-        font-size: 1.1rem;
+        /* Same treatment as the nav links: Geist Mono, uppercase. */
+        font-family: var(--font-mono);
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        font-size: 0.8rem;
       }
       .main-nav {
         display: flex;

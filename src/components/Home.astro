@@ -174,6 +174,95 @@ const processIcons = [
 <script>
   import '../scripts/countup';
 </script>
+<script>
+  // Hero cursor trail: small flat coloured squares (Nina-style) dropped along the mouse path while
+  // it moves over the hero, each one fading and shrinking away. Only for real pointers that can hover
+  // and for people who haven't asked for reduced motion. Purely decorative, behind the text.
+  const trailHero = document.querySelector<HTMLElement>('.hero');
+  const canTrail = window.matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)').matches;
+  if (trailHero && canTrail) {
+    const palette = ['#F4A0C8', '#F8E39A', '#4A8FE0', '#C9A7F0', '#E8894A', '#E94B2A']; // no green
+    const STEP = 34; // px of mouse travel between two squares
+    let last: { x: number; y: number } | null = null;
+    let live = 0;
+    trailHero.addEventListener('pointermove', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      const box = trailHero.getBoundingClientRect();
+      const x = e.clientX - box.left;
+      const y = e.clientY - box.top;
+      if (last && Math.hypot(x - last.x, y - last.y) < STEP) return;
+      last = { x, y };
+      if (live > 14) return;
+      const el = document.createElement('span');
+      el.className = 'hero-trail';
+      el.setAttribute('aria-hidden', 'true');
+      el.style.left = `${x}px`;
+      el.style.top = `${y}px`;
+      el.style.background = palette[Math.floor(Math.random() * palette.length)];
+      live++;
+      el.addEventListener('animationend', () => { el.remove(); live--; });
+      trailHero.appendChild(el);
+    });
+    trailHero.addEventListener('pointerleave', () => { last = null; });
+  }
+
+  // Touch / no-hover devices have no cursor to trail, so instead 4 squares are scattered over the
+  // hero background at random spots each visit (like Nina's mobile hero). They keep clear of every
+  // piece of hero text, of the photo card and of each other.
+  // Also on any phone-width viewport, even if the browser reports a mouse (e.g. a narrowed desktop window).
+  const noHover = !window.matchMedia('(hover: hover) and (pointer: fine)').matches || window.matchMedia('(max-width: 780px)').matches;
+  const scatter = () => {
+  if (!trailHero) return;
+    const palette = ['#F4A0C8', '#F8E39A', '#4A8FE0', '#C9A7F0', '#E8894A', '#E94B2A']; // no green
+    // One of the four is always pink; the other three are random from the rest.
+    const colors = ['#F4A0C8', ...palette.slice(1).sort(() => Math.random() - 0.5).slice(0, 3)].sort(() => Math.random() - 0.5);
+    const box = trailHero.getBoundingClientRect();
+    const size = 10;
+    // The open space below the headline and tags, down to just above the intro text. It is split
+    // into a 2 x 2 grid and each square gets its own cell, so they spread over the whole area.
+    const tagsBottom = trailHero.querySelector('.hero-meta-list')?.getBoundingClientRect().bottom ?? box.top + box.height * 0.4;
+    const introTop = trailHero.querySelector('.hero-intro')?.getBoundingClientRect().top ?? box.bottom;
+    const yMin = tagsBottom - box.top + 22;
+    const yMax = Math.max(yMin + 120, introTop - box.top - 30);
+    const xMin = box.width * 0.05;
+    const xMax = box.width * 0.95;
+    const cellW = (xMax - xMin) / 2;
+    const cellH = (yMax - yMin) / 2;
+    // Real text extents: a range over each text block gives one rect per line, not the full-width box.
+    const avoid: DOMRect[] = [];
+    trailHero.querySelectorAll<HTMLElement>('.hero-line, .hero-intro').forEach((el) => {
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      avoid.push(...Array.from(range.getClientRects()));
+    });
+    trailHero.querySelectorAll<HTMLElement>('.hero-meta-list li, .hero-card').forEach((el) => avoid.push(el.getBoundingClientRect()));
+    const clear = (x: number, y: number) => {
+      const m = 14; // breathing room around text
+      return !avoid.some((r) => r.width > 0 && x + size > r.left - m && x < r.right + m && y + size > r.top - m && y < r.bottom + m);
+    };
+    const placed: { x: number; y: number }[] = [];
+    const cells = [0, 1, 2, 3].sort(() => Math.random() - 0.5);
+    colors.forEach((color, i) => {
+      const cx = xMin + (cells[i] % 2) * cellW;
+      const cy = yMin + Math.floor(cells[i] / 2) * cellH;
+      for (let attempt = 0; attempt < 80; attempt++) {
+        const x = cx + 10 + Math.random() * (cellW - 20) - size / 2;
+        const y = cy + 10 + Math.random() * (cellH - 20) - size / 2;
+        if (!clear(box.left + x, box.top + y)) continue;
+        if (placed.some((q) => Math.hypot(q.x - x, q.y - y) < 60)) continue;
+        placed.push({ x, y });
+        const el = document.createElement('span');
+        el.className = 'hero-square';
+        el.setAttribute('aria-hidden', 'true');
+        el.style.cssText = `left:${x}px;top:${y}px;background:${color};animation-delay:${0.5 + i * 0.08}s`;
+        trailHero.appendChild(el);
+        break;
+      }
+    });
+  };
+  // Wait for the fonts so the text rects used to keep clear of the copy are the final ones.
+  if (noHover) document.fonts.ready.then(scatter);
+</script>
 
 <style>
   .hero {
@@ -184,6 +273,57 @@ const processIcons = [
     min-height: calc(100svh - var(--header-h));
     padding-top: clamp(32px, 5vw, 80px);
     padding-bottom: clamp(24px, 3vw, 48px);
+  }
+  /* Light theme: a gradient from very light grey (#f2f2f2, top) to white (bottom) behind the
+     hero, with fine film grain on top. It extends up behind the transparent header, and it
+     ends exactly in the page colour so it melts into the next section instead of stopping in a hard edge. */
+  :global([data-theme='light']) .hero::before {
+    content: '';
+    position: absolute;
+    inset: calc(var(--header-h) * -1) 0 0 0;
+    z-index: 0;
+    background: linear-gradient(to bottom, #f2f2f2 0%, var(--bg-page) 100%);
+    pointer-events: none;
+  }
+  :global([data-theme='light']) .hero::after {
+    content: '';
+    position: absolute;
+    inset: calc(var(--header-h) * -1) 0 0 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='280' height='280'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    mix-blend-mode: multiply;
+    opacity: 0.22;
+    -webkit-mask-image: linear-gradient(to bottom, #000 40%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 40%, transparent 100%);
+  }
+  /* Cursor trail squares (added by the script above). Behind the text, never interactive. */
+  .hero :global(.hero-trail) {
+    position: absolute;
+    z-index: 0;
+    width: 10px;
+    height: 10px;
+    margin: -5px 0 0 -5px; /* centred on the pointer */
+    pointer-events: none;
+    animation: trail-out 0.9s ease-out forwards;
+  }
+  @keyframes trail-out {
+    from { opacity: 1; scale: 1; }
+    to { opacity: 0; scale: 0.3; }
+  }
+  /* Static squares for touch devices (added by the script above). Behind the text, never interactive. */
+  .hero :global(.hero-square) {
+    position: absolute;
+    z-index: 0;
+    width: 10px;
+    height: 10px;
+    pointer-events: none;
+  }
+  @keyframes square-in {
+    from { opacity: 0; scale: 0.5; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero :global(.hero-square) { animation: square-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
   }
   /* Portrait + availability as one component: the status is a small translucent badge
      in the bottom-left corner of the photo. The card sits in the same row as the intro
@@ -364,17 +504,17 @@ const processIcons = [
     gap: var(--space-6);
   }
   .hero-intro {
-    font-family: var(--font-headline);
+    font-family: var(--font-sans); /* Geist */
+    font-weight: 500;
     font-size: 18px;
     line-height: 1.25;
-    color: var(--text-primary);
+    letter-spacing: -0.2px;
     max-width: 30ch;
     margin: 0;
   }
-  /* Single color for the whole intro: near-black in light mode, white in dark
-     (same ink as the headline). */
-  .hero-intro { color: var(--text-primary); }
-  :global([data-theme='light']) .hero-intro { color: #14181F; }
+  /* Single color for the whole intro: the site's muted grey softened 12% towards the page
+     background, so it stays within the palette (both themes) and reads as quiet supporting copy. */
+  .hero-intro { color: color-mix(in srgb, var(--text-muted) 88%, var(--bg-page)); }
   .hero-intro-lead { color: inherit; }
   /* Location sentence wraps as one unit, so it drops to the last line intact. */
   .hero-location { display: inline-block; }
@@ -628,8 +768,16 @@ const processIcons = [
 
 
   @media (max-width: 780px) {
-    /* 15vw makes the longest line ("Visual Designer") fill the width; it still fits down to 320px. */
-    .hero-name { font-size: 15vw; }
+    /* Phone headline (as on Nina's): the name is big and fills the width, the role is a small
+       line right under it. */
+    .hero-name { font-size: 17.8vw; }
+    .hero-line:nth-child(1) { white-space: nowrap; }
+    .hero-line:nth-child(2) {
+      font-size: 5.8vw;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-top: 0.8em;
+    }
   }
 
   @media (max-width: 780px) {
