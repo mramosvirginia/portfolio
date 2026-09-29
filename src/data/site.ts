@@ -422,7 +422,7 @@ export const about = {
     coursesTitle: 'Courses',
     courses: [
       {
-        title: 'Design Systems PRO',
+        title: 'Design Systems PRO + Next',
         institution: 'Shift+R',
         description: 'Shift+R is a continuing education and professional specialization program in digital design, focused on updating skills in Design Systems, collaborative design, accessibility, applied AI, automation, and new ways of working across design, product, and technology.',
         year: 'Ongoing',
@@ -520,7 +520,7 @@ export const about = {
     coursesTitle: 'Cursos',
     courses: [
       {
-        title: 'Design Systems PRO',
+        title: 'Design Systems PRO + Next',
         institution: 'Shift+R',
         description: 'Shift+R es un programa de formación continua y especialización profesional en diseño digital, orientado a la actualización de competencias en Design Systems, diseño colaborativo, accesibilidad, IA aplicada, automatización y nuevas formas de trabajo entre diseño, producto y tecnología.',
         year: 'En curso',
