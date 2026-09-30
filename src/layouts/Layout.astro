@@ -125,10 +125,17 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
       })();
     </script>
 
+    <!--
+      Fonts. CS Briem (headlines) is self-hosted: it is preloaded so the headline paints in its own
+      face instead of swapping from a fallback. Geist / Geist Mono come from Google Fonts, limited to
+      the weights the site really uses (Geist 400 body, 500 hero intro, 700 bold labels; Geist Mono
+      400 and 500). Audited across every route at desktop and phone width: nothing else is requested.
+    -->
+    <link rel="preload" href="/fonts/cs-briem/CSBriem-Regular.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Stack+Sans+Headline:wght@400;500;600;700&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&family=Geist+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
   </head>
