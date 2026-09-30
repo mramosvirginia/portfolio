@@ -572,6 +572,7 @@ export const lab = {
       dragHint: 'Hover, or tap, to expand',
       prevLabel: 'Previous',
       nextLabel: 'Next',
+      playLabel: 'Autoplay',
       images: [
         {
           src: '/images/about/personal.jpg',
@@ -620,6 +621,7 @@ export const lab = {
       dragHint: 'Pasa el cursor, o toca, para expandir',
       prevLabel: 'Anterior',
       nextLabel: 'Siguiente',
+      playLabel: 'Reproducción automática',
       images: [
         {
           src: '/images/about/personal.jpg',

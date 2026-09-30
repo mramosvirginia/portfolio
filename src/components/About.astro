@@ -19,11 +19,11 @@ const aboutSizes = '(min-width: 901px) calc((100vw - 96px) / 2), calc(100vw - 32
 
 <section class="about-hero">
   <div class="container about-grid">
-    <nav class="about-tabs" aria-label={a.overview.title} role="tablist">
+    <div class="about-tabs" aria-label={a.overview.title} role="tablist">
       <button type="button" role="tab" id="tab-overview" aria-selected="true" aria-controls="panel-overview" class="is-active" data-tab="overview">{a.tabs.overview}</button>
       <button type="button" role="tab" id="tab-experience" aria-selected="false" aria-controls="panel-experience" tabindex="-1" data-tab="experience">{a.tabs.experience}</button>
       <button type="button" role="tab" id="tab-personal" aria-selected="false" aria-controls="panel-personal" tabindex="-1" data-tab="personal">{a.tabs.personal}</button>
-    </nav>
+    </div>
 
     <div class="about-copy">
       <div class="tab-panel is-active" data-panel="overview" role="tabpanel" id="panel-overview" aria-labelledby="tab-overview" tabindex="0">

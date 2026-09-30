@@ -16,6 +16,9 @@ const workHref = `${base}/work`;
 const backLabel = locale === 'en' ? 'Back to work' : 'Volver a trabajo';
 const tocLabel = locale === 'en' ? 'On this page' : 'En esta página';
 const impactLabel = locale === 'en' ? 'Impact:' : 'Impacto:';
+const videoLabels = locale === 'en'
+  ? { pause: 'Pause animation', play: 'Play animation' }
+  : { pause: 'Pausar animación', play: 'Reproducir animación' };
 
 const captionHtml = (image: { caption?: string; captionLink?: { text: string; href: string } }) => {
   const esc = (v: string) => v.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -185,7 +188,20 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
             </div>
           )}
           {section.video && (
-            <video class="section-video" src={section.video} aria-label={section.title} autoplay loop muted playsinline></video>
+            <div class="video-wrap">
+              <video class="section-video" src={`${section.video}#t=0.1`} aria-label={section.title} loop muted playsinline preload="metadata"></video>
+              <button
+                type="button"
+                class="video-toggle"
+                hidden
+                aria-label={videoLabels.pause}
+                data-label-pause={videoLabels.pause}
+                data-label-play={videoLabels.play}
+              >
+                <svg class="video-icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                <svg class="video-icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4l14 8-14 8V4z"/></svg>
+              </button>
+            </div>
           )}
           {section.images?.map((image) => (
             <figure class:list={['figure-image', { framed: image.framed }]}>
@@ -235,6 +251,29 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
   );
 
   sections.forEach((section) => observer.observe(section));
+
+  // Section videos (WCAG 2.2.2): they only autoplay when the visitor hasn't asked for reduced
+  // motion, and a visible pause/play button is always available. Without JS the video simply
+  // stays on its first frame and the button stays hidden.
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll<HTMLElement>('.video-wrap').forEach((wrap) => {
+    const video = wrap.querySelector<HTMLVideoElement>('video');
+    const button = wrap.querySelector<HTMLButtonElement>('.video-toggle');
+    if (!video || !button) return;
+    const sync = () => {
+      wrap.classList.toggle('is-paused', video.paused);
+      button.setAttribute('aria-label', (video.paused ? button.dataset.labelPlay : button.dataset.labelPause) || '');
+    };
+    video.addEventListener('play', sync);
+    video.addEventListener('pause', sync);
+    button.addEventListener('click', () => {
+      if (video.paused) void video.play();
+      else video.pause();
+    });
+    button.hidden = false;
+    sync();
+    if (!reduceMotion) video.play().catch(() => {});
+  });
 </script>
 
 <style>
@@ -564,6 +603,29 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
     height: auto;
     display: block;
   }
+  .video-wrap {
+    position: relative;
+    margin-top: var(--space-6);
+  }
+  .video-wrap .section-video { margin-top: 0; }
+  .video-toggle {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 50%;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.62);
+    cursor: pointer;
+  }
+  .video-toggle:hover { background: rgba(0, 0, 0, 0.8); }
+  .video-toggle .video-icon-play { display: none; }
+  .video-wrap.is-paused .video-toggle .video-icon-pause { display: none; }
+  .video-wrap.is-paused .video-toggle .video-icon-play { display: block; }
   .section-video {
     width: 100%;
     height: auto;

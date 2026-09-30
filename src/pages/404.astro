@@ -1,0 +1,102 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { home } from '../data/site';
+
+// One bilingual 404: static hosts only serve a single /404.html, so it can't know the visitor's
+// language. Spanish (the default) comes first, English right below.
+const t = home.es;
+const sections = [
+  { es: 'Inicio', en: 'Home', esHref: '/', enHref: '/en/' },
+  { es: 'Trabajo', en: 'Work', esHref: '/work', enHref: '/en/work' },
+  { es: 'Sobre mí', en: 'About', esHref: '/about', enHref: '/en/about' },
+  { es: 'Lab', en: 'Lab', esHref: '/lab', enHref: '/en/lab' },
+];
+---
+
+<Layout
+  locale="es"
+  title="Página no encontrada | Virginia Miner"
+  description="La página que buscas no existe o se ha movido."
+  noindex
+>
+  <section class="not-found">
+    <div class="container">
+      <p class="eyebrow">404</p>
+      <h1>Esta página no existe</h1>
+      <p class="lead">Puede que el enlace esté roto o que la página se haya movido. Puedes volver al inicio o ir a una de las secciones.</p>
+      <ul class="links">
+        {sections.map((s) => <li><a href={s.esHref}>{s.es}</a></li>)}
+      </ul>
+
+      <div class="english" lang="en">
+        <h2>This page doesn't exist</h2>
+        <p class="lead">The link may be broken or the page may have moved. Go back home or jump to a section.</p>
+        <ul class="links">
+          {sections.map((s) => <li><a href={s.enHref}>{s.en}</a></li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+  <Fragment slot="footer">
+    <p>{t.footerTagline}</p>
+  </Fragment>
+</Layout>
+
+<style>
+  .not-found {
+    padding-top: clamp(48px, 8vw, 120px);
+    padding-bottom: clamp(48px, 8vw, 120px);
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-2);
+  }
+  h1 {
+    font-size: var(--text-h1);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    margin-bottom: var(--space-6);
+  }
+  h2 {
+    font-size: var(--text-h2);
+    margin-bottom: var(--space-3);
+  }
+  .lead {
+    max-width: 46ch;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-6);
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .links a {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--text-primary);
+    border: 1.5px solid var(--text-primary);
+    border-radius: 999px;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: var(--transition-theme);
+  }
+  @media (hover: hover) {
+    .links a:hover { background: var(--bg-surface-subtle); }
+  }
+  .english {
+    margin-top: clamp(48px, 7vw, 96px);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--border-default);
+  }
+</style>

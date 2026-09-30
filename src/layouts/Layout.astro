@@ -7,9 +7,11 @@ interface Props {
   locale: Locale;
   title: string;
   description: string;
+  /** Keep the page out of search results (e.g. the 404 page). */
+  noindex?: boolean;
 }
 
-const { locale, title, description } = Astro.props;
+const { locale, title, description, noindex = false } = Astro.props;
 const t = nav[locale];
 const f = footer[locale];
 const ctaTalk = home[locale].ctaTalk;
@@ -73,6 +75,7 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192" />
