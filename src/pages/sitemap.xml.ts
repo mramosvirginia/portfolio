@@ -5,7 +5,7 @@ const slugs = ['webia', 'uxquickaudit', 'auroradorada', 'rebranding-qdq', 'lando
 const sections = ['', 'work', 'about', 'lab', ...slugs.map((s) => `projects/${s}`)];
 
 export const GET: APIRoute = ({ site }) => {
-  const base = site ?? new URL('https://mramosvirginia.com');
+  const base = site ?? new URL('https://www.mramosvirginia.com');
   const url = (prefix: string, section: string) => {
     const path = [prefix, section].filter(Boolean).join('/');
     return new URL(path ? `/${path}/` : '/', base).href;

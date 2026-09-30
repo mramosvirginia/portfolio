@@ -12,7 +12,7 @@ interface Props {
 const { locale, study } = Astro.props;
 const t = home[locale];
 const base = locale === 'es' ? '' : '/en';
-const workHref = `${base}/work`;
+const workHref = `${base}/work/`;
 const backLabel = locale === 'en' ? 'Back to work' : 'Volver a trabajo';
 const tocLabel = locale === 'en' ? 'On this page' : 'En esta página';
 const impactLabel = locale === 'en' ? 'Impact:' : 'Impacto:';
@@ -43,7 +43,7 @@ const heroRatio = heroPortrait && heroMeta ? `${heroMeta.width} / ${heroMeta.hei
 const contentSizes = '(min-width: 901px) calc(100vw - 356px), calc(100vw - 32px)';
 const relatedSizes = '(min-width: 901px) calc((100vw - 404px) / 3), calc(100vw - 32px)';
 
-const related = t.projects.filter((p) => p.filter === study.filter && !p.href.endsWith(study.slug)).slice(0, 3);
+const related = t.projects.filter((p) => p.filter === study.filter && !p.href.includes(`/${study.slug}/`)).slice(0, 3);
 ---
 
 <article class="case-study">
@@ -109,7 +109,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
           </div>
         </dl>
         {study.overviewImages?.map((image) => (
-          <figure class:list={['figure-image', { framed: image.framed }]}>
+          <figure class="figure-image">
             <Img class="section-image has-image" src={image.src} alt={image.caption || study.overviewTitle} sizes={contentSizes} />
             {image.caption && <figcaption set:html={captionHtml(image)} />}
           </figure>
@@ -126,7 +126,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
           <a href={study.creditLink.href} target="_blank" rel="noopener" class="credit-link">{study.creditLink.label}</a>
         )}
         {study.roleImages?.map((image) => (
-          <figure class:list={['figure-image', { framed: image.framed }]}>
+          <figure class="figure-image">
             <Img class="section-image has-image" src={image.src} alt={image.caption || study.roleLabel || study.title} sizes={contentSizes} />
             {image.caption && <figcaption set:html={captionHtml(image)} />}
           </figure>
@@ -204,7 +204,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
             </div>
           )}
           {section.images?.map((image) => (
-            <figure class:list={['figure-image', { framed: image.framed }]}>
+            <figure class="figure-image">
               <Img class="section-image has-image" src={image.src} alt={image.caption || section.title} sizes={contentSizes} />
               {image.caption && <figcaption set:html={captionHtml(image)} />}
             </figure>
@@ -580,16 +580,6 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.en
 
   figure {
     margin: var(--space-6) 0 0;
-  }
-  .figure-image.framed {
-    background: var(--off-white);
-    border: 1px solid var(--border-light);
-    border-radius: var(--radius-image);
-    padding: var(--space-6);
-    box-shadow: 0 12px 32px -16px rgba(20, 15, 40, 0.25);
-  }
-  .figure-image.framed :global(.section-image) {
-    border-radius: var(--radius-image);
   }
   :global(.section-image) {
     aspect-ratio: 16 / 10;

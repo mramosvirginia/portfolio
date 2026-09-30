@@ -35,7 +35,7 @@ const filterGroupLabel = locale === 'en' ? 'Filter projects by category' : 'Filt
     ></p>
     <div class="work-grid">
       {t.projects.map((p, i) => (
-        <a href={p.href} class="project-card" data-category={p.filter} data-slug={p.href.split('/').pop()}>
+        <a href={p.href} class="project-card" data-category={p.filter} data-slug={p.href.split('/').filter(Boolean).pop()}>
           <div class={`project-thumb thumb-ratio-${i % 4} ${p.image ? 'has-image' : ''}`}>
             {p.image && <Img src={p.image} alt="" sizes="(min-width: 901px) calc((100vw - 120px) / 3), (min-width: 641px) calc((100vw - 72px) / 2), calc(100vw - 32px)" widths={[320, 480, 640, 900, 1200]} loading={i === 0 ? 'eager' : 'lazy'} />}
             <div class="project-overlay">

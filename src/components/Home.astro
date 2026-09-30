@@ -83,7 +83,7 @@ const processIcons = [
     <div class="section-head">
       <p class="eyebrow">{t.caseStudiesEyebrow}</p>
       <h2>{t.caseStudiesTitle}</h2>
-      <a href={`${base}/work`} class="process-more-link">
+      <a href={`${base}/work/`} class="process-more-link">
         {t.seeAllWork}
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
@@ -91,7 +91,7 @@ const processIcons = [
     <div class="span-23">
     <div class="project-grid">
       {t.projects.map((p, i) => (
-        <a href={p.href} class="project-card" data-slug={p.href.split('/').pop()}>
+        <a href={p.href} class="project-card" data-slug={p.href.split('/').filter(Boolean).pop()}>
           <div class={`project-thumb thumb-ratio-${i % 4} ${p.image ? 'has-image' : ''}`}>
             {p.image && <Img src={p.image} alt="" sizes="(min-width: 781px) calc((100vw - 96px) / 2), calc(100vw - 32px)" widths={[400, 640, 900, 1200]} loading="lazy" />}
             <div class="project-overlay">
@@ -116,7 +116,7 @@ const processIcons = [
     <div class="section-head">
       <p class="eyebrow">{t.processEyebrow}</p>
       <h2>{t.processTitle}</h2>
-      <a href={`${base}/about`} class="process-more-link">
+      <a href={`${base}/about/`} class="process-more-link">
         {t.processMoreLink}
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
@@ -496,9 +496,9 @@ const processIcons = [
     max-width: 30ch;
     margin: 0;
   }
-  /* Single color for the whole intro: the site's muted grey softened 12% towards the page
+  /* Single color for the whole intro: the site's muted grey softened 4% towards the page
      background, so it stays within the palette (both themes) and reads as quiet supporting copy. */
-  .hero-intro { color: color-mix(in srgb, var(--text-muted) 88%, var(--bg-page)); }
+  .hero-intro { color: color-mix(in srgb, var(--text-muted) 96%, var(--bg-page)); }
   .hero-intro-lead { color: inherit; }
   /* Location sentence wraps as one unit, so it drops to the last line intact. */
   .hero-location { display: inline-block; }

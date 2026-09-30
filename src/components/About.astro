@@ -1,5 +1,5 @@
 ---
-import { about, cvUrl, type Locale } from '../data/site';
+import { about, cvUrl, nav, type Locale } from '../data/site';
 import Img from './Img.astro';
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 
 const { locale } = Astro.props;
 const a = about[locale];
-const zineHref = locale === 'es' ? '/projects/levedadzine' : '/en/projects/levedadzine';
+const zineHref = locale === 'es' ? '/projects/levedadzine/' : '/en/projects/levedadzine/';
 const photoAlt = {
   overview: locale === 'en' ? 'Portrait of Virginia Miner outdoors' : 'Retrato de Virginia Miner al aire libre',
   experience: locale === 'en' ? 'Collage of Virginia\'s work: team sessions, UX research boards, and product screens' : 'Collage del trabajo de Virginia: sesiones de equipo, tableros de investigación UX y pantallas de producto',
@@ -18,6 +18,8 @@ const aboutSizes = '(min-width: 901px) calc((100vw - 96px) / 2), calc(100vw - 32
 ---
 
 <section class="about-hero">
+  {/* The one h1 of the page. The three panel titles below are h2 (only one panel shows at a time). */}
+  <h1 class="visually-hidden">{nav[locale].about}</h1>
   <div class="container about-grid">
     <div class="about-tabs" aria-label={a.overview.title} role="tablist">
       <button type="button" role="tab" id="tab-overview" aria-selected="true" aria-controls="panel-overview" class="is-active" data-tab="overview">{a.tabs.overview}</button>
@@ -27,7 +29,7 @@ const aboutSizes = '(min-width: 901px) calc((100vw - 96px) / 2), calc(100vw - 32
 
     <div class="about-copy">
       <div class="tab-panel is-active" data-panel="overview" role="tabpanel" id="panel-overview" aria-labelledby="tab-overview" tabindex="0">
-        <h1>{a.overview.title}</h1>
+        <h2>{a.overview.title}</h2>
         {a.overview.body.map((p) => <p>{p}</p>)}
         <ul class="badges">
           {a.overview.badges.map((b) => (
@@ -39,12 +41,12 @@ const aboutSizes = '(min-width: 901px) calc((100vw - 96px) / 2), calc(100vw - 32
         </ul>
       </div>
       <div class="tab-panel" data-panel="experience" role="tabpanel" id="panel-experience" aria-labelledby="tab-experience" tabindex="0">
-        <h1>{a.experiencePanel.title}</h1>
+        <h2>{a.experiencePanel.title}</h2>
         {a.experiencePanel.body.map((p) => <p>{p}</p>)}
         <a class="panel-cta" href={cvUrl} target="_blank" rel="noopener">&gt; {a.experiencePanel.cta}</a>
       </div>
       <div class="tab-panel" data-panel="personal" role="tabpanel" id="panel-personal" aria-labelledby="tab-personal" tabindex="0">
-        <h1>{a.personalPanel.title}</h1>
+        <h2>{a.personalPanel.title}</h2>
         {a.personalPanel.body.map((p) => <p>{p}</p>)}
         <a class="panel-cta" href={zineHref}>&gt; {a.personalPanel.cta}</a>
       </div>
@@ -207,7 +209,7 @@ const aboutSizes = '(min-width: 901px) calc((100vw - 96px) / 2), calc(100vw - 32
   .tab-panel.is-active {
     display: block;
   }
-  .about-copy h1 {
+  .about-copy h2 {
     font-size: 40px;
     margin-bottom: var(--space-6);
   }
@@ -370,7 +372,7 @@ const aboutSizes = '(min-width: 901px) calc((100vw - 96px) / 2), calc(100vw - 32
   }
   @media (max-width: 640px) {
     .about-hero { padding-top: var(--space-8); }
-    .about-copy h1 { font-size: 32px; }
+    .about-copy h2 { font-size: 32px; }
     .about-tabs { padding-top: var(--space-4); }
     .skills-grid { grid-template-columns: 1fr; }
     /* Keep the section headings ("Habilidades y herramientas", "Experiencia", "Cursos") on one line. */

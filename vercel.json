@@ -1,0 +1,105 @@
+{
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/es",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/es/",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/es/work",
+      "destination": "/work/",
+      "statusCode": 301
+    },
+    {
+      "source": "/es/work/",
+      "destination": "/work/",
+      "statusCode": 301
+    },
+    {
+      "source": "/es/about",
+      "destination": "/about/",
+      "statusCode": 301
+    },
+    {
+      "source": "/es/about/",
+      "destination": "/about/",
+      "statusCode": 301
+    },
+    {
+      "source": "/es/lab",
+      "destination": "/lab/",
+      "statusCode": 301
+    },
+    {
+      "source": "/es/lab/",
+      "destination": "/lab/",
+      "statusCode": 301
+    },
+    {
+      "source": "/es/projects/webia",
+      "destination": "/projects/webia/",
+      "statusCode": 301
+    },
+    {
+      "source": "/es/projects/webia/",
+      "destination": "/projects/webia/",
+      "statusCode": 301
+    },
+    {
+      "source": "/es/projects/uxquickaudit",
+      "destination": "/projects/uxquickaudit/",
+      "statusCode": 301
+    },
+    {
+      "source": "/es/projects/uxquickaudit/",
+      "destination": "/projects/uxquickaudit/",
+      "statusCode": 301
+    },
+    {
+      "source": "/es/projects/auroradorada",
+      "destination": "/projects/auroradorada/",
+      "statusCode": 301
+    },
+    {
+      "source": "/es/projects/auroradorada/",
+      "destination": "/projects/auroradorada/",
+      "statusCode": 301
+    },
+    {
+      "source": "/es/projects/rebranding-qdq",
+      "destination": "/projects/rebranding-qdq/",
+      "statusCode": 301
+    },
+    {
+      "source": "/es/projects/rebranding-qdq/",
+      "destination": "/projects/rebranding-qdq/",
+      "statusCode": 301
+    },
+    {
+      "source": "/es/projects/landora",
+      "destination": "/projects/landora/",
+      "statusCode": 301
+    },
+    {
+      "source": "/es/projects/landora/",
+      "destination": "/projects/landora/",
+      "statusCode": 301
+    },
+    {
+      "source": "/es/projects/levedadzine",
+      "destination": "/projects/levedadzine/",
+      "statusCode": 301
+    },
+    {
+      "source": "/es/projects/levedadzine/",
+      "destination": "/projects/levedadzine/",
+      "statusCode": 301
+    }
+  ]
+}
