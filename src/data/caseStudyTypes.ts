@@ -20,9 +20,11 @@ export interface CaseStudyObjectives {
   user: string[];
 }
 
-/** A single supporting image, with an optional caption shown under it. */
+/** A single supporting image: a required description for screen readers, plus an optional visible caption. */
 export interface CaseStudyImage {
   src: string;
+  /** What the image shows (not a repeat of the section title). Written in the page's language. */
+  alt: string;
   caption?: string;
   /** Turns the first occurrence of `text` inside the caption into a link. */
   captionLink?: { text: string; href: string };
@@ -44,6 +46,8 @@ export interface CaseStudySection {
   labeledItems?: { label: string; body: string }[];
   table?: { headers: [string, string, string]; rows: [string, string, string][] };
   video?: string;
+  /** Accessible description of the video (it is announced instead of the section title). */
+  videoAlt?: string;
   images?: CaseStudyImage[];
 }
 
@@ -55,7 +59,13 @@ export interface CaseStudyContent {
   slug: string;
   filter: 'product' | 'visual';
   title: string;
+  /** Localized <title> and meta description of the page (also used for the share card). */
+  seo: { title: string; description: string };
   heroImage?: string;
+  /** Accessible description of the hero image. */
+  heroAlt?: string;
+  /** Optional ready-made 1200x630 share image, for covers that do not survive a landscape crop (e.g. a portrait book). */
+  shareImage?: string;
   heroCtaLabel: string;
   heroCtaHref?: string;
   /** One-line "at a glance" result shown at the top of the case study,

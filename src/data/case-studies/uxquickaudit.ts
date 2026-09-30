@@ -5,7 +5,12 @@ export const uxquickaudit: { en: CaseStudyContent; es: CaseStudyContent } = {
     slug: 'uxquickaudit',
     filter: 'product',
     title: 'A self-built product for fast, evidence-based UX audits',
+    seo: {
+      title: "UX QuickAudit: fast UX audits | Virginia Miner",
+      description: "Case study of UX QuickAudit, a self-built tool for fast UX audits: 96 audit points on usability, accessibility and design psychology, in under 10 minutes.",
+    },
     heroImage: '/images/case-studies/uxquickaudit/cover.webp',
+    heroAlt: "Laptop on a perforated metal surface showing the UX QuickAudit home screen with the headline \"Fundamenta tu diseño en segundos\".",
     heroCtaLabel: 'View Live Project',
     heroCtaHref: 'https://mramosvirginia.github.io/ux-quickaudit/',
     highlight: 'Full UX audit in under 10 minutes',
@@ -22,15 +27,15 @@ export const uxquickaudit: { en: CaseStudyContent; es: CaseStudyContent } = {
     overviewIntro:
       'Designers often leave accessibility, heuristics, and design psychology for the end, or ignore them altogether. There is no quick tool to consult these foundations in a way that is contextualized to the type of product being designed. UX QuickAudit solves this: select the product type and focus, and get technical arguments ready to copy and paste into any document. No registration, no plugins, no friction, 96 unique audit points combining heuristics, WCAG accessibility, and design psychology.',
     overviewImages: [
-      { src: '/images/case-studies/uxquickaudit/image2.webp' },
-      { src: '/images/case-studies/uxquickaudit/image3.webp' },
+      { src: '/images/case-studies/uxquickaudit/image2.webp', alt: "Two smartphones showing UX QuickAudit: one asks to choose an audit approach (usability, accessibility) and the other lists audit points for usability in forms." },
+      { src: '/images/case-studies/uxquickaudit/image3.webp', alt: "Tablet on a purple gradient showing the tool: it asks which product the user is working on (landing page, ecommerce, dashboard, form) and shows audit cards below." },
     ],
     challengeTitle: 'Challenge',
     challengeBody:
       'The visual layer tends to grab all the attention in the design process, so accessibility and usability are often postponed or omitted. Lack of contextualized tools: while NNGroup or W3C rules exist, they are not organized by product type or in a directly usable format. The goal was not just to inform, but to empower the designer to justify decisions with a technical base, not just an aesthetic one.',
     roleLabel: 'My Role',
     role: 'Product Design & Front-End Development · Solo: framework definition, UI design, build.',
-    roleImages: [{ src: '/images/case-studies/uxquickaudit/image1.webp' }],
+    roleImages: [{ src: '/images/case-studies/uxquickaudit/image1.webp', alt: "Person typing on a laptop in a bright room; the screen shows UX QuickAudit asking to choose an audit approach for a web product." }],
     objectives: {
       title: 'Objectives',
       businessLabel: 'Product Objectives',
@@ -177,8 +182,8 @@ export const uxquickaudit: { en: CaseStudyContent; es: CaseStudyContent } = {
           'Functional tool, published and accessible without installation or registration. Covers the 4 most frequent digital product types in the UX/UI market. Generates technical arguments based on NNGroup, Laws of UX, and W3C ready to use. Next iteration: Resource search engine, expanded directory, and analytics to measure real usage.',
         ],
         images: [
-          { src: '/images/case-studies/uxquickaudit/image5.webp' },
-          { src: '/images/case-studies/uxquickaudit/image4.png' },
+          { src: '/images/case-studies/uxquickaudit/image5.webp', alt: "Four code windows labeled app.js, data.js, styles.css and index.html: the whole tool is built with these four plain files." },
+          { src: '/images/case-studies/uxquickaudit/image4.png', alt: "Figma canvas with the tool's two designs: the desktop version and the iPhone 13 and 14 version of the home screen \"Fundamenta tu diseño en segundos\"." },
         ],
       },
     ],
@@ -188,7 +193,12 @@ export const uxquickaudit: { en: CaseStudyContent; es: CaseStudyContent } = {
     slug: 'uxquickaudit',
     filter: 'product',
     title: 'Un producto propio para auditorías UX rápidas y basadas en evidencia',
+    seo: {
+      title: "UX QuickAudit: auditorías UX rápidas | Virginia Miner",
+      description: "Caso de UX QuickAudit, una herramienta propia de auditorías UX rápidas: 96 puntos de usabilidad, accesibilidad y psicología del diseño en menos de 10 minutos.",
+    },
     heroImage: '/images/case-studies/uxquickaudit/cover.webp',
+    heroAlt: "Portátil sobre una superficie metálica perforada que muestra la portada de UX QuickAudit con el titular «Fundamenta tu diseño en segundos».",
     heroCtaLabel: 'Ver proyecto en vivo',
     heroCtaHref: 'https://mramosvirginia.github.io/ux-quickaudit/',
     highlight: 'Auditoría UX completa en menos de 10 minutos',
@@ -205,15 +215,15 @@ export const uxquickaudit: { en: CaseStudyContent; es: CaseStudyContent } = {
     overviewIntro:
       'Los diseñadores suelen dejar la accesibilidad, la heurística y la psicología del diseño para el final, o directamente las ignoran. No existe una herramienta rápida para consultar estos fundamentos de forma contextualizada al tipo de producto que se está diseñando. UX QuickAudit resuelve esto: selecciona el tipo de producto y el foco, y obtén argumentos técnicos listos para copiar y pegar en cualquier documento. Sin registro, sin plugins, sin fricción, 96 puntos de auditoría únicos que combinan heurística, accesibilidad WCAG y psicología del diseño.',
     overviewImages: [
-      { src: '/images/case-studies/uxquickaudit/image2.webp' },
-      { src: '/images/case-studies/uxquickaudit/image3.webp' },
+      { src: '/images/case-studies/uxquickaudit/image2.webp', alt: "Dos móviles con UX QuickAudit: uno pide elegir un enfoque de auditoría (usabilidad, accesibilidad) y el otro lista puntos de auditoría de usabilidad en formularios." },
+      { src: '/images/case-studies/uxquickaudit/image3.webp', alt: "Tableta sobre un degradado morado con la herramienta: pregunta en qué producto se va a trabajar (landing page, ecommerce, dashboard, formulario) y muestra debajo tarjetas de auditoría." },
     ],
     challengeTitle: 'Reto',
     challengeBody:
       'La capa visual suele acaparar toda la atención en el proceso de diseño, así que la accesibilidad y la usabilidad a menudo se posponen o se omiten. Falta de herramientas contextualizadas: aunque existen las reglas de NNGroup o W3C, no están organizadas por tipo de producto ni en un formato directamente utilizable. El objetivo no era solo informar, sino capacitar al diseñador para justificar decisiones con una base técnica, no solo estética.',
     roleLabel: 'Mi rol',
     role: 'Diseño de producto y desarrollo Front-End · En solitario: definición del framework, diseño de UI, construcción.',
-    roleImages: [{ src: '/images/case-studies/uxquickaudit/image1.webp' }],
+    roleImages: [{ src: '/images/case-studies/uxquickaudit/image1.webp', alt: "Persona escribiendo en un portátil en una sala luminosa; la pantalla muestra UX QuickAudit pidiendo elegir un enfoque de auditoría para un producto web." }],
     objectives: {
       title: 'Objetivos',
       businessLabel: 'Objetivos de producto',
@@ -360,8 +370,8 @@ export const uxquickaudit: { en: CaseStudyContent; es: CaseStudyContent } = {
           'Herramienta funcional, publicada y accesible sin instalación ni registro. Cubre los 4 tipos de producto digital más frecuentes en el mercado UX/UI. Genera argumentos técnicos basados en NNGroup, Laws of UX y W3C listos para usar. Próxima iteración: buscador de recursos, directorio ampliado y analítica para medir el uso real.',
         ],
         images: [
-          { src: '/images/case-studies/uxquickaudit/image5.webp' },
-          { src: '/images/case-studies/uxquickaudit/image4.png' },
+          { src: '/images/case-studies/uxquickaudit/image5.webp', alt: "Cuatro ventanas de código etiquetadas app.js, data.js, styles.css e index.html: toda la herramienta está hecha con estos cuatro archivos simples." },
+          { src: '/images/case-studies/uxquickaudit/image4.png', alt: "Lienzo de Figma con los dos diseños de la herramienta: la versión de escritorio y la de iPhone 13 y 14 de la pantalla «Fundamenta tu diseño en segundos»." },
         ],
       },
     ],

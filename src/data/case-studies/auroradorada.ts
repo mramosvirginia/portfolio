@@ -5,7 +5,13 @@ export const auroradorada: { en: CaseStudyContent; es: CaseStudyContent } = {
     slug: 'auroradorada',
     filter: 'visual',
     title: 'Seven-year editorial identity, 40+ covers, and full UX e-commerce redesign',
+    seo: {
+      title: "Aurora Dorada: editorial brand and store | Virginia Miner",
+      description: "Seven years as sole designer of Aurora Dorada Ediciones: brand identity, 40+ covers, book layout and an online store redesign. Half of sales now organic.",
+    },
     heroImage: '/images/case-studies/auroradorada/cover.webp',
+    heroAlt: "Hardcover book \"Un diablillo del éter\" by W. H. Pugmire: black cover with a small green illustration, on a light background.",
+    shareImage: '/images/case-studies/auroradorada/share.jpg',
     heroCtaLabel: 'View Live Project',
     heroCtaHref: 'https://www.auroradoradaediciones.com/',
     highlight: '50% of sales now organic',
@@ -21,13 +27,13 @@ export const auroradorada: { en: CaseStudyContent; es: CaseStudyContent } = {
     stack: ['BigCartel', 'Squarespace', 'Illustrator', 'InDesign', 'Photoshop', 'Affinity'],
     overviewIntro:
    'Aurora Dorada Ediciones is an independent publishing house for which I have been responsible for the complete visual identity, both physical and digital, since 2019. Over the years I have designed more than 40 book covers and laid out more than 30 books, building a consistent visual language for the editorial brand. As the catalogue and business grew, the existing website (Bigcartel) became a barrier, limiting navigation, the shopping experience, and organic positioning. This case study focuses on the full UX redesign and platform migration to Squarespace, extending the editorial visual identity into a functional digital experience.',
-    overviewImages: [{ src: '/images/case-studies/auroradorada/image1.webp' }],
+    overviewImages: [{ src: '/images/case-studies/auroradorada/image1.webp', alt: "Aurora Dorada editorial pieces: black t-shirts with occult illustrations, an open book spread, an illustrated bookmark, a book cover on a starry black background and a sticker." }],
     challengeTitle: 'Challenge',
     challengeBody:
       'No categorisation by genre or collection, so the catalogue was impossible to explore efficiently. Overloaded product page: description, author biography, and technical details in a single text block. Checkout only available in English for a predominantly Spanish-speaking audience. No reviews, no blog, and no authors section, critical elements for conversion and positioning. Static website with no ability to generate organic content.',
     roleLabel: 'My Role',
     role: 'Visual & Editorial Design · Brand identity, book and cover layout, ecommerce UX/UI redesign.',
-    roleImages: [{ src: '/images/case-studies/auroradorada/image2.avif' }],
+    roleImages: [{ src: '/images/case-studies/auroradorada/image2.avif', alt: "Two desktop views of the redesigned Aurora Dorada online store: a dark \"Novedades\" page with three books and a light \"Colección Yuggoth\" page." }],
     objectives: {
       title: 'Objectives',
       businessLabel: 'Business Goals',
@@ -110,8 +116,8 @@ export const auroradorada: { en: CaseStudyContent; es: CaseStudyContent } = {
           '50% of sales now come from organic search, direct result of SEO and content architecture work. Increased visits and longer average session, over 1 minute average time on page. Most visited pages after the homepage are Catalogue and Authors, validating architecture decisions.',
         ],
         images: [
-          { src: '/images/case-studies/auroradorada/image3.webp' },
-          { src: '/images/case-studies/auroradorada/image4.webp' },
+          { src: '/images/case-studies/auroradorada/image3.webp', alt: "Smartphone at an angle showing the dark \"Novedades\" page of the Aurora Dorada store with two book covers." },
+          { src: '/images/case-studies/auroradorada/image4.webp', alt: "Aurora Dorada catalogue page with a collections dropdown menu, filters on the left and four books with \"Añadir al carrito\" buttons." },
         ],
       },
     ],
@@ -121,7 +127,13 @@ export const auroradorada: { en: CaseStudyContent; es: CaseStudyContent } = {
     slug: 'auroradorada',
     filter: 'visual',
     title: 'Siete años de identidad editorial, 40+ portadas y rediseño UX completo del ecommerce',
+    seo: {
+      title: "Aurora Dorada: marca editorial y tienda | Virginia Miner",
+      description: "Siete años como diseñadora única de Aurora Dorada Ediciones: identidad, 40+ portadas, maquetación y rediseño de su tienda. La mitad de las ventas, ya orgánicas.",
+    },
     heroImage: '/images/case-studies/auroradorada/cover.webp',
+    heroAlt: "Libro de tapa dura «Un diablillo del éter», de W. H. Pugmire: cubierta negra con una pequeña ilustración verde, sobre fondo claro.",
+    shareImage: '/images/case-studies/auroradorada/share.jpg',
     heroCtaLabel: 'Ver proyecto en vivo',
     heroCtaHref: 'https://www.auroradoradaediciones.com/',
     highlight: '50% de ventas orgánicas',
@@ -137,13 +149,13 @@ export const auroradorada: { en: CaseStudyContent; es: CaseStudyContent } = {
     stack: ['BigCartel', 'Squarespace', 'Illustrator', 'InDesign', 'Photoshop', 'Affinity'],
     overviewIntro:
    'Aurora Dorada Ediciones es una editorial independiente para la que he sido responsable de toda la identidad visual, física y digital, desde 2019. A lo largo de estos años he diseñado más de 40 portadas de libros y maquetado más de 30 libros, construyendo un lenguaje visual consistente para la marca editorial. A medida que el catálogo y el negocio crecían, la web existente (Bigcartel) se convirtió en una barrera, limitando la navegación, la experiencia de compra y el posicionamiento orgánico. Este caso de estudio se centra en el rediseño UX completo y la migración de plataforma a Squarespace, extendiendo la identidad visual editorial a una experiencia digital funcional.',
-    overviewImages: [{ src: '/images/case-studies/auroradorada/image1.webp' }],
+    overviewImages: [{ src: '/images/case-studies/auroradorada/image1.webp', alt: "Piezas editoriales de Aurora Dorada: camisetas negras con ilustraciones ocultistas, un libro abierto, un marcapáginas ilustrado, una portada sobre fondo negro estrellado y una pegatina." }],
     challengeTitle: 'Reto',
     challengeBody:
       'Sin categorización por género o colección, por lo que el catálogo era imposible de explorar de forma eficiente. Página de producto sobrecargada: descripción, biografía del autor y datos técnicos en un solo bloque de texto. Checkout disponible solo en inglés para una audiencia mayoritariamente hispanohablante. Sin reseñas, sin blog y sin sección de autores, elementos críticos para la conversión y el posicionamiento. Web estática sin capacidad de generar contenido orgánico.',
     roleLabel: 'Mi rol',
     role: 'Diseño visual y editorial · Identidad de marca, maquetación de libros y portadas, rediseño UX/UI del ecommerce.',
-    roleImages: [{ src: '/images/case-studies/auroradorada/image2.avif' }],
+    roleImages: [{ src: '/images/case-studies/auroradorada/image2.avif', alt: "Dos vistas de escritorio de la tienda online rediseñada de Aurora Dorada: una página oscura de «Novedades» con tres libros y otra clara de la «Colección Yuggoth»." }],
     objectives: {
       title: 'Objetivos',
       businessLabel: 'Objetivos de negocio',
@@ -226,8 +238,8 @@ export const auroradorada: { en: CaseStudyContent; es: CaseStudyContent } = {
           'El 50% de las ventas provienen ahora de búsqueda orgánica, resultado directo del trabajo de SEO y arquitectura de contenidos. Aumento de visitas y sesiones más largas, más de 1 minuto de tiempo medio en página. Las páginas más visitadas después de la home son Catálogo y Autores, validando las decisiones de arquitectura.',
         ],
         images: [
-          { src: '/images/case-studies/auroradorada/image3.webp' },
-          { src: '/images/case-studies/auroradorada/image4.webp' },
+          { src: '/images/case-studies/auroradorada/image3.webp', alt: "Móvil en perspectiva que muestra la página oscura de «Novedades» de la tienda de Aurora Dorada con dos portadas de libros." },
+          { src: '/images/case-studies/auroradorada/image4.webp', alt: "Página de catálogo de Aurora Dorada con un menú desplegable de colecciones, filtros a la izquierda y cuatro libros con botones «Añadir al carrito»." },
         ],
       },
     ],

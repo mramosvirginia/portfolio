@@ -2,15 +2,18 @@
 import Layout from '../../../layouts/Layout.astro';
 import CaseStudy from '../../../components/CaseStudy.astro';
 import { home } from '../../../data/site';
+import { caseSeo } from '../../../lib/caseSeo';
 import { auroradorada } from '../../../data/case-studies/auroradorada';
 
 const t = home.en;
+const seo = await caseSeo(auroradorada.en);
 ---
 
 <Layout
   locale="en"
-  title="Aurora Dorada | Virginia Miner"
-  description={auroradorada.en.title}
+  title={seo.title}
+  description={seo.description}
+  image={seo.image}
 >
   <CaseStudy locale="en" study={auroradorada.en} />
   <Fragment slot="footer">

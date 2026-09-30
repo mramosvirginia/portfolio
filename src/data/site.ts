@@ -573,6 +573,8 @@ export const lab = {
       prevLabel: 'Previous',
       nextLabel: 'Next',
       playLabel: 'Autoplay',
+      dotsLabel: 'Carousel images',
+      dotLabel: 'Go to image {n} of {total}',
       images: [
         {
           src: '/images/about/personal.jpg',
@@ -622,6 +624,8 @@ export const lab = {
       prevLabel: 'Anterior',
       nextLabel: 'Siguiente',
       playLabel: 'Reproducción automática',
+      dotsLabel: 'Imágenes del carrusel',
+      dotLabel: 'Ir a la imagen {n} de {total}',
       images: [
         {
           src: '/images/about/personal.jpg',

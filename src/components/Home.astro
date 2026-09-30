@@ -15,7 +15,7 @@ const base = locale === 'es' ? '' : '/en';
 // Hero portrait: the card is hidden below 900px, so it is served through <picture>: the real
 // source only matches on wide screens and phones get a 1px placeholder, meaning the browser
 // never downloads it (display:none alone would still fetch an eager image).
-const heroPhoto = await optimizeImage({ src: getImage('/images/about/overview.png'), widths: [220, 440], format: 'webp', quality: 75 });
+const heroPhoto = await optimizeImage({ src: getImage('/images/about/overview.png'), widths: [240, 480], format: 'webp', quality: 75 });
 
 // Hero tags laid out in explicit rows of 2-3 so each row hugs its content.
 const heroTags = [...t.availability.slice(1), ...t.tags];
@@ -61,7 +61,7 @@ const processIcons = [
       <p class="hero-intro"><span class="hero-intro-lead">{t.heroIntro}</span> {t.heroIntroRest} <span class="hero-location">{t.heroLocation}</span></p>
       <div class="hero-card">
         <picture>
-          <source media="(min-width: 901px)" type="image/webp" srcset={heroPhoto.srcSet.attribute} sizes="220px" />
+          <source media="(min-width: 901px)" type="image/webp" srcset={heroPhoto.srcSet.attribute} sizes="240px" />
           <img
             src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
             alt=""
@@ -309,7 +309,7 @@ const processIcons = [
   .hero-card {
     position: relative;
     flex-shrink: 0;
-    width: 220px;
+    width: 240px;
     aspect-ratio: 3 / 2;
     border-radius: var(--radius-image);
     overflow: hidden;
@@ -338,7 +338,7 @@ const processIcons = [
     padding: 5px 10px;
     border-radius: 6px;
     font-family: var(--font-mono);
-    font-size: 0.66rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.02em;
     white-space: nowrap;
@@ -459,7 +459,7 @@ const processIcons = [
     justify-content: center;
     text-align: center;
     font-family: var(--font-mono);
-    font-size: 0.74rem;
+    font-size: 0.75rem;
     letter-spacing: 0.02em;
     text-transform: uppercase;
     color: var(--text-primary);
@@ -697,7 +697,7 @@ const processIcons = [
     align-items: center;
     gap: 8px;
     font-family: var(--font-mono);
-    font-size: 0.74rem;
+    font-size: 0.75rem;
     letter-spacing: 0.02em;
     text-transform: uppercase;
     white-space: nowrap;
@@ -779,9 +779,8 @@ const processIcons = [
       margin: var(--space-2) 0 0; /* a little extra room under the headline (on top of the stack gap) */
     }
     .hero-meta-list li {
-      /* Scales with the viewport so two tags always fit per row
-         (longest pair is the ES one: ~32em wide plus padding and gap). */
-      font-size: clamp(7.5px, calc((100vw - 80px) / 32), 9.9px);
+      /* 12px is the floor for any text on the site. The tag rows wrap as they need to. */
+      font-size: 12px;
       padding: 5px 8px;
       border-width: 1px;
     }

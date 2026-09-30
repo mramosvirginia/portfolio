@@ -5,7 +5,12 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
     slug: 'landora',
     filter: 'product',
     title: 'End-to-end product design for a rural experience platform',
+    seo: {
+      title: "Landora: rural experiences app | Virginia Miner",
+      description: "End-to-end product design for Landora, a platform to discover and book rural experiences: research, flows and a production-ready design system.",
+    },
     heroImage: '/images/case-studies/landora/cover.webp',
+    heroAlt: "Smartphone leaning on a blue fabric chair showing the Landora experience detail screen, \"Maneja un rebaño de ovejas\".",
     heroCtaLabel: 'View Live Project',
     heroCtaHref:
       'https://www.figma.com/proto/xSsAgNWjrqVlo0lg0XpLdm/Landora-App-%7C-UI-Design?node-id=1-4&p=f&viewport=-77%2C89%2C0.41&t=kceyZGHaanXrLbuZ-8&scaling=scale-down&content-scaling=fixed&starting-point-node-id=1%3A4&hide-ui=1',
@@ -23,15 +28,15 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
     overviewIntro:
       "Rural experiences in Spain exist but are scattered and difficult to find or book. Current platforms fail to combine good UX with a rural focus and local community support, and the booking process is often confusing and visual information is scarce. Landora centralizes the discovery and booking of rural experiences (cultural, gastronomic, and natural) in a simple, accessible way that supports local communities.",
     overviewImages: [
-      { src: '/images/case-studies/landora/image3.avif' },
-      { src: '/images/case-studies/landora/image2.png' },
+      { src: '/images/case-studies/landora/image3.avif', alt: "Landora interface collage in lilac: category search, favourites and saved experiences, a photo of a woman with her phone and four value cards (personalisation, sustainability, intuitive navigation, conscious tourism)." },
+      { src: '/images/case-studies/landora/image2.png', alt: "Large lilac \"landora\" wordmark above a phone showing the home screen \"Hola Laura\" with a search bar." },
     ],
     challengeTitle: 'Challenge',
     challengeBody:
       'Rural areas are depopulating while cities face mass tourism, and there is a high demand for unique experiences but no centralized platform to host them. The booking process in existing options is often confusing, outdated, or incomplete. Users find themselves searching multiple sites without finding a unified solution.',
     roleLabel: 'My Role',
     role: 'Product Design & Design System · Solo, end-to-end: research, IA, UI design, accessibility (WCAG AA), dev handoff.',
-    roleImages: [{ src: '/images/case-studies/landora/image4.avif' }],
+    roleImages: [{ src: '/images/case-studies/landora/image4.avif', alt: "Landora phone screen with the details of an experience next to a photo of a smiling woman checking her phone in a lavender field." }],
     objectives: {
       title: 'Objectives',
       businessLabel: 'Product Objectives',
@@ -71,8 +76,8 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
           'Key insight: Fragmented Search',
         ],
         images: [
-          { src: '/images/case-studies/landora/image5.webp' },
-          { src: '/images/case-studies/landora/image6.webp' },
+          { src: '/images/case-studies/landora/image5.webp', alt: "Survey charts on rural travel: where participants live, how important it is to book everything on one platform, what they value when choosing a rural experience and their previous tourism experiences." },
+          { src: '/images/case-studies/landora/image6.webp', alt: "Competitor analysis table comparing Ecotur, Airbnb and Rústicas by target, services, value proposition, UX and features, with a checklist of functions." },
         ],
       },
       {
@@ -85,9 +90,9 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
           'Prioritization of core features.',
         ],
         images: [
-          { src: '/images/case-studies/landora/image7.webp' },
-          { src: '/images/case-studies/landora/image8.avif' },
-          { src: '/images/case-studies/landora/image9.avif' },
+          { src: '/images/case-studies/landora/image7.webp', alt: "Three user personas, including Laura Martínez and Carlos Rodríguez, with bio, goals, frustrations, behaviours and needs." },
+          { src: '/images/case-studies/landora/image8.avif', alt: "Customer journey map across six stages (need, search, discovery, decision, payment, post-booking) for three user profiles, with an emotion curve for each." },
+          { src: '/images/case-studies/landora/image9.avif', alt: "User flow diagram of the Landora app: welcome, sign up or log in, onboarding, choosing interests, home, experience details, availability, payment and confirmation." },
         ],
       },
       {
@@ -102,8 +107,8 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
           'Visual system based on clarity, hierarchy, and accessibility.',
         ],
         images: [
-          { src: '/images/case-studies/landora/image10.webp' },
-          { src: '/images/case-studies/landora/image11.webp' },
+          { src: '/images/case-studies/landora/image10.webp', alt: "Sheet of low-fidelity wireframes for the main Landora screens, from login and exploring to search, experience details and checkout." },
+          { src: '/images/case-studies/landora/image11.webp', alt: "Component documentation sheet for the Landora design system, with tables of variants and usage notes." },
         ],
       },
       {
@@ -149,7 +154,7 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
           '20+ components: buttons, text fields, calendar selector, nav bar, cards, stepper, checkout summary, and modular cards.',
           'Fully documented for developer handoff, audited for consistency and published as a standalone documentation site.',
         ],
-        images: [{ src: '/images/case-studies/landora/image12.webp' }],
+        images: [{ src: '/images/case-studies/landora/image12.webp', alt: "Overview of the final Landora app screens arranged in rows, from the lilac onboarding cards to the booking flow." }],
       },
       {
         id: 'handoff-documentation',
@@ -193,7 +198,7 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
         paragraphs: [
           'Identified a real market opportunity: no existing platform combines high-quality UX with a rural focus and community support. Simplified the booking process to 1 configuration screen + 3 checkout steps with persistent contextual information. Accessible color system: level 600 primary lilac ramp to comply with WCAG 2.1 AA (> 4.5:1 ratio). UI Kit documented as a production-ready design system, 20+ components, primitive and semantic tokens, audited for consistency and published as a standalone handoff library. Fully testable interactive prototype in Figma.',
         ],
-        images: [{ src: '/images/case-studies/landora/image13.webp' }],
+        images: [{ src: '/images/case-studies/landora/image13.webp', alt: "Two overlapping smartphones showing Landora: the home screen \"Hola Laura\" and the details of the experience \"Maneja un rebaño de ovejas\"." }],
       },
     ],
     viewMoreWork: 'View more work.',
@@ -202,7 +207,12 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
     slug: 'landora',
     filter: 'product',
     title: 'Diseño de producto end-to-end para una plataforma de experiencias rurales',
+    seo: {
+      title: "Landora: app de experiencias rurales | Virginia Miner",
+      description: "Diseño de producto para Landora, una plataforma para descubrir y reservar experiencias rurales: investigación, flujos y un design system listo para producción.",
+    },
     heroImage: '/images/case-studies/landora/cover.webp',
+    heroAlt: "Móvil apoyado en una silla de tela azul que muestra la pantalla de detalle de una experiencia de Landora, «Maneja un rebaño de ovejas».",
     heroCtaLabel: 'Ver proyecto en vivo',
     heroCtaHref:
       'https://www.figma.com/proto/xSsAgNWjrqVlo0lg0XpLdm/Landora-App-%7C-UI-Design?node-id=1-4&p=f&viewport=-77%2C89%2C0.41&t=kceyZGHaanXrLbuZ-8&scaling=scale-down&content-scaling=fixed&starting-point-node-id=1%3A4&hide-ui=1',
@@ -220,15 +230,15 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
     overviewIntro:
       'Las experiencias rurales en España existen pero están dispersas y son difíciles de encontrar o reservar. Las plataformas actuales no combinan una buena UX con un enfoque rural y apoyo a la comunidad local, y el proceso de reserva suele ser confuso y la información visual escasa. Landora centraliza el descubrimiento y la reserva de experiencias rurales (culturales, gastronómicas y naturales) de forma sencilla y accesible, apoyando a las comunidades locales.',
     overviewImages: [
-      { src: '/images/case-studies/landora/image3.avif' },
-      { src: '/images/case-studies/landora/image2.png' },
+      { src: '/images/case-studies/landora/image3.avif', alt: "Collage de interfaz de Landora en tonos lila: búsqueda por categoría, favoritos y experiencias guardadas, una foto de una mujer con su móvil y cuatro tarjetas de valores (personalización, sostenibilidad, navegación intuitiva, turismo consciente)." },
+      { src: '/images/case-studies/landora/image2.png', alt: "Logotipo «landora» grande en lila sobre un móvil que muestra la pantalla de inicio «Hola Laura» con un buscador." },
     ],
     challengeTitle: 'Reto',
     challengeBody:
       'Las zonas rurales se despueblan mientras las ciudades sufren turismo masivo, y existe una alta demanda de experiencias únicas pero ninguna plataforma centralizada que las albergue. El proceso de reserva en las opciones existentes suele ser confuso, anticuado o incompleto. Los usuarios acaban buscando en varios sitios sin encontrar una solución unificada.',
     roleLabel: 'Mi rol',
     role: 'Diseño de Producto y Design System · En solitario, de principio a fin: investigación, IA, diseño de UI, accesibilidad (WCAG AA), handoff a desarrollo.',
-    roleImages: [{ src: '/images/case-studies/landora/image4.avif' }],
+    roleImages: [{ src: '/images/case-studies/landora/image4.avif', alt: "Pantalla de móvil de Landora con el detalle de una experiencia junto a la foto de una mujer sonriendo con su móvil en un campo de lavanda." }],
     objectives: {
       title: 'Objetivos',
       businessLabel: 'Objetivos de producto',
@@ -268,8 +278,8 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
           'Insight clave: Búsqueda fragmentada',
         ],
         images: [
-          { src: '/images/case-studies/landora/image5.webp' },
-          { src: '/images/case-studies/landora/image6.webp' },
+          { src: '/images/case-studies/landora/image5.webp', alt: "Gráficos de la encuesta sobre viajes rurales: dónde viven los participantes, la importancia de reservar todo en una plataforma, qué valoran al elegir una experiencia rural y sus experiencias turísticas previas." },
+          { src: '/images/case-studies/landora/image6.webp', alt: "Tabla de análisis de competidores que compara Ecotur, Airbnb y Rústicas por público, servicios, propuesta de valor, UX y funcionalidades, con una lista de funciones." },
         ],
       },
       {
@@ -282,9 +292,9 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
           'Priorización de funcionalidades clave.',
         ],
         images: [
-          { src: '/images/case-studies/landora/image7.webp' },
-          { src: '/images/case-studies/landora/image8.avif' },
-          { src: '/images/case-studies/landora/image9.avif' },
+          { src: '/images/case-studies/landora/image7.webp', alt: "Tres personas de usuario, entre ellas Laura Martínez y Carlos Rodríguez, con biografía, objetivos, frustraciones, comportamientos y necesidades." },
+          { src: '/images/case-studies/landora/image8.avif', alt: "Mapa de la experiencia del usuario en seis fases (necesidad, búsqueda, descubrimiento, decisión, pago y posreserva) para tres perfiles, con una curva de emociones para cada uno." },
+          { src: '/images/case-studies/landora/image9.avif', alt: "Diagrama del flujo de usuario de la app de Landora: bienvenida, registro o inicio de sesión, onboarding, elección de intereses, inicio, detalle de la experiencia, disponibilidad, pago y confirmación." },
         ],
       },
       {
@@ -299,8 +309,8 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
           'Sistema visual basado en claridad, jerarquía y accesibilidad.',
         ],
         images: [
-          { src: '/images/case-studies/landora/image10.webp' },
-          { src: '/images/case-studies/landora/image11.webp' },
+          { src: '/images/case-studies/landora/image10.webp', alt: "Hoja de wireframes de baja fidelidad de las pantallas principales de Landora, desde el acceso y la exploración hasta la búsqueda, el detalle de la experiencia y el pago." },
+          { src: '/images/case-studies/landora/image11.webp', alt: "Hoja de documentación de componentes del sistema de diseño de Landora, con tablas de variantes y notas de uso." },
         ],
       },
       {
@@ -346,7 +356,7 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
           '20+ componentes: botones, campos de texto, selector de calendario, barra de navegación, tarjetas, stepper, resumen de checkout y tarjetas modulares.',
           'Completamente documentado para handoff a desarrollo, auditado por consistencia y publicado como sitio de documentación independiente.',
         ],
-        images: [{ src: '/images/case-studies/landora/image12.webp' }],
+        images: [{ src: '/images/case-studies/landora/image12.webp', alt: "Vista general de las pantallas finales de la app de Landora ordenadas en filas, desde las tarjetas lila de onboarding hasta el flujo de reserva." }],
       },
       {
         id: 'handoff-documentation',
@@ -390,7 +400,7 @@ export const landora: { en: CaseStudyContent; es: CaseStudyContent } = {
         paragraphs: [
           'Se identificó una oportunidad de mercado real: ninguna plataforma existente combina UX de alta calidad con enfoque rural y apoyo comunitario. Se simplificó el proceso de reserva a 1 pantalla de configuración + 3 pasos de checkout con información contextual persistente. Sistema de color accesible: rampa lila primaria de nivel 600 para cumplir WCAG 2.1 AA (ratio > 4.5:1). UI Kit documentado como design system listo para producción, 20+ componentes, tokens primitivos y semánticos, auditados por consistencia y publicados como librería de handoff independiente. Prototipo interactivo completamente testeable en Figma.',
         ],
-        images: [{ src: '/images/case-studies/landora/image13.webp' }],
+        images: [{ src: '/images/case-studies/landora/image13.webp', alt: "Dos móviles superpuestos con Landora: la pantalla de inicio «Hola Laura» y el detalle de la experiencia «Maneja un rebaño de ovejas»." }],
       },
     ],
     viewMoreWork: 'Ver más trabajo.',

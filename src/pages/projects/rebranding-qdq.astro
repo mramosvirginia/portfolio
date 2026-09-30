@@ -2,15 +2,18 @@
 import Layout from '../../layouts/Layout.astro';
 import CaseStudy from '../../components/CaseStudy.astro';
 import { home } from '../../data/site';
+import { caseSeo } from '../../lib/caseSeo';
 import { rebrandingQdq } from '../../data/case-studies/rebranding-qdq';
 
 const t = home.es;
+const seo = await caseSeo(rebrandingQdq.es);
 ---
 
 <Layout
   locale="es"
-  title="Rebranding qdq | Virginia Miner"
-  description={rebrandingQdq.es.title}
+  title={seo.title}
+  description={seo.description}
+  image={seo.image}
 >
   <CaseStudy locale="es" study={rebrandingQdq.es} />
   <Fragment slot="footer">

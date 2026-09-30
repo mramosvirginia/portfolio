@@ -2,15 +2,18 @@
 import Layout from '../../layouts/Layout.astro';
 import CaseStudy from '../../components/CaseStudy.astro';
 import { home } from '../../data/site';
+import { caseSeo } from '../../lib/caseSeo';
 import { landora } from '../../data/case-studies/landora';
 
 const t = home.es;
+const seo = await caseSeo(landora.es);
 ---
 
 <Layout
   locale="es"
-  title="Landora | Virginia Miner"
-  description={landora.es.title}
+  title={seo.title}
+  description={seo.description}
+  image={seo.image}
 >
   <CaseStudy locale="es" study={landora.es} />
   <Fragment slot="footer">
