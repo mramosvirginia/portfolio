@@ -332,10 +332,13 @@ const processIcons = [
     line-height: 1.25;
     padding: 5px 18px;
     border-radius: var(--radius-image);
-    /* Filled: dark on the light theme, light on the dark one (always the page's opposite). */
+    /* Filled: near-black on the light theme, near-white on the dark one (the page's opposite). */
     color: var(--bg-page);
-    background: var(--text-primary);
+    background: #0A0A0B;
     text-decoration: none;
+  }
+  :global([data-theme='dark']) .hero-cta {
+    background: var(--text-primary);
   }
   @media (hover: hover) {
     .hero-cta:hover { opacity: 0.8; }
