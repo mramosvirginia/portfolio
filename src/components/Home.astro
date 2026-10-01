@@ -20,7 +20,11 @@ const heroPhoto = await optimizeImage({ src: getImage('/images/about/overview.pn
 // Hero tags laid out in explicit rows of 2-3 so each row hugs its content.
 const heroTags = [...t.availability.slice(1), ...t.tags];
 const heroTagRows = [heroTags.slice(0, 2), heroTags.slice(2)];
-// Phone layout is 2 / 2 / 1: a break marker sits before the last tag.
+// Phone layout is 3 lines (2 / 2 / 1): a break marker sits before the last tag. The tag font
+// scales with the viewport so the first two tags always share the first line; --ab is that
+// pair's width in em (characters x ~0.64), used by the 780px rules.
+const firstPairChars = heroTags[0].length + heroTags[1].length;
+const firstPairEm = (firstPairChars * 0.64).toFixed(1);
 
 // One icon per process card, matched by index — not translated content,
 // so kept separate from the locale-aware copy in site.ts.
@@ -43,7 +47,7 @@ const processIcons = [
         <span class="hero-line">{t.heroName}</span>
         <span class="hero-line">Product &amp; {t.heroRole}</span>
       </h1>
-      <div class="hero-meta-list">
+      <div class="hero-meta-list" style={`--ab:${firstPairEm}`}>
         {heroTagRows.map((row) => (
           <ul class="tag-row">
             {row.map((item, i) => (
@@ -66,7 +70,7 @@ const processIcons = [
         </p>
       </div>
       <div class="hero-side">
-      <a href={`mailto:${email}`} class="hero-cta">{t.ctaTalk}<svg class="hero-cta-arrow" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+      <a href={`mailto:${email}`} class="btn-cta">{t.ctaTalk}<svg class="btn-cta-arrow" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
       <div class="hero-card">
         <picture>
           <source media="(min-width: 901px)" type="image/webp" srcset={heroPhoto.srcSet.attribute} sizes="240px" />
@@ -236,7 +240,7 @@ const processIcons = [
       range.selectNodeContents(el);
       avoid.push(...Array.from(range.getClientRects()));
     });
-    trailHero.querySelectorAll<HTMLElement>('.hero-meta-list li, .hero-cta, .hero-card').forEach((el) => avoid.push(el.getBoundingClientRect()));
+    trailHero.querySelectorAll<HTMLElement>('.hero-meta-list li, .btn-cta, .hero-card').forEach((el) => avoid.push(el.getBoundingClientRect()));
     const clear = (x: number, y: number) => {
       const m = 14; // breathing room around text
       return !avoid.some((r) => r.width > 0 && x + size > r.left - m && x < r.right + m && y + size > r.top - m && y < r.bottom + m);
@@ -321,27 +325,6 @@ const processIcons = [
     flex-direction: column;
     align-items: flex-end;
     gap: var(--space-4);
-  }
-  /* Filled button: same corner radius as the photo, same font and size as the footer link. */
-  .hero-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3em;
-    font-family: var(--font-headline);
-    font-size: 22px;
-    line-height: 1.25;
-    padding: 5px 18px;
-    border-radius: var(--radius-image);
-    /* Filled: near-black on the light theme, near-white on the dark one (the page's opposite). */
-    color: var(--bg-page);
-    background: #0A0A0B;
-    text-decoration: none;
-  }
-  :global([data-theme='dark']) .hero-cta {
-    background: var(--text-primary);
-  }
-  @media (hover: hover) {
-    .hero-cta:hover { opacity: 0.8; }
   }
   .hero-card {
     position: relative;
@@ -850,12 +833,12 @@ const processIcons = [
       margin: var(--space-2) 0 0; /* a little extra room under the headline (on top of the stack gap) */
     }
     .hero-meta-list li {
-      /* 12px is the floor for any text on the site. The tag rows wrap as they need to. */
-      font-size: 12px;
+      /* Up to 12px, but scaled down so the first two tags fit one line (--ab em wide, plus the
+         32px gutters, the 8px gap and the tags' own 18px of padding + border each). Never below 9px. */
+      font-size: min(12px, max(9px, calc((100vw - 78px) / var(--ab))));
       padding: 5px 8px;
       border-width: 1px;
     }
-    /* Forces the 2 / 2 / 1 rows. */
     .hero-meta-list li.tag-br {
       display: block;
       flex: 0 0 100%;

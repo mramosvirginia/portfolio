@@ -201,3 +201,28 @@ img { max-width: 100%; display: block; }
   from { opacity: 1; scale: 1; }
   to { opacity: 0; scale: 0.3; }
 }
+
+/* "Let's talk!" button, shared by the hero and the footer so it is visually the same in both:
+   Briem 22px + arrow, 10px corners (same as images), filled near-black on the light theme and
+   near-white on the dark one. The footer is always black, so it takes the light variant. */
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  font-family: var(--font-headline);
+  font-size: 22px;
+  line-height: 1.25;
+  padding: 8px 18px;
+  border-radius: var(--radius-image);
+  color: var(--bg-page);
+  background: #0A0A0B;
+  text-decoration: none;
+}
+[data-theme='dark'] .btn-cta,
+.site-footer .btn-cta {
+  color: #000;
+  background: #F5F3FA;
+}
+@media (hover: hover) {
+  .btn-cta:hover { opacity: 0.8; }
+}

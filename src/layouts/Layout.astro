@@ -237,7 +237,7 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
           <a href={linkedinUrl} target="_blank" rel="noopener">LinkedIn</a>
           <a href={cvUrl} target="_blank" rel="noopener">{f.downloadCv}</a>
         </div>
-        <a href={`mailto:${email}`} class="footer-cta">{ctaTalk}<svg class="footer-cta-arrow" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <a href={`mailto:${email}`} class="btn-cta footer-cta">{ctaTalk}<svg class="btn-cta-arrow" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
       </div>
     </footer>
 
@@ -599,22 +599,6 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
         max-width: 11em;
         text-wrap: balance;
       }
-      /* Same treatment as the hero's "Let's talk!" link: Briem, underlined, with an arrow. */
-      .footer-cta {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.3em;
-        font-family: var(--font-headline);
-        font-size: 22px;
-        line-height: 1.25;
-        color: var(--text-primary);
-        text-decoration: underline;
-        text-decoration-thickness: 1.5px;
-        text-underline-offset: 0.2em;
-      }
-      @media (hover: hover) {
-        .footer-cta:hover { opacity: 0.6; }
-      }
       .footer-brand :global(p) {
         font-family: var(--font-mono);
         font-size: 0.95rem;
@@ -676,7 +660,6 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
         .footer-brand :global(p) { font-size: 0.75rem; }
         .footer-heading { font-size: 0.75rem; }
         .footer-col a { font-size: 1rem; }
-        .footer-cta { font-size: 18px; }
         .footer-brand { height: auto; }
         .footer-brand :global(p) { margin-top: var(--space-4); }
       }
