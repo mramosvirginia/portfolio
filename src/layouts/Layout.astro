@@ -37,7 +37,7 @@ const esPath = locale === 'es' ? rawPath : otherHref;
 const enPath = locale === 'en' ? rawPath : otherHref;
 const siteName = 'Virginia Miner';
 // Site-wide share image, unless the page brings its own (?v bumps the cache when the default changes).
-const ogImage = image ? new URL(image.src, Astro.site) : new URL('/og-image.jpg?v=3', Astro.site);
+const ogImage = image ? new URL(image.src, Astro.site) : new URL('/og-image.jpg?v=4', Astro.site);
 const ogImageAlt = image?.alt ?? 'Virginia Miner, Product & Visual Designer';
 const ogImageWidth = image?.width ?? 1200;
 const ogImageHeight = image?.height ?? 630;
