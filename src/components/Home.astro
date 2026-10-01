@@ -59,11 +59,11 @@ const processIcons = [
 
     <div class="hero-bottom">
       <div class="hero-copy">
+        <p class="hero-intro"><span class="hero-intro-lead">{t.heroIntro}</span> {t.heroIntroRest} <span class="hero-location">{t.heroLocation}</span></p>
         <p class="hero-scroll">
           <svg class="hero-scroll-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
           {t.scrollHint}
         </p>
-        <p class="hero-intro"><span class="hero-intro-lead">{t.heroIntro}</span> {t.heroIntroRest} <span class="hero-location">{t.heroLocation}</span></p>
       </div>
       <div class="hero-side">
       <a href={`mailto:${email}`} class="hero-cta">{t.ctaTalk}<svg class="hero-cta-arrow" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
@@ -535,9 +535,9 @@ const processIcons = [
   .hero-copy {
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
+    gap: var(--space-6);
   }
-  /* Scroll hint above the intro: Geist Mono caps like the tags, 12px floor. */
+  /* Scroll hint under the intro: Geist Mono caps like the tags, 12px floor. */
   .hero-scroll {
     display: flex;
     align-items: center;
