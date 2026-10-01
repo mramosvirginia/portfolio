@@ -476,6 +476,11 @@ const processIcons = [
     padding: 8.1px 15px;
     white-space: nowrap;
   }
+  /* Beside the headline the two rows together match the cap height of "Product & Visual
+     Designer"; the font stays at the 12px floor. */
+  @media (min-width: 1321px) {
+    .hero-meta-list li { padding: 3.5px 13px; }
+  }
   :global([data-theme='light']) .hero-meta-list li {
     background: var(--white);
   }
