@@ -660,6 +660,8 @@ const isWorkActive = isActive(workHref) || currentPath.includes('/projects/');
         .footer-brand :global(p) { font-size: 0.75rem; }
         .footer-heading { font-size: 0.75rem; }
         .footer-col a { font-size: 1rem; }
+        /* On phones the button steps down to 18px so it stays below the 23px title. */
+        .footer-cta { font-size: 18px; padding: 7px 16px; }
         .footer-brand { height: auto; }
         .footer-brand :global(p) { margin-top: var(--space-4); }
       }
