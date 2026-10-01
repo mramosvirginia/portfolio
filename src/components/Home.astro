@@ -322,7 +322,7 @@ const processIcons = [
     align-items: flex-end;
     gap: var(--space-4);
   }
-  /* Filled pill button; same font and size as the footer's link. */
+  /* Filled button: same corner radius as the photo, same font and size as the footer link. */
   .hero-cta {
     display: inline-flex;
     align-items: center;
@@ -331,7 +331,7 @@ const processIcons = [
     font-size: 22px;
     line-height: 1.25;
     padding: 5px 18px;
-    border-radius: 999px;
+    border-radius: var(--radius-image);
     /* Filled: dark on the light theme, light on the dark one (always the page's opposite). */
     color: var(--bg-page);
     background: var(--text-primary);
