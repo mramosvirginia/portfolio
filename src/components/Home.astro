@@ -316,7 +316,7 @@ const processIcons = [
     align-items: flex-end;
     gap: var(--space-4);
   }
-  /* Same link as the footer's (same 22px). */
+  /* Filled pill button; same font and size as the footer's link. */
   .hero-cta {
     display: inline-flex;
     align-items: center;
@@ -324,13 +324,15 @@ const processIcons = [
     font-family: var(--font-headline);
     font-size: 22px;
     line-height: 1.25;
-    color: var(--text-primary);
-    text-decoration: underline;
-    text-decoration-thickness: 1.5px;
-    text-underline-offset: 0.2em;
+    padding: 10px 20px;
+    border-radius: 999px;
+    /* Filled: dark on the light theme, light on the dark one (always the page's opposite). */
+    color: var(--bg-page);
+    background: var(--text-primary);
+    text-decoration: none;
   }
   @media (hover: hover) {
-    .hero-cta:hover { opacity: 0.6; }
+    .hero-cta:hover { opacity: 0.8; }
   }
   .hero-card {
     position: relative;
