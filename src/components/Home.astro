@@ -58,7 +58,13 @@ const processIcons = [
     </div>
 
     <div class="hero-bottom">
-      <p class="hero-intro"><span class="hero-intro-lead">{t.heroIntro}</span> {t.heroIntroRest} <span class="hero-location">{t.heroLocation}</span></p>
+      <div class="hero-copy">
+        <p class="hero-scroll">
+          <svg class="hero-scroll-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+          {t.scrollHint}
+        </p>
+        <p class="hero-intro"><span class="hero-intro-lead">{t.heroIntro}</span> {t.heroIntroRest} <span class="hero-location">{t.heroLocation}</span></p>
+      </div>
       <div class="hero-side">
       <a href={`mailto:${email}`} class="hero-cta">{t.ctaTalk}<svg class="hero-cta-arrow" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
       <div class="hero-card">
@@ -525,6 +531,31 @@ const processIcons = [
     justify-content: space-between;
     align-items: flex-end;
     gap: var(--space-6);
+  }
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  /* Scroll hint above the intro: Geist Mono caps like the tags, 12px floor. */
+  .hero-scroll {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .hero-scroll-arrow { flex-shrink: 0; }
+  @keyframes scroll-hint-bob {
+    0%, 100% { transform: translateY(-2px); }
+    50% { transform: translateY(2px); }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-scroll-arrow { animation: scroll-hint-bob 1.8s ease-in-out infinite; }
   }
   .hero-intro {
     font-family: var(--font-sans); /* Geist */
