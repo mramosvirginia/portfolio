@@ -132,9 +132,9 @@ const titleHtml = l.title.replace(/\b(lab)\b/i, '<span class="lab-title-pink">$1
 
     <p class="cc-caption" data-cc-caption></p>
 
-    <div class="cc-dots" data-cc-dots role="tablist" aria-label={l.analog.title}>
+    <div class="cc-dots" data-cc-dots role="group" aria-label={l.analog.dotsLabel}>
       {analogDisplay.map((_, i) => (
-        <button type="button" class="cc-dot" data-cc-dot data-index={i} aria-current={i === 0 ? 'true' : 'false'} aria-label={`${i + 1}`}></button>
+        <button type="button" class="cc-dot" data-cc-dot data-index={i} aria-current={i === 0 ? 'true' : 'false'} aria-label={l.analog.dotLabel.replace('{n}', String(i + 1)).replace('{total}', String(analogDisplay.length))}></button>
       ))}
     </div>
   </div>
@@ -446,7 +446,7 @@ const titleHtml = l.title.replace(/\b(lab)\b/i, '<span class="lab-title-pink">$1
   .ai-tag {
     display: inline-block;
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.02em;
     color: var(--accent-highlight);

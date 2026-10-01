@@ -2,15 +2,18 @@
 import Layout from '../../../layouts/Layout.astro';
 import CaseStudy from '../../../components/CaseStudy.astro';
 import { home } from '../../../data/site';
+import { caseSeo } from '../../../lib/caseSeo';
 import { uxquickaudit } from '../../../data/case-studies/uxquickaudit';
 
 const t = home.en;
+const seo = await caseSeo(uxquickaudit.en);
 ---
 
 <Layout
   locale="en"
-  title="UX QuickAudit | Virginia Miner"
-  description={uxquickaudit.en.title}
+  title={seo.title}
+  description={seo.description}
+  image={seo.image}
 >
   <CaseStudy locale="en" study={uxquickaudit.en} />
   <Fragment slot="footer">

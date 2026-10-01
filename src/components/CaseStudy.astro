@@ -70,7 +70,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.in
       </header>
       {study.heroImage ? (
         <div class:list={['hero-image', 'has-image', { 'is-portrait': heroPortrait }]} style={heroRatio ? `--hero-ar: ${heroRatio}` : undefined}>
-          <Img src={study.heroImage} alt={study.title} sizes={contentSizes} loading="eager" />
+          <Img src={study.heroImage} alt={study.heroAlt ?? study.title} sizes={contentSizes} loading="eager" />
         </div>
       ) : (
         <div class="hero-image" aria-hidden="true"></div>
@@ -110,7 +110,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.in
         </dl>
         {study.overviewImages?.map((image) => (
           <figure class="figure-image">
-            <Img class="section-image has-image" src={image.src} alt={image.caption || study.overviewTitle} sizes={contentSizes} />
+            <Img class="section-image has-image" src={image.src} alt={image.alt} sizes={contentSizes} />
             {image.caption && <figcaption set:html={captionHtml(image)} />}
           </figure>
         ))}
@@ -127,7 +127,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.in
         )}
         {study.roleImages?.map((image) => (
           <figure class="figure-image">
-            <Img class="section-image has-image" src={image.src} alt={image.caption || study.roleLabel || study.title} sizes={contentSizes} />
+            <Img class="section-image has-image" src={image.src} alt={image.alt} sizes={contentSizes} />
             {image.caption && <figcaption set:html={captionHtml(image)} />}
           </figure>
         ))}
@@ -189,7 +189,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.in
           )}
           {section.video && (
             <div class="video-wrap">
-              <video class="section-video" src={`${section.video}#t=0.1`} aria-label={section.title} loop muted playsinline preload="metadata"></video>
+              <video class="section-video" src={`${section.video}#t=0.1`} aria-label={section.videoAlt ?? section.title} loop muted playsinline preload="metadata"></video>
               <button
                 type="button"
                 class="video-toggle"
@@ -205,7 +205,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.in
           )}
           {section.images?.map((image) => (
             <figure class="figure-image">
-              <Img class="section-image has-image" src={image.src} alt={image.caption || section.title} sizes={contentSizes} />
+              <Img class="section-image has-image" src={image.src} alt={image.alt} sizes={contentSizes} />
               {image.caption && <figcaption set:html={captionHtml(image)} />}
             </figure>
           ))}
@@ -328,7 +328,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.in
   .toc-label {
     display: none;
     font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     color: var(--text-muted);
@@ -341,7 +341,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.in
   }
   .toc a {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     letter-spacing: 0.02em;
     color: var(--text-muted);
     line-height: 1.4;
@@ -374,7 +374,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.in
     align-items: center;
     flex-shrink: 0;
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.02em;
     color: var(--accent-cta-text);
@@ -484,7 +484,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.in
   }
   .meta-grid dt {
     font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.02em;
     color: var(--text-muted);
@@ -510,7 +510,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.in
   }
   .case-section .stack-label {
     font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.02em;
     color: var(--text-muted);
@@ -542,7 +542,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.in
   }
   .objectives-label {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.02em;
     color: var(--text-muted);
@@ -564,7 +564,7 @@ const related = t.projects.filter((p) => p.filter === study.filter && !p.href.in
   th {
     text-align: left;
     font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.02em;
     color: var(--text-muted);

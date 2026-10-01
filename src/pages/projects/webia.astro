@@ -2,15 +2,18 @@
 import Layout from '../../layouts/Layout.astro';
 import CaseStudy from '../../components/CaseStudy.astro';
 import { home } from '../../data/site';
+import { caseSeo } from '../../lib/caseSeo';
 import { webia } from '../../data/case-studies/webia';
 
 const t = home.es;
+const seo = await caseSeo(webia.es);
 ---
 
 <Layout
   locale="es"
-  title="Web IA | Virginia Miner"
-  description={webia.es.title}
+  title={seo.title}
+  description={seo.description}
+  image={seo.image}
 >
   <CaseStudy locale="es" study={webia.es} />
   <Fragment slot="footer">

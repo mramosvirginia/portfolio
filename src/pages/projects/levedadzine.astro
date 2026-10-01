@@ -2,15 +2,18 @@
 import Layout from '../../layouts/Layout.astro';
 import CaseStudy from '../../components/CaseStudy.astro';
 import { home } from '../../data/site';
+import { caseSeo } from '../../lib/caseSeo';
 import { levedadzine } from '../../data/case-studies/levedadzine';
 
 const t = home.es;
+const seo = await caseSeo(levedadzine.es);
 ---
 
 <Layout
   locale="es"
-  title="Levedad & Somos Paisajes | Virginia Miner"
-  description={levedadzine.es.title}
+  title={seo.title}
+  description={seo.description}
+  image={seo.image}
 >
   <CaseStudy locale="es" study={levedadzine.es} />
   <Fragment slot="footer">

@@ -61,9 +61,11 @@ export const home = {
     heroRole: 'Visual Designer',
     heroIntro: 'Product & Visual Designer',
     heroIntroRest: "who's always asking what's worth solving, before deciding how it should look.",
-    heroLocation: 'Based in Valencia, Spain.',
+    heroOrigin: 'From Madrid and',
+    heroLocation: 'based in Valencia, Spain.',
     tags: ['UX Strategy', 'Design Systems & AI', 'Editorial Craft'],
     ctaTalk: "Let's talk!",
+    scrollHint: 'Scroll to explore',
     processEyebrow: 'PROCESS',
     processMoreLink: 'Learn more',
     processTitle: 'What guides my process',
@@ -197,9 +199,11 @@ export const home = {
     heroRole: 'Visual Designer',
     heroIntro: 'Diseñadora de Producto y Visual,',
     heroIntroRest: 'siempre preguntándome qué merece la pena resolver antes de decidir cómo debería verse.',
-    heroLocation: 'Con base en Valencia, España.',
+    heroOrigin: 'De Madrid y',
+    heroLocation: 'con base en Valencia, España.',
     tags: ['Estrategia UX', 'Design Systems & IA', 'Criterio editorial'],
     ctaTalk: 'Hablemos',
+    scrollHint: 'Desliza para explorar',
     processEyebrow: 'PROCESO',
     processMoreLink: 'Saber más',
     processTitle: 'Lo que guía mi proceso',
@@ -573,6 +577,8 @@ export const lab = {
       prevLabel: 'Previous',
       nextLabel: 'Next',
       playLabel: 'Autoplay',
+      dotsLabel: 'Carousel images',
+      dotLabel: 'Go to image {n} of {total}',
       images: [
         {
           src: '/images/about/personal.jpg',
@@ -622,6 +628,8 @@ export const lab = {
       prevLabel: 'Anterior',
       nextLabel: 'Siguiente',
       playLabel: 'Reproducción automática',
+      dotsLabel: 'Imágenes del carrusel',
+      dotLabel: 'Ir a la imagen {n} de {total}',
       images: [
         {
           src: '/images/about/personal.jpg',

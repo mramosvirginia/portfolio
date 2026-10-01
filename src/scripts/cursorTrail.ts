@@ -4,8 +4,8 @@
 // behind the content (z-index 0) and never take pointer events. Styles live in global.css.
 
 const PALETTE = ['#F4A0C8', '#F8E39A', '#4A8FE0', '#C9A7F0', '#E8894A', '#E94B2A']; // no green
-const STEP = 34; // px of mouse travel between two squares
-const MAX_LIVE = 14;
+const STEP = 18; // px of mouse travel between two squares
+const MAX_LIVE = 24;
 
 export function attachCursorTrail(container: HTMLElement) {
   if (!window.matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)').matches) return;
