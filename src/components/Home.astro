@@ -41,7 +41,7 @@ const processIcons = [
     <div class="hero-headline">
       <h1 class="hero-name">
         <span class="hero-line">{t.heroName}</span>
-        <span class="hero-line"><span class="hero-role-prefix">Product &amp; </span>{t.heroRole}</span>
+        <span class="hero-line">Product &amp; {t.heroRole}</span>
       </h1>
       <div class="hero-meta-list">
         {heroTagRows.map((row) => (
@@ -427,18 +427,24 @@ const processIcons = [
   .hero-line {
     display: block;
   }
-  .hero-role-prefix { display: none; }
+  /* Second line "Product & Visual Designer": a step below the name. */
+  .hero-line:nth-child(2) {
+    font-size: 0.5em;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    margin-top: 0.12em;
+  }
   :global([data-theme='light']) .hero-name {
     color: #14181F;
   }
   /* Tags as a compact 2-3 grid placed right after the end of "Visual
-     Designer" (5.785em is that line's width), bottom edge on that line's baseline.
+     Designer" (4.98em is that line's width), bottom edge on that line's baseline.
      em is relative to the headline size, so it tracks the fluid font-size. */
   .hero-meta-list {
     position: absolute;
     font-size: var(--text-h1);
-    left: calc(5.785em + 32px);
-    top: 1.727em; /* baseline of the second headline line */
+    left: calc(4.98em + 32px);
+    top: 1.431em; /* baseline of the second headline line */
     transform: translateY(-100%);
     display: flex;
     flex-direction: column;
@@ -756,8 +762,6 @@ const processIcons = [
        line right under it. */
     .hero-name { font-size: 17.8vw; }
     .hero-line:nth-child(1) { white-space: nowrap; }
-    /* On phones the small role line reads "Product & Visual Designer". */
-    .hero-role-prefix { display: inline; }
     .hero-line:nth-child(2) {
       font-size: 5.8vw;
       line-height: 1.2;
